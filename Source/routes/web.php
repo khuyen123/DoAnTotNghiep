@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Client\homeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('client')->group( function() {
+    Route::get('/index',[homeController::class,'index'])->name('client_index');
+    Route::get('/events',[homeController::class,'client_events'])->name('client_events');
+    Route::get('/creator',[homeController::class,'creator'])->name('creator');
 });
+// Route::get('index',[homeController::class,'index']);
