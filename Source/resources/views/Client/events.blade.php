@@ -7,7 +7,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sona | Template</title>
+    <title>Sự kiện số | Trang người dùng</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -55,31 +55,20 @@
                     </ul>
                 </div>
             </div>
-            <a href="#" class="bk-btn">Booking Now</a>
+                <a href="#" class="bk-btn">Đăng nhập</a>
+                            <a href="#" class="bkj-btn">Đăng ký</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./rooms.html">Rooms</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
-                <li><a href="./pages.html">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
-                    </ul>
-                </li>
-                <li><a href="./blog.html">News</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="{{route('client_index')}}">Trang chủ</a></li>
+                    <li class="active"><a href="{{route('client_events')}}">Sự kiện</a></li>
+                    <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
+                    <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="top-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
+            
         </div>
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (12) 345 67890</li>
@@ -107,17 +96,8 @@
                                 <a href="#"><i class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
                             </div>
-                            <a href="#" class="bk-btn">Booking Now</a>
-                            <div class="language-option">
-                                <img src="img/flag.jpg" alt="">
-                                <span>EN <i class="fa fa-angle-down"></i></span>
-                                <div class="flag-dropdown">
-                                    <ul>
-                                        <li><a href="#">Zi</a></li>
-                                        <li><a href="#">Fr</a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <a href="#" class="bk-btn">Đăng nhập</a>
+                            <a href="#" class="bkj-btn">Đăng ký</a>
                         </div>
                     </div>
                 </div>
@@ -137,12 +117,10 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li ><a href="{{route('client_index')}}">Trang chủ</a></li>
+                                <li ><a href="{{route('client_index')}}">Trang chủ</a></li>
                                     <li class="active"><a href="{{route('client_events')}}">Sự kiện</a></li>
-                                    <li><a href="./about-us.html">Ban tổ chức</a></li>
-                                    <li><a href="./pages.html">Về chúng tôi</a>
-                                        
-                                    </li>
+                                    <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
+                                    <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
                                     
                                 </ul>
                             </nav>
