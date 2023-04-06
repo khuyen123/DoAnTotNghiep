@@ -19,4 +19,4 @@ Route::prefix('client')->group( function() {
     Route::get('/creator',[homeController::class,'creator'])->name('creator');
     Route::get('/aboutus',[homeController::class,'aboutus'])->name('aboutus');
 });
-// Route::get('index',[homeController::class,'index']);
+Route::get('/',[homeController::class,'index']);

@@ -51,7 +51,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-            <li class="active"><a href="{{route('client_index')}}">Trang chủ</a></li>
+            <li class="active"><a href="/">Trang chủ</a></li>
                                     <li><a href="{{route('client_events')}}">Sự kiện</a></li>
                                     <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
                                     <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
@@ -96,7 +96,7 @@
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="./index.html">
-                                <img src="img/logo.png" alt="">
+                                <img style="width:90px;height:90px" src="img/logo.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="{{route('client_index')}}">Trang chủ</a></li>
+                                    <li class="active"><a href="/">Trang chủ</a></li>
                                     <li><a href="{{route('client_events')}}">Sự kiện</a></li>
                                     <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
                                     <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
@@ -130,41 +130,45 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="hero-text">
-                        <h1>Sona A Luxury Hotel</h1>
-                        <p>Here are the best hotel booking sites, including recommendations for international
-                            travel and for finding low-priced hotel rooms.</p>
-                        <a href="#" class="primary-btn">Discover Now</a>
+                        <h1>Sự kiện số</h1>
+                        <p>Đây là trang web giúp bạn có thể mua vé tham gia sự kiện một cách nhanh chóng và thuận tiện.</p>
+                        
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Booking Your Hotel</h3>
+                        <h3>Sự kiện phù hợp</h3>
                         <form action="#">
                             <div class="check-date">
-                                <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
-                                <i class="icon_calendar"></i>
+                                <label for="cus_yearold">Độ tuổi của bạn:</label>
+                                <input type="text" class="search-input" id="cus_yearold">
                             </div>
-                            <div class="check-date">
+                            <!-- <div class="check-date">
                                 <label for="date-out">Check Out:</label>
                                 <input type="text" class="date-input" id="date-out">
                                 <i class="icon_calendar"></i>
+                            </div> -->
+                            
+                            <div class="check-date">
+                                <label for="number_cus">Số người đi cùng bạn:</label>
+                                <input type="number" class="search-input" id="number_cus">
                             </div>
                             <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">2 Adults</option>
-                                    <option value="">3 Adults</option>
+                                <label for="cus_cate">Hình thức sự kiện mà bạn muốn:</label>
+                                <select id="cus_cate">
+                                    <option value="">Lễ hội âm nhạc</option>
+                                    <option value="">Đấu giá từ thiện</option>
+                                    <option value="">Cắm trại dã ngoại</option>
                                 </select>
                             </div>
                             <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                    <option value="">2 Room</option>
+                                <label for="cus_provice">Chọn thành phố mà bạn sống:</label>
+                                <select id="cus_provice">
+                                    <option value="">Đà Nẵng</option>
+                                    <option value="">Quảng Nam</option>
                                 </select>
                             </div>
-                            <button type="submit">Check Availability</button>
+                            <button type="submit">Kiểm tra</button>
                         </form>
                     </div>
                 </div>
@@ -185,15 +189,19 @@
                 <div class="col-lg-6">
                     <div class="about-text">
                         <div class="section-title">
-                            <span>About Us</span>
-                            <h2>Intercontinental LA <br />Westlake Hotel</h2>
+                            <span>Về chúng tôi</span>
+                            <h2>Sự kiện số <br />Nơi tạo ra những ký ức tươi đẹp</h2>
                         </div>
-                        <p class="f-para">Sona.com is a leading online accommodation site. We’re passionate about
-                            travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
-                            languages.</p>
-                        <p class="s-para">So when it comes to booking the perfect hotel, vacation rental, resort,
-                            apartment, guest house, or tree house, we’ve got you covered.</p>
-                        <a href="#" class="primary-btn about-btn">Read More</a>
+                        <p class="f-para">Sự Kiện Số là trang web được tạo ra
+                                    với hy vọng là nơi có thể giúp các Nhà tổ chức 
+                                    có thể quản lý và phát triển sự kiện của mình 
+                                    một cách dễ dàng và có khoa học hơn. </p>
+                        <p class="s-para">Mỗi ngày, chúng ta đều có rất nhiều sự kiện diễn ra như 
+Show ca nhạc, cắm trại, dã ngoại, từ thiện,... 
+mà việc mua vé và đăng ký tham gia vẫn chủ yếu 
+được thực hiện bằng giấy tờ. 
+Vì vậy, trang web này được tạo ra để việc đó trở nên dễ dàng hơn.</p>
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -203,7 +211,7 @@
                                 <img src="img/about/about-1.jpg" alt="">
                             </div>
                             <div class="col-sm-6">
-                                <img src="img/about/about-2.jpg" alt="">
+                                <img src="img/about/about-1.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -219,12 +227,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>What We Do</span>
-                        <h2>Discover Our Services</h2>
+                        <span>Sự kiện nổibật</span>
+                        <h2>Sự kiện nổi bật đang diễn ra</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <div class="service-item">
                         <i class="flaticon-036-parking"></i>
@@ -273,7 +281,7 @@
                             labore et dolore magna.</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </section>
     <!-- Services Section End -->
@@ -286,116 +294,132 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="hp-room-item set-bg" data-setbg="img/room/room-b1.jpg">
                             <div class="hr-text">
-                                <h3>Double Room</h3>
-                                <h2>199$<span>/Pernight</span></h2>
+                                <h3>Cắm trại</h3>
+                                <h2>150.000 VNĐ<span>/Vé</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Nẵng</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé vào cổng</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 15</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                                <a href="#" class="primary-btn">Đặt vé ngay</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
                         <div class="hp-room-item set-bg" data-setbg="img/room/room-b2.jpg">
                             <div class="hr-text">
-                                <h3>Premium King Room</h3>
-                                <h2>159$<span>/Pernight</span></h2>
+                                <h3>Đêm nhạc hội</h3>
+                                <h2>170.000 VNĐ<span>/Vé</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                                <a href="#" class="primary-btn">Đặt vé ngay</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b3.jpg">
+                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b1.jpg">
                             <div class="hr-text">
-                                <h3>Deluxe Room</h3>
-                                <h2>198$<span>/Pernight</span></h2>
+                                <h3>Cắm trại</h3>
+                                <h2>150.000 VNĐ<span>/Vé</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Nẵng</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé vào cổng</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 15</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                                <a href="#" class="primary-btn">Đặt vé ngay</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b4.jpg">
+                        <div class="hp-room-item set-bg" data-setbg="img/room/room-b2.jpg">
                             <div class="hr-text">
-                                <h3>Family Room</h3>
-                                <h2>299$<span>/Pernight</span></h2>
+                                <h3>Đêm nhạc hội</h3>
+                                <h2>170.000 VNĐ<span>/Vé</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
                                         </tr>
                                     </tbody>
                                 </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                                <a href="#" class="primary-btn">Đặt vé ngay</a>
                             </div>
                         </div>
                     </div>
@@ -405,121 +429,9 @@
     </section>
     <!-- Home Room Section End -->
 
-    <!-- Testimonial Section Begin -->
-    <section class="testimonial-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>Testimonials</span>
-                        <h2>What Customers Say?</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="testimonial-slider owl-carousel">
-                        <div class="ts-item">
-                            <p>After a construction project took longer than expected, my husband, my daughter and I
-                                needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                                city, neighborhood and the types of housing options available and absolutely love our
-                                vacation at Sona Hotel.</p>
-                            <div class="ti-author">
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5> - Alexander Vasquez</h5>
-                            </div>
-                            <img src="img/testimonial-logo.png" alt="">
-                        </div>
-                        <div class="ts-item">
-                            <p>After a construction project took longer than expected, my husband, my daughter and I
-                                needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                                city, neighborhood and the types of housing options available and absolutely love our
-                                vacation at Sona Hotel.</p>
-                            <div class="ti-author">
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5> - Alexander Vasquez</h5>
-                            </div>
-                            <img src="img/testimonial-logo.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Testimonial Section End -->
-
+   
     <!-- Blog Section Begin -->
-    <section class="blog-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>Hotel News</span>
-                        <h2>Our Blog & Event</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-1.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel Trip</span>
-                            <h4><a href="#">Tremblant In Canada</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-2.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Camping</span>
-                            <h4><a href="#">Choosing A Static Caravan</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog-item set-bg" data-setbg="img/blog/blog-3.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Copper Canyon</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 21th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="blog-item small-size set-bg" data-setbg="img/blog/blog-wide.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Event</span>
-                            <h4><a href="#">Trip To Iqaluit In Nunavut A Canadian Arctic City</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 08th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="blog-item small-size set-bg" data-setbg="img/blog/blog-10.jpg">
-                        <div class="bi-text">
-                            <span class="b-tag">Travel</span>
-                            <h4><a href="#">Traveling To Barcelona</a></h4>
-                            <div class="b-time"><i class="icon_clock_alt"></i> 12th April, 2019</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
     <!-- Blog Section End -->
 
     <!-- Footer Section Begin -->
@@ -531,10 +443,10 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img style="width:90px;height:90px" src="img/logo.png" alt="">
                                 </a>
                             </div>
-                            <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
+                            <p>Chúng tôi tạo ra trang web để bạn được chill<br /> Đồ án tốt nghiệp</p>
                             <div class="fa-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -548,18 +460,18 @@
                         <div class="ft-contact">
                             <h6>Contact Us</h6>
                             <ul>
-                                <li>(12) 345 67890</li>
-                                <li>info.colorlib@gmail.com</li>
-                                <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                                <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
+                                <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+                                <li><i class="fa fa-location-arrow"></i> 3/75 Nguyễn Khuyến</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-newslatter">
-                            <h6>New latest</h6>
-                            <p>Get the latest updates and offers.</p>
+                            <h6>Gửi phản hồi của bạn</h6>
                             <form action="#" class="fn-form">
-                                <input type="text" placeholder="Email">
+                               
+                                <input type="text" placeholder="Phản hổi của bạn">
                                 <button type="submit"><i class="fa fa-send"></i></button>
                             </form>
                         </div>

@@ -60,7 +60,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li><a href="{{route('client_index')}}">Trang chủ</a></li>
+                <li><a href="/">Trang chủ</a></li>
                     <li class="active"><a href="{{route('client_events')}}">Sự kiện</a></li>
                     <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
                     <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
@@ -71,8 +71,8 @@
             
         </div>
         <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+            <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
+            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
@@ -84,18 +84,13 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tn-left">
-                            <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-                            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+                        <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
+            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                            <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                            </div>
+                           
                             <a href="#" class="bk-btn">Đăng nhập</a>
                             <a href="#" class="bkj-btn">Đăng ký</a>
                         </div>
