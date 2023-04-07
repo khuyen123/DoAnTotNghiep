@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('makichhoat')->nullable();
             $table->integer('trangthai');
             $table->integer('kichhoat');
+            $table->integer('quyentruycap');
+     
             $table->timestamps();
         });
     }
