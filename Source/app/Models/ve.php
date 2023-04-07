@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Ve extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,12 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'tendangnhap',
-        'matkhau',
-        'email',
-        'trangthai',
-        'kichhoat',
-        'makichhoat'
+        'madatve',
+        'tinhtrang',
+        'hangGhe',
+        'soGhe',
+        'soBan',
+        'soCong',
+        'thanhtoan'
     ];
 
     /**
@@ -31,23 +32,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+   
 
     /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-    public function thongtinnguoidung(){
-        return $this->hasOne(thongtinnguoidung::class,'id','id');
-    }
-    public function ve(){
-        return $this->hasMany(ve::class,'id','id');
-    }
+    
 }
