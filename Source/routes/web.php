@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Client\homeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::prefix('client')->group( function() {
-    Route::get('/index',[homeController::class,'index'])->name('client_index');
+    // Route::get('/index',[homeController::class,'index'])->name('client_index');
     Route::get('/events',[homeController::class,'client_events'])->name('client_events');
     Route::get('/creator',[homeController::class,'creator'])->name('creator');
     Route::get('/aboutus',[homeController::class,'aboutus'])->name('aboutus');
 });
 Route::get('/',[homeController::class,'index']);
+Route::get('/login',[BaseController::class,'login_index'])->name('login');
+Route::get('/register',[BaseController::class,'register_index'])->name('sigup');

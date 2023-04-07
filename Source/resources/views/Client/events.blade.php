@@ -7,7 +7,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sự kiện số | Trang người dùng</title>
+    <title>Sự kiện số | Sự kiện</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -45,18 +45,9 @@
             <i class="icon_search"></i>
         </div>
         <div class="header-configure-area">
-            <div class="language-option">
-                <img src="img/flag.jpg" alt="">
-                <span>EN <i class="fa fa-angle-down"></i></span>
-                <div class="flag-dropdown">
-                    <ul>
-                        <li><a href="#">Zi</a></li>
-                        <li><a href="#">Fr</a></li>
-                    </ul>
-                </div>
-            </div>
-                <a href="#" class="bk-btn">Đăng nhập</a>
-                            <a href="#" class="bkj-btn">Đăng ký</a>
+           
+                <a href="{{Route('login')}}" class="bk-btn">Đăng nhập</a>
+                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
@@ -91,8 +82,8 @@
                     <div class="col-lg-6">
                         <div class="tn-right">
                            
-                            <a href="#" class="bk-btn">Đăng nhập</a>
-                            <a href="#" class="bkj-btn">Đăng ký</a>
+                            <a href="{{Route('login')}}" class="bk-btn">Đăng nhập</a>
+                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
                         </div>
                     </div>
                 </div>
@@ -102,9 +93,9 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
-                        <div class="logo">
-                            <a href="./index.html">
-                                <img src="img/logo.png" alt="">
+                    <div class="logo">
+                            <a href="/">
+                                <img style="width:90px;height:90px" src="img/logo.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -112,7 +103,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                <li ><a href="{{route('client_index')}}">Trang chủ</a></li>
+                                <li ><a href="/">Trang chủ</a></li>
                                     <li class="active"><a href="{{route('client_events')}}">Sự kiện</a></li>
                                     <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
                                     <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
@@ -136,10 +127,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Our Rooms</h2>
+                        <h2>Sự kiện</h2>
                         <div class="bt-option">
-                            <a href="./home.html">Home</a>
-                            <span>Rooms</span>
+                            <a href="/">Trang chủ</a>
+                            <span>Sự kiện</span>
                         </div>
                     </div>
                 </div>
@@ -154,181 +145,205 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img src="img/room/room-1.jpg" alt="">
+                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
                         <div class="ri-text">
-                            <h4>Premium King Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h4>Mây Lang Thang</h4>
+                            <h3>150.000 VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 3</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
+                                <tr>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
+                                        </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a href="#" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img src="img/room/room-2.jpg" alt="">
+                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
                         <div class="ri-text">
-                            <h4>Deluxe Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h4>Mây Lang Thang</h4>
+                            <h3>150.000 VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 5</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
+                                <tr>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
+                                        </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a href="#" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img src="img/room/room-3.jpg" alt="">
+                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
                         <div class="ri-text">
-                            <h4>Double Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h4>Mây Lang Thang</h4>
+                            <h3>150.000 VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
+                                <tr>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
+                                        </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a href="#" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img src="img/room/room-4.jpg" alt="">
+                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
                         <div class="ri-text">
-                            <h4>Luxury Room</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h4>Mây Lang Thang</h4>
+                            <h3>150.000 VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
+                                <tr>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
+                                        </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a href="#" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img src="img/room/room-5.jpg" alt="">
+                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
                         <div class="ri-text">
-                            <h4>Room With View</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h4>Mây Lang Thang</h4>
+                            <h3>150.000 VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 1</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
+                                <tr>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
+                                        </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a href="#" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img src="img/room/room-6.jpg" alt="">
+                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
                         <div class="ri-text">
-                            <h4>Small View</h4>
-                            <h3>159$<span>/Pernight</span></h3>
+                            <h4>Mây Lang Thang</h4>
+                            <h3>150.000 VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
-                                    <tr>
-                                        <td class="r-o">Size:</td>
-                                        <td>30 ft</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Capacity:</td>
-                                        <td>Max persion 2</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Bed:</td>
-                                        <td>King Beds</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Services:</td>
-                                        <td>Wifi, Television, Bathroom,...</td>
-                                    </tr>
+                                <tr>
+                                            <td class="r-o">Địa điểm:</td>
+                                            <td>Đà Lạt</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hình thức vé:</td>
+                                            <td>Vé ghế ngồi</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Độ tuổi:</td>
+                                            <td>Lớn hơn 7</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Tình trạng:</td>
+                                            <td>Còn vé</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="r-o">Hoạt động:</td>
+                                            <td>Còn hoạt động</td>
+                                        </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="primary-btn">More Details</a>
+                            <a href="#" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
                 </div>
@@ -353,10 +368,10 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="img/footer-logo.png" alt="">
+                                    <img style="width:90px;height:90px" src="img/logo.png" alt="">
                                 </a>
                             </div>
-                            <p>We inspire and reach millions of travelers<br /> across 90 local websites</p>
+                            <p>Chúng tôi tạo ra trang web để bạn được chill<br /> Đồ án tốt nghiệp</p>
                             <div class="fa-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -368,20 +383,20 @@
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-contact">
-                            <h6>Contact Us</h6>
+                            <h6>Liên hệ chúng tôi</h6>
                             <ul>
-                                <li>(12) 345 67890</li>
-                                <li>info.colorlib@gmail.com</li>
-                                <li>856 Cordia Extension Apt. 356, Lake, United State</li>
+                                <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
+                                <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+                                <li><i class="fa fa-location-arrow"></i> 3/75 Nguyễn Khuyến</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-newslatter">
-                            <h6>New latest</h6>
-                            <p>Get the latest updates and offers.</p>
+                            <h6>Gửi phản hồi của bạn</h6>
                             <form action="#" class="fn-form">
-                                <input type="text" placeholder="Email">
+                               
+                                <input type="text" placeholder="Phản hổi của bạn">
                                 <button type="submit"><i class="fa fa-send"></i></button>
                             </form>
                         </div>
@@ -389,7 +404,7 @@
                 </div>
             </div>
         </div>
-       
+        
     </footer>
     <!-- Footer Section End -->
 

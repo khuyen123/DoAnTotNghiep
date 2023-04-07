@@ -7,7 +7,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sự kiện số | Trang người dùng</title>
+    <title>Sự kiện số | Trang chủ</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -46,8 +46,8 @@
         </div>
         <div class="header-configure-area">
           
-            <a href="#" class="bk-btn">Đăng nhập</a>
-                            <a href="#" class="bkj-btn">Đăng ký</a>
+            <a href="{{Route('login')}}" class="bk-btn">Đăng nhập</a>
+                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
@@ -81,8 +81,8 @@
                     <div class="col-lg-6">
                         <div class="tn-right">
                             
-                            <a href="#" class="bk-btn">Đăng nhập</a>
-                            <a href="#" class="bkj-btn">Đăng ký</a>
+                            <a href="{{Route('login')}}" class="bk-btn">Đăng nhập</a>
+                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
                             
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.html">
+                            <a href="/">
                                 <img style="width:90px;height:90px" src="img/logo.png" alt="">
                             </a>
                         </div>
@@ -175,7 +175,7 @@
             </div>
         </div>
         <div class="hero-slider owl-carousel">
-            <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
+        <div class="hs-item set-bg" data-setbg="img/hero/hero-1.jpg"></div>
             <div class="hs-item set-bg" data-setbg="img/hero/hero-2.jpg"></div>
             <div class="hs-item set-bg" data-setbg="img/hero/hero-3.jpg"></div>
         </div>
@@ -232,56 +232,7 @@ Vì vậy, trang web này được tạo ra để việc đó trở nên dễ d�
                     </div>
                 </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-036-parking"></i>
-                        <h4>Travel Plan</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-033-dinner"></i>
-                        <h4>Catering Service</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-026-bed"></i>
-                        <h4>Babysitting</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-024-towel"></i>
-                        <h4>Laundry</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-044-clock-1"></i>
-                        <h4>Hire Driver</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-012-cocktail"></i>
-                        <h4>Bar & Drink</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-            </div> -->
+           
         </div>
     </section>
     <!-- Services Section End -->
@@ -458,7 +409,7 @@ Vì vậy, trang web này được tạo ra để việc đó trở nên dễ d�
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-contact">
-                            <h6>Contact Us</h6>
+                            <h6>Liên hệ chúng tôi</h6>
                             <ul>
                                 <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
                                 <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
