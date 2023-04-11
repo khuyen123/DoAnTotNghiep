@@ -23,7 +23,12 @@ class User extends Authenticatable
         'email',
         'trangthai',
         'kichhoat',
-        'makichhoat'
+        'makichhoat',
+        'hoten',
+        'diachi',
+        'ngaysinh',
+        'sdt',
+        'quyentruycap'
     ];
 
     /**
@@ -44,10 +49,5 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function thongtinnguoidung(){
-        return $this->hasOne(thongtinnguoidung::class,'id','id');
-    }
-    public function ve(){
-        return $this->hasMany(ve::class,'id','id');
-    }
+    
 }

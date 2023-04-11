@@ -13,10 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tieude', function (Blueprint $table) {
-            $table->id();
-            $table->string('noidung');
-            $table->string('mota')->nullable();
+        Schema::create('thongtintrangchu', function (Blueprint $table) {
+            $table->id('id_thongtintrangchu');
+            $table->string('tieude_vechungtoi')->nullable();
+            $table->string('noidung_vechungtoi')->nullable();
+            $table->string('email_trangchu')->nullable();
+            $table->string('sdt_trangchu')->nullable();
+            $table->string('diachi_trangchu')->nullable();
             $table->timestamps();
 
             
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tieude');
+        Schema::dropIfExists('thongtintrangchu');
     }
 };

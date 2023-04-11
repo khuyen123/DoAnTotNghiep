@@ -14,18 +14,18 @@ return new class extends Migration
     public function up()
     {
         Schema::create('ve', function (Blueprint $table) {
-            $table->id();
-            $table->string('madatve');
+            $table->id('id_ve');
             $table->string('tinhtrang');
             $table->string('hangGhe')->nullable();
             $table->string('soGhe')->nullable();
             $table->string('soBan')->nullable();
             $table->string('soCong')->nullable();
             $table->integer('thanhtoan');
+            $table->integer('kiemtra');
             $table->unsignedBigInteger('id_nguoidung');
-            $table->unsignedBigInteger('id_sukien_xuatchieu');
-            $table->foreign('id_nguoidung')->references('id')->on('nguoidung')->onUpdate('restrict')->onDelete('cascade');
-            $table->foreign('id_sukien_xuatchieu')->references('id')->on('sukien_xuatchieu')->onUpdate('restrict')->onDelete('cascade');
+            $table->unsignedBigInteger('id_chitietsukien');
+            $table->foreign('id_nguoidung')->references('id_nguoidung')->on('nguoidung')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreign('id_chitietsukien')->references('id_chitietsukien')->on('chitietsukien')->onUpdate('restrict')->onDelete('cascade');
             $table->timestamps();
         });
     }

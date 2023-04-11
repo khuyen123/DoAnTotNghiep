@@ -14,14 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chitietsukien', function (Blueprint $table) {
-            $table->id();
-            $table->string('sdtlienhe');
-            $table->string('tennguoilienhe');
-            $table->integer('kichthuocsukien');
+            $table->id('id_chitietsukien');
+            $table->dateTime('batdau');
+            $table->dateTime('ketthuc');
+            $table->string('diachi');
+            $table->string('khuvuc');
+            $table->integer('sovetoida');
+            $table->integer('sovedaban');
+            $table->string('trangthai');
+            $table->decimal('giave');
+            $table->string('sdt_lienhe')->nullable();
+            $table->string('ten_lienhe')->nullable();
             $table->integer('dotuoichophep');
             $table->string('mota')->nullable();
             $table->unsignedBigInteger('id_sukien');
-            $table->foreign('id_sukien')->references('id')->on('sukien')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreign('id_sukien')->references('id_sukien')->on('sukien')->onUpdate('restrict')->onDelete('cascade');
             $table->timestamps();
             
         });
