@@ -20,6 +20,7 @@ Route::prefix('client')->group( function() {
     Route::get('/creator',[homeController::class,'creator'])->name('creator');
     Route::get('/aboutus',[homeController::class,'aboutus'])->name('aboutus');
 });
-Route::get('/',[homeController::class,'index']);
+Route::get('/',[homeController::class,'index'])->name('home');
 Route::get('/login',[BaseController::class,'login_index'])->name('login');
+Route::post('/login/store',[BaseController::class,'login_function'])->name('login_function');
 Route::get('/register',[BaseController::class,'register_index'])->name('sigup');

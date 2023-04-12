@@ -80,9 +80,16 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                            
-                            <a href="{{Route('login')}}" class="bk-btn">Đăng nhập</a>
-                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
+                            <?php
+                                use Illuminate\Support\Facades\Auth;
+                                $html='<a href="/login" class="bk-btn">Đăng nhập</a>';
+                                $html .='<a href="/register" class="bkj-btn">Đăng ký</a>';
+                                
+                                if (Auth::check())
+                                   echo 'da dang nhap'; else
+                                   echo $html;
+                            ?>
+                          
                             
                             </div>
                         </div>
