@@ -102,7 +102,7 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="/">Trang chủ</a></li>
+                                    <li class="active"><a href="{{route('home')}}">Trang chủ</a></li>
                                     <li><a href="{{route('client_events')}}">Sự kiện</a></li>
                                     <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
                                     <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
