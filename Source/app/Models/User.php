@@ -28,7 +28,8 @@ class User extends Authenticatable
         'diachi',
         'ngaysinh',
         'sdt',
-        'quyentruycap'
+        'quyentruycap',
+        'token'
     ];
 
     /**

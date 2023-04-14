@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('id_nguoidung');
-            $table->string('tendangnhap');
-            $table->string('matkhau');
+            $table->string('username');
+            $table->string('password');
             $table->string('email');
             $table->string('makichhoat')->nullable();
             $table->integer('trangthai');
@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('gioiTinh')->nullable();
             $table->string('diachi')->nullable();
             $table->integer('quyentruycap');
+            $table->string('token')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -7,7 +7,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sự kiện số | Trang đăng nhập</title>
+    <title>Sự kiện số | Trang đăng ký</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -47,7 +47,7 @@
         <div class="header-configure-area">
           
             
-                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
+                            <a href="#" class="bkj-btn">Đăng ký</a>
         </div>
        
         <div id="mobile-menu-wrap"></div>
@@ -72,8 +72,8 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                        <a href="/"><img style="width:90px;height:50px" src="img/logo.png" alt=""></a>
-                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
+                        <a href="{{Route('home')}}"><img style="width:90px;height:50px" src="img/logo.png" alt=""></a>
+                            <a href="{{Route('login')}}" class="bkj-btn">Đăng nhập</a>
                             
                             </div>
                         </div>
@@ -98,24 +98,29 @@
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Trang đang nhập</h3>
-                        <form action="{{route('login_function')}}" method="post">
+                        <h3>Trang đang ký</h3>
+                        <form action="#">
                             <div class="check-date">
-                                <label for="username_login" style="font-size:20px ;">Tên đăng nhập:</label>
-                                <input style="border-radius: 10px; font-size:15px" type="text"  id="username_login" name="username_login"/>
-                              
+                                <label for="userName" style="font-size:20px ;">Tên đăng nhập:</label>
+                                <input style="border-radius: 10px; font-size:15px" type="text"  id="userName"/>
                             </div>
                             <div class="check-date">
-                                <label for="password_login" style="font-size:20px ;">Mật khẩu:</label>
-                                <input style="border-radius: 10px;" type="password"  id="password_login" name="password_login" />
-                            </div>   
-                            <button type="submit">Đăng nhập</button>
-                            @csrf
+                                <label for="user_email" style="font-size:20px ;">Email:</label>
+                                <input style="border-radius: 10px; font-size:15px" type="text"  id="userEmail"/>
+                            </div>
+                            <div class="check-date">
+                                <label for="passWord" style="font-size:20px ;">Mật khẩu:</label>
+                                <input style="border-radius: 10px;" type="password"  id="passWord" />  
+                            </div>
+                            <div class="check-date">
+                                <label for="repeat_passWord" style="font-size:20px ;">Nhập lại mật khẩu:</label>
+                                <input style="border-radius: 10px;" type="password"  id="repeat_passWord" name="repeat_password" />  
+                            </div>
+                           
+                           
+                            <button type="submit">Đăng Ký</button>
                         </form>
-                        <p style="font-size:13px; margin-left:80px">Hoặc đăng nhập bằng</p>
-                        <a href="#"><i class="fa fa-google" style="font-size: 30px;margin-left:75px"></i></a>
-                        <i class="fa fa-facebook" style="font-size: 30px;margin-left:20px"></i>
-                        <i class="fa fa-twitter" style="font-size: 30px;margin-left:20px"></i>
+                     
                     </div>
                 </div>
             </div>

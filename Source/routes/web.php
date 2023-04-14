@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Client\BaseController;
 use App\Http\Controllers\Client\homeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +19,10 @@ Route::prefix('client')->group( function() {
     Route::get('/events',[homeController::class,'client_events'])->name('client_events');
     Route::get('/creator',[homeController::class,'creator'])->name('creator');
     Route::get('/aboutus',[homeController::class,'aboutus'])->name('aboutus');
+    Route::get('/index',[homeController::class,'index'])->name('home');
+    Route::get('/login',[BaseController::class,'login_index'])->name('login');
+    Route::post('/login/store',[BaseController::class,'login_function'])->name('login_function');
+    Route::get('/register',[BaseController::class,'register_index'])->name('sigup');
+    Route::get('/logout',[BaseController::class,'user_logout'])->name('sigout');
 });
-Route::get('/',[homeController::class,'index'])->name('home');
-Route::get('/login',[BaseController::class,'login_index'])->name('login');
-Route::post('/login/store',[BaseController::class,'login_function'])->name('login_function');
-Route::get('/register',[BaseController::class,'register_index'])->name('sigup');
+

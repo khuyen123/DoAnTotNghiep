@@ -51,7 +51,7 @@
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-            <li class="active"><a href="/">Trang chủ</a></li>
+            <li class="active"><a href="{{route('home')}}">Trang chủ</a></li>
                                     <li><a href="{{route('client_events')}}">Sự kiện</a></li>
                                     <li><a href="{{route('creator')}}">Ban tổ chức</a></li>
                                     <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
@@ -80,17 +80,8 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                            <?php
-                                use Illuminate\Support\Facades\Auth;
-                                $html='<a href="/login" class="bk-btn">Đăng nhập</a>';
-                                $html .='<a href="/register" class="bkj-btn">Đăng ký</a>';
-                                
-                                if (Auth::check())
-                                   echo 'da dang nhap'; else
-                                   echo $html;
-                            ?>
-                          
-                            
+                        <a href="{{Route('login')}}" class="bk-btn">Đăng nhập</a>
+                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>    
                             </div>
                         </div>
                     </div>
