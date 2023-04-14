@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Client\BaseController;
-use App\Http\Controllers\Client\homeController;
+use App\Http\Controllers\client\baseController;
+use App\Http\Controllers\client\loginController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,15 +15,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/',[baseController::class,'index'])->name('home');
 Route::prefix('client')->group( function() {
-    // Route::get('/index',[homeController::class,'index'])->name('client_index');
-    Route::get('/events',[homeController::class,'client_events'])->name('client_events');
-    Route::get('/creator',[homeController::class,'creator'])->name('creator');
-    Route::get('/aboutus',[homeController::class,'aboutus'])->name('aboutus');
-    Route::get('/index',[homeController::class,'index'])->name('home');
-    Route::get('/login',[BaseController::class,'login_index'])->name('login');
-    Route::post('/login/store',[BaseController::class,'login_function'])->name('login_function');
-    Route::get('/register',[BaseController::class,'register_index'])->name('sigup');
-    Route::get('/logout',[BaseController::class,'user_logout'])->name('sigout');
+    // Route::get('/index',[homeController::class,'index'])->name('home');
+    Route::post('/login/store',[loginController::class,'login_function'])->name('login_function');
+    Route::get('/login',[loginController::class,'login'])->name('login');
+    Route::get('/register',[loginController::class,'sigup'])->name('sigup');
+    Route::get('/events',[baseController::class,'events'])->name('client_events');
+    Route::get('/creator',[baseController::class,'creator'])->name('creator');
+    Route::get('/aboutus',[baseController::class,'aboutus'])->name('aboutus');
+    Route::get('/logout',[loginController::class,'sigout'])->name('logout');
 });
 

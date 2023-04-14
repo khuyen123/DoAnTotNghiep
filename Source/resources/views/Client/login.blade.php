@@ -101,13 +101,13 @@
                         <h3>Trang đang nhập</h3>
                         <form action="{{route('login_function')}}" method="post">
                             <div class="check-date">
-                                <label for="username_login" style="font-size:20px ;">Tên đăng nhập:</label>
-                                <input style="border-radius: 10px; font-size:15px" type="text"  id="username_login" name="username_login"/>
+                                <label for="email" style="font-size:20px ;">Tên đăng nhập:</label>
+                                <input style="border-radius: 10px; font-size:15px" type="text"  id="emal" name="email"/>
                               
                             </div>
                             <div class="check-date">
                                 <label for="password_login" style="font-size:20px ;">Mật khẩu:</label>
-                                <input style="border-radius: 10px;" type="password"  id="password_login" name="password_login" />
+                                <input style="border-radius: 10px;" type="password"  id="password" name="password" />
                             </div>   
                             <button type="submit">Đăng nhập</button>
                             @csrf
