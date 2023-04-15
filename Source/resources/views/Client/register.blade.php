@@ -118,7 +118,8 @@
                             </div>
                            
                            
-                            <button type="submit">Đăng Ký</button>
+                            <button type="submit" id="submit_register" name="submit_register">Đăng Ký</button>
+                            @csrf
                         </form>
                      
                     </div>

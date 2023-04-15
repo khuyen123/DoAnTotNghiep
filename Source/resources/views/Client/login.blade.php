@@ -100,17 +100,20 @@
                     <div class="booking-form">
                         <h3>Trang đang nhập</h3>
                         <form action="{{route('login_function')}}" method="post">
+                            
                             <div class="check-date">
                                 <label for="email" style="font-size:20px ;">Tên đăng nhập:</label>
-                                <input style="border-radius: 10px; font-size:15px" type="text"  id="emal" name="email"/>
-                              
+                                <input style="border-radius: 10px; font-size:15px" type="text"  id="email" name="email"/>
+                                <p style="color:#CB4154">{{ $errors->first('email') }}</p>
                             </div>
                             <div class="check-date">
                                 <label for="password_login" style="font-size:20px ;">Mật khẩu:</label>
                                 <input style="border-radius: 10px;" type="password"  id="password" name="password" />
+                                <p style="color:#CB4154">{{ $errors->first('password') }}</p>
                             </div>   
                             <button type="submit">Đăng nhập</button>
                             @csrf
+                           
                         </form>
                         <p style="font-size:13px; margin-left:80px">Hoặc đăng nhập bằng</p>
                         <a href="#"><i class="fa fa-google" style="font-size: 30px;margin-left:75px"></i></a>
