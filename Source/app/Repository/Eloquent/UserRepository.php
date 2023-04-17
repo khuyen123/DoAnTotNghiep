@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
    }
    public function getAll()
    {
-        return User::orderby('id')->paginate(5);
+        return User::all();
    }
    public function changePass($request, $user)
    {    
@@ -39,10 +39,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return true;
     }
    }
-   public function getall_nopagenigate()
-   {
-        return User::orderby('id')->paginate(100000);
-   }
+   
    public function destroyMany($request)
    {
         try {
