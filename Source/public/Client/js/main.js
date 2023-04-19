@@ -107,4 +107,3 @@
     $("select").niceSelect();
 
 })(jQuery);
-$(document).on('click','.submit_register')

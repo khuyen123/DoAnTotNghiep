@@ -19,14 +19,14 @@ return new class extends Migration
             $table->string('password');
             $table->string('email');
             $table->string('makichhoat')->nullable();
-            $table->integer('trangthai');
-            $table->integer('kichhoat');
-            $table->string('hoten');
+            $table->integer('trangthai')->nullable();
+            $table->integer('kichhoat')->nullable();
+            $table->string('hoten')->nullable();
             $table->date('ngaySinh')->nullable();      
             $table->string('sdt')->nullable();          
             $table->string('gioiTinh')->nullable();
             $table->string('diachi')->nullable();
-            $table->integer('quyentruycap');
+            $table->integer('quyentruycap')->nullable();
             $table->string('token')->nullable();
             $table->unsignedBigInteger('id_xaphuong');
             $table->foreign('id_xaphuong')->references('id_xaphuong')->on('xaphuong');

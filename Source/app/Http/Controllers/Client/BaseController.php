@@ -10,22 +10,15 @@ use Illuminate\Support\Facades\Auth;
 class baseController extends Controller
 {
     public function index(){
-       return view('index');
-    }
-    public function another() {
-        if (Auth::check()){
-            dd(Auth::user());
-        } else {
-            echo "Chưa đăng nhập";
-        }
+       return view('client.index');
     }
     public function events() {
-        return view('client.events');
+        return view('client.event.events');
     }
     public function creator(){
         echo "Trang quản trị";
     }
     public function aboutus(){
-        return view('client.aboutus');
+        return view('client.aboutus.aboutus');
     }
 }

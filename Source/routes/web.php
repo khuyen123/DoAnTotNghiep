@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\admin\basecontroller as AdminBasecontroller;
 use App\Http\Controllers\client\baseController;
+use App\Http\Controllers\client\eventcontroller;
 use App\Http\Controllers\client\loginController;
-
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,16 +18,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+//Client Route
 Route::get('/',[baseController::class,'index'])->name('home');
 Route::prefix('client')->group( function() {
     // Route::get('/index',[homeController::class,'index'])->name('home');
     Route::post('/login/store',[loginController::class,'login_function'])->name('login_function');
     Route::get('/login',[loginController::class,'login'])->name('login');
     Route::get('/register',[loginController::class,'sigup'])->name('sigup');
+    Route::post('/register/store',[loginController::class,'sigup_function'])->name('sigup_function');
     Route::get('/events',[baseController::class,'events'])->name('client_events');
-    Route::get('/creator',[baseController::class,'creator'])->name('creator');
     Route::get('/aboutus',[baseController::class,'aboutus'])->name('aboutus');
     Route::get('/logout',[loginController::class,'sigout'])->name('logout');
+    Route::get('/register/active/{user}/{token}',[loginController::class,'active_account'])->name('active_account');
+    Route::get('/event_detail',[eventcontroller::class,'eventdetail'])->name('event_detail');
+});
+Route::prefix('admin')->group(function() {
+    Route::get('/index',[AdminBasecontroller::class,'index'])->name('admin_index');
 });
 
