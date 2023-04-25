@@ -36,7 +36,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/admin/categories/index" class="nav-link">
                         <i class="nav-icon fas fa-bars"></i>
                         <p>
                             Danh mục sự kiện
@@ -47,7 +47,7 @@
                 </li>
  
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/admin/event/index" class="nav-link">
                         <i class="nav-icon fab fa-product-hunt"></i>
                         <p>
                             Sự kiện
@@ -65,6 +65,16 @@
                             
                         </p>
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-user-alt"></i>
+                        <p>
+                            Vé
+                            
+                        </p>
+                    </a>
+                   
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">

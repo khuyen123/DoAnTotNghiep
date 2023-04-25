@@ -7,7 +7,7 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sự kiện số | Sự kiện</title>
+    <title>Sự kiện số | Chi tiết sự kiện</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -48,22 +48,22 @@
            
         <?php
 
-use Illuminate\Support\Facades\Auth;
+            use Illuminate\Support\Facades\Auth;
 
-$html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
-$html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-$html_logined = '<a href="/client/infor" class="bk-btn">';
-if(isset(Auth::user()->hoten)) {
-    $html_logined .= Auth::user()->hoten;
-}
-$html_logined .= '</a>';
-$html_logined .='<a href="/client/logout" class="bkj-btn">Đăng xuất</a>';
-if (Auth::check()) {
-    echo $html_logined;
-} else {
-    echo $html;
-}
-?>
+            $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
+            $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
+            $html_logined = '<a href="/client/infor" class="bk-btn">';
+            if(isset(Auth::user()->hoten)) {
+                $html_logined .= Auth::user()->hoten;
+            }
+            $html_logined .= '</a>';
+            $html_logined .='<a href="/client/logout" class="bkj-btn">Đăng xuất</a>';
+            if (Auth::check()) {
+                echo $html_logined;
+            } else {
+                echo $html;
+            }
+            ?>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
@@ -150,16 +150,16 @@ if (Auth::check()) {
     </header>
     <!-- Header End -->
 
-    <!-- Breadcrumb Section Begin -->
+    <!-- Rooms Section Begin -->
     <div class="breadcrumb-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Sự kiện</h2>
+                        <h2>Mây lang thang</h2>
                         <div class="bt-option">
-                            <a href="/">Trang chủ</a>
-                            <span>Sự kiện</span>
+                            <a href="{{Route('client_events')}}">Sự kiện</a>
+                            <span>chi tiết sự kiện</span>
                         </div>
                     </div>
                 </div>
@@ -168,219 +168,170 @@ if (Auth::check()) {
     </div>
     <!-- Breadcrumb Section End -->
 
-    <!-- Rooms Section Begin -->
-    <section class="rooms-section spad">
+    <!-- Room Details Section Begin -->
+    <section class="room-details-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
+                <div class="col-lg-8">
+                    <div class="room-details-item">
+                        <img src="img/room/room-b2.jpg" alt="">
+                        <div class="rd-text">
+                            <div class="rd-title">
+                                <h3>Đêm nhạc Mây lang thang</h3>
+                                <div class="rdt-right">
+                                    <div class="rating">
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star"></i>
+                                        <i class="icon_star-half_alt"></i>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <h2>150.000 VNĐ<span>/Vé</span></h2>
                             <table>
                                 <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974;">Người liên hệ:</td>
+                                        <td>Phạm Khuyến</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Email liên hệ:</td>
+                                        <td>khuyenphamno0@gmail.com</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Số điện thoại :</td>
+                                        <td>0336482917</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Hình thức vé:</td>
+                                        <td>Vé vào cổng</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Độ tuổi:</td>
+                                        <td>Lớn hơn 7</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Tình trạng:</td>
+                                        <td>Còn vé</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Hoạt động:</td>
+                                        <td>Đang hoạt động</td>
+                                    </tr>
+                                    <tr >
+                                        <td class="r-o" style="color:#dfa974; font-size:23px">Mô tả sự kiện:</td>
+                                        
+                                    </tr>
                                 </tbody>
                             </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
+                            <p class="f-para">Đêm nhạc Mây Lang Thang được tổ chức bởi Khuyến Phạm Studio, nơi hội tụ những giọng ca tuyệt vời 
+                                và nổi tiếng như Tăng Phúc, Noo Phước Thịnh,... Hứa hẹn sẽ đem lại cho các bạn những giây phút thư giãn tuyệt vời 
+                                cũng như những tiết mục đặc sắc. Sự kiện diễn ra liên tục hằng tuần tại mỗi tỉnh thành và sẽ kết thúc khi nào kết thúc.</p>
+                            
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
+                    <div class="rd-reviews">
+                        <h4>Bình luận</h4>
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="img/room/avatar/avatar-1.jpg" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>27/08/2022</span>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <h5>Nguyễn Duyên</h5>
+                                <p>Mình rất thích sự kiện</p>
+                            </div>
+                        </div>
+                        <div class="review-item">
+                            <div class="ri-pic">
+                                <img src="img/room/avatar/avatar-1.jpg" alt="">
+                            </div>
+                            <div class="ri-text">
+                                <span>27/08/2022</span>
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <h5>Nguyễn Duyên</h5>
+                                <p>Mình rất thích sự kiện</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
+                    <div class="review-add">
+                        <h4>Đăng bình luận:</h4>
+                        <form action="#" class="ra-form">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Họ tên">
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="text" placeholder="Email*">
+                                </div>
+                                <div class="col-lg-12">
+                                    <div>
+                                        <h5>Đánh giá:</h5>
+                                        <div class="rating">
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star"></i>
+                                            <i class="icon_star-half_alt"></i>
+                                        </div>
+                                    </div>
+                                    <textarea placeholder="Bình luận"></textarea>
+                                    <button type="submit">Đăng</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="room-pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
+                <div class="col-lg-4">
+                    <div class="room-booking">
+                        <h3>Đặt vé Ngay</h3>
+                        <form action="#">
+                            <div class="check-date">
+                                <label for="client_titket_num"> Họ tên:</label>
+                                <input value="Phạm Khuyến" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                            </div>
+                            <div class="check-date">
+                                <label for="client_titket_num"> Số điện thoại</label>
+                                <input value="0336482917" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                            </div>
+                            <div class="check-date">
+                                <label for="client_titket_num"> Nhập số vé</label>
+                                <input style=" font-size:15px" type="number"  id="client_titket_num" name="client_titket_num"/>
+                            </div>
+                            
+                            <div class="select-option">
+                                <label for="cus_cate">Chọn dãy ghế Vé 1:</label>
+                                <select id="cus_cate">
+                                    <option value="">Dãy A</option>
+                                    <option value="">Dãy B</option>
+                                    <option value="">Dãy C</option>
+                                </select>
+                            </div>
+                            <div class="select-option">
+                                <label for="cus_cate">Chọn Số ghế Vé 1:</label>
+                                <select id="cus_cate">
+                                    <option value="">Ghế 1</option>
+                                    <option value="">Ghế 2</option>
+                                    <option value="">Ghế 3</option>
+                                </select>
+                            </div>
+                            <button type="submit">Đặt ngay</button>
+                        </form>
                     </div>
                 </div>
             </div>

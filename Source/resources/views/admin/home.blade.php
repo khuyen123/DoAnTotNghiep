@@ -8,7 +8,7 @@
               <div class="inner">
                 <h3>150</h3>
 
-                <p>Đơn hàng</p>
+                <p>Vé bán ra</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>
@@ -21,9 +21,9 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>150</h3>
+                <h3>150.000.000 VNĐ</h3>
 
-                <p>Sản phẩm đã bán</p>
+                <p>Doanh thu vé</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -36,9 +36,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>150</h3>
+                <h3>150 </h3>
 
-                <p>Khách hàng mới</p>
+                <p>Khán giả mới</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
@@ -51,9 +51,9 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3> Vnđ</h3>
+                <h3>3</h3>
 
-                <p>Tổng tiền đã bán</p>
+                <p>Sự kiện hoàn thành</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>

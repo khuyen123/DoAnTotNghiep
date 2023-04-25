@@ -125,7 +125,7 @@
                            
                         </form>
                         <p style="font-size:13px; margin-left:80px">Hoặc đăng nhập bằng</p>
-                        <a href="#"><i class="fa fa-google" style="font-size: 30px;margin-left:75px"></i></a>
+                       <i class="fa fa-google" style="font-size: 30px;margin-left:75px"></i>
                         <i class="fa fa-facebook" style="font-size: 30px;margin-left:20px"></i>
                         <i class="fa fa-twitter" style="font-size: 30px;margin-left:20px"></i>
                     </div>
