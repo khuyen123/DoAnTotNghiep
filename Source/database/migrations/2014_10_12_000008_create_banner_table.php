@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('banner', function (Blueprint $table) {
             $table->id('id_banner');
             $table->string('noidung');
-            $table->string('mota')->nullable();
+            $table->string('mota',10000)->nullable();
             $table->timestamps();
 
             
