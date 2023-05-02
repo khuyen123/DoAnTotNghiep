@@ -52,9 +52,9 @@
             </div>
         </div>
         <div class="hero-slider owl-carousel">
-        <div class="hs-item set-bg" data-setbg="client/img/hero/hero-1.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="client/img/hero/hero-2.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="client/img/hero/hero-3.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="client/Image/hero/hero-1.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="client/Image/hero/hero-2.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="client/Image/hero/hero-3.jpg"></div>
         </div>
     </section>
     <!-- Hero Section End -->

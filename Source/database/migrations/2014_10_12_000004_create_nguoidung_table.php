@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer('quyentruycap')->nullable();
             $table->string('token')->nullable();
             $table->unsignedBigInteger('id_xaphuong');
-            $table->foreign('id_xaphuong')->references('id_xaphuong')->on('xaphuong');
+            $table->foreign('id_xaphuong')->references('id')->on('xaphuong');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\basecontroller as AdminBasecontroller;
+use App\Http\Controllers\admin\category\categoryController;
 use App\Http\Controllers\admin\event\event_categorycontroller;
 use App\Http\Controllers\admin\event\eventcontroller as EventEventcontroller;
 use App\Http\Controllers\client\baseController;
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Route without Login:
+
 Route::post('/client/login/store',[loginController::class,'login_function'])->name('login_function');
 Route::get('/client/login',[loginController::class,'login'])->name('login');
 Route::get('/client/register',[loginController::class,'sigup'])->name('sigup');
@@ -46,6 +48,11 @@ Route::middleware(['auth'])->group(function() {
         Route::prefix('/categories')->group(function() {
            
             Route::get('/index',[event_categorycontroller::class,'index']);
+            Route::get('/find/{id}',[event_categorycontroller::class,'find']);
+            Route::post('/edit/{id}',[event_categorycontroller::class,'edit_store']);
+            Route::post('/create',[event_categorycontroller::class,'create_category']);
+            Route::delete('/delete/{id}',[event_categorycontroller::class,'deleteOneCategory']);
+            Route::delete('/deleteMany',[event_categorycontroller::class,'deleteManyCategory']);
             
         });
         Route::prefix('/event')->group(function(){

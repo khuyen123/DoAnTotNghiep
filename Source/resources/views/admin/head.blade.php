@@ -10,7 +10,7 @@
 <link href="{{asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}"  rel="stylesheet">
 <!-- Theme style -->
 <link href="{{asset('admin/dist/css/adminlte.min.css')}}"rel="stylesheet">
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 @yield('head')

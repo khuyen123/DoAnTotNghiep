@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('chitietsukien', function (Blueprint $table) {
-            $table->id('id_chitietsukien');
+            $table->id();
             $table->dateTime('batdau');
             $table->dateTime('ketthuc');
             $table->string('diachi');
@@ -24,13 +24,14 @@ return new class extends Migration
             $table->integer('trangthai');
             $table->decimal('giave');
             $table->string('sdt_lienhe')->nullable();
+            $table->string('email_lienhe')->nullable();
             $table->string('ten_lienhe')->nullable();
             $table->integer('dotuoichophep');
             $table->string('mota',10000)->nullable();
             $table->unsignedBigInteger('id_sukien');
             $table->unsignedBigInteger('id_xaphuong');
-            $table->foreign('id_xaphuong')->references('id_xaphuong')->on('xaphuong');
-            $table->foreign('id_sukien')->references('id_sukien')->on('sukien')->onUpdate('restrict')->onDelete('cascade');
+            $table->foreign('id_xaphuong')->references('id')->on('xaphuong');
+            $table->foreign('id_sukien')->references('id')->on('sukien')->onUpdate('restrict')->onDelete('cascade');
             $table->timestamps();
             
         });
