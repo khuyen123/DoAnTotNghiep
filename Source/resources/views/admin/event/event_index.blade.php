@@ -11,7 +11,7 @@
             Xóa hết
         </button>
     </div>
-<!-- Form Create Categories_ Ajax -->
+<!-- Form Create Event_ Ajax -->
         <div class="modal fade" id="create_event_js" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -26,12 +26,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="create_event_name">Tên sự kiện</label>
-                                <input type="text" value="{{old('create_event_name')}}" class="form-control" name="create_event_name" id="create_event_name" placeholder="Nhập tên danh mục">
+                                <input type="text" value="{{old('create_event_name')}}" class="form-control" name="create_event_name" id="create_event_name" placeholder="Nhập tên sự kiện">
                             </div>
                            
                             <div class="form-group">
                                 <label for="create_event_des">Mô tả</label>
-                                <input id="create_event_des" value="{{old('create_event_des')}}" name="create_event_des" class="form-control" placeholder="Nhập mô tả danh mục"/>
+                                <input id="create_event_des" value="{{old('create_event_des')}}" name="create_event_des" class="form-control" placeholder="Nhập mô tả sự kiện"/>
                             </div>
                             <div class="form-group">
                                 <label for="create_event_category_parrent">Danh mục sự kiện</label>
@@ -44,7 +44,7 @@
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="submit" class="submit_create_event_category btn btn-primary">Thêm danh mục</button>
+                            <button type="submit" class="submit_create_event btn btn-primary">Thêm Sự kiện</button>
                         </div>
                         @csrf
                     </form>
@@ -75,35 +75,42 @@
        
         <!-- End of list categories  using ajax -->
         <!-- start of Edit Categories Form -->
-        <div class="modal fade" id="edit_event_category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="edit_event" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa danh mục</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa Sự kiện</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
                 <div class="modal-body">
-                    <form id="edit_event_category_form" >
+                    <form id="edit_event_form" >
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="edit_eventcategory_name">Tên danh mục</label>
-                                <input type="text"  class="name form-control" name="edit_eventcategory_name" id="edit_eventcategory_name" placeholder="Nhập tên danh mục">
-                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_eventcate_name">
+                                <label for="edit_event_name">Tên sự kiện</label>
+                                <input type="text"  class="name form-control" name="edit_event_name" id="edit_event_name" placeholder="Nhập tên danh mục">
+                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_event_name">
                             </div>
                             
                             <div class="description form-group">
-                                <label for="edit_eventcategory_description">Mô tả</label>
-                                <input type="text" id="edit_eventcategory_description" name="edit_eventcategory_description" class="form-control">
-                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_eventcate_des">
+                                <label for="edit_event_description">Mô tả</label>
+                                <input type="text" id="edit_event_description" name="edit_event_description" class="form-control">
+                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_event_des">
                             </div>
-                           
+                            <div class="form-group">
+                                <label for="edit_event_category_parrent">Danh mục sự kiện</label>
+                                <select class="form-control" name="edit_id_danhmucsukien">
+                                @foreach($categories as $category)--}}
+                                    <option value="{{$category->id}}">{{$category->tenDanhmuc}}</option>
+                                @endforeach
+                                </select>
+                            </div>
                             
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="submit" class="submit_edit_event_category btn btn-primary">Lưu</button>
+                            <button type="submit" class="submit_edit_event btn btn-primary">Lưu</button>
                         </div>
                         @csrf
                     </form>
