@@ -27,7 +27,7 @@ class EventRepository extends BaseRepository implements EventRepositoryInterface
    public function destroyMany($request)
    {
       try {
-        return event::destroy($request->category_id);
+        return event::destroy($request->event_id);
       } catch (\Throwable $th) {
         return false;
       }

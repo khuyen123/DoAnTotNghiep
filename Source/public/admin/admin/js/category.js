@@ -1,7 +1,4 @@
 //Event_category edit Start:
-
-
-
 function show_category(id){
     $('#edit_event_category').modal('show');
 
@@ -68,7 +65,7 @@ function deleteEventcategory(id){
                             'Xoá danh mục thành công',
                             'success'
                         ).then(function(){
-                            location.reload();
+                            location.href='/admin/categories/index';
                         })
                     }
                 },
@@ -126,17 +123,26 @@ $(document).on('click','.submit_create_event_category',function(e) {
 var category_id = [];
 $(document).ready(function(){
     category_id = [];
+    if (category_id.length == 0 ){
+        document.getElementById("delete_all_categories").disabled = true;
+        document.getElementById("unselectall_categories").disabled = true;
+    }
 })
 //select Many Category:
 function selectManycategory(id){
     var check_category = document.getElementById("check_category"+id);
-  
+    
     if (check_category.checked) {
-        
         category_id.push(id);
+        document.getElementById("delete_all_categories").disabled = false;
+        document.getElementById("unselectall_categories").disabled = false;
         $('#check_category'+id).prop('checked',true);
     } else {
         category_id.splice(category_id.indexOf(id),1);
+        if (category_id.length == 0 ){
+            document.getElementById("delete_all_categories").disabled = true;
+            document.getElementById("unselectall_categories").disabled = true;
+        }
         $('#check_category'+id).prop('checked',false);
     }
 }
@@ -166,7 +172,7 @@ $(document).on('click','#delete_all_categories',function(){
                         'Xoá danh mục thành công',
                         'success'
                     ).then(function(){
-                        location.reload();
+                        location.href='/admin/categories/index';
                     })
                 
             },

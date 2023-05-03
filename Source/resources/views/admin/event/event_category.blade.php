@@ -28,16 +28,18 @@
                             <div class="form-group">
                                 <label for="create_event_category_name">Tên danh mục</label>
                                 <input type="text" value="{{old('create_event_category_name')}}" class="form-control" name="create_event_category_name" id="create_event_category_name" placeholder="Nhập tên danh mục">
+                                <input  readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_eventcate_name">
                             </div>
                            
                             <div class="form-group">
                                 <label for="create_event_category_des">Mô tả</label>
                                 <input id="create_event_category_des" value="{{old('create_event_category_des')}}" name="create_event_category_des" class="form-control" placeholder="Nhập mô tả danh mục"/>
+                                <input  readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_eventcate_des">
                             </div>
 
         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                            <input  readonly type="text" style="color:#b83009;border:none;width:300px" id="alert_eventcate_des"><button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                             <button type="submit" class="submit_create_event_category btn btn-primary">Thêm danh mục</button>
                         </div>
                         @csrf
@@ -83,13 +85,13 @@
                             <div class="form-group">
                                 <label for="edit_eventcategory_name">Tên danh mục</label>
                                 <input type="text"  class="name form-control" name="edit_eventcategory_name" id="edit_eventcategory_name" placeholder="Nhập tên danh mục">
-                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_eventcate_name">
+                                <input readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_eventcate_name">
                             </div>
                             
                             <div class="description form-group">
                                 <label for="edit_eventcategory_description">Mô tả</label>
                                 <input type="text" id="edit_eventcategory_description" name="edit_eventcategory_description" class="form-control">
-                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_eventcate_des">
+                                <input  readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_eventcate_des">
                             </div>
                            
                             

@@ -36,6 +36,11 @@ class event_categorycontroller extends Controller
             ]);
         }
     }
+    public function getall(){
+        return response()->json([
+            'categories'=>$this->categoryService->getAll()
+        ]);
+    }
     public function edit_store($id,event_category_updateRequest $request){
         $category = $this->categoryService->find($id);
         $data = $request->all();

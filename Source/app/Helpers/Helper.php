@@ -48,6 +48,9 @@ class Helper
                             <a class="btn btn-danger btn-sm" onclick="deleteEvent('.$event->id.')">
                                 <i class="fas fa-trash"></i>
                             </a>
+                            <a class="btn btn-info btn-sm" href="/admin/event_detail/'.$event->id.'/index">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
                         </td>
                     </tr>
 

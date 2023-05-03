@@ -27,15 +27,17 @@
                             <div class="form-group">
                                 <label for="create_event_name">Tên sự kiện</label>
                                 <input type="text" value="{{old('create_event_name')}}" class="form-control" name="create_event_name" id="create_event_name" placeholder="Nhập tên sự kiện">
+                                <input readonly  type="text" style="color:#b83009;border:none;width:1px" id="alert_event_name">
                             </div>
                            
                             <div class="form-group">
                                 <label for="create_event_des">Mô tả</label>
                                 <input id="create_event_des" value="{{old('create_event_des')}}" name="create_event_des" class="form-control" placeholder="Nhập mô tả sự kiện"/>
+                                <input readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_event_des">
                             </div>
                             <div class="form-group">
                                 <label for="create_event_category_parrent">Danh mục sự kiện</label>
-                                <select class="form-control" name="create_id_danhmucsukien">
+                                <select class="form-control" name="create_id_danhmucsukien" id="create_id_danhmucsukien">
                                 @foreach($categories as $category)--}}
                                     <option value="{{$category->id}}">{{$category->tenDanhmuc}}</option>
                                 @endforeach
@@ -90,19 +92,19 @@
                             <div class="form-group">
                                 <label for="edit_event_name">Tên sự kiện</label>
                                 <input type="text"  class="name form-control" name="edit_event_name" id="edit_event_name" placeholder="Nhập tên danh mục">
-                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_event_name">
+                                <input readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_event_name">
                             </div>
                             
                             <div class="description form-group">
                                 <label for="edit_event_description">Mô tả</label>
                                 <input type="text" id="edit_event_description" name="edit_event_description" class="form-control">
-                                <input type="text" style="color:#b83009;border:none;width:300px" id="alert_event_des">
+                                <input readonly type="text" style="color:#b83009;border:none;width:1px" id="alert_event_des">
                             </div>
                             <div class="form-group">
                                 <label for="edit_event_category_parrent">Danh mục sự kiện</label>
-                                <select class="form-control" name="edit_id_danhmucsukien">
+                                <select class="form-control" name="edit_id_danhmucsukien" id= "edit_event_category_parrent">
                                 @foreach($categories as $category)--}}
-                                    <option value="{{$category->id}}">{{$category->tenDanhmuc}}</option>
+                                    <option id="select_edit_event_parrenttt{{$category->id}}" value="{{$category->id}}">{{$category->tenDanhmuc}}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -128,7 +130,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="{{asset('admin/admin/js/category.js')}}"></script>
+    <script src="{{asset('admin/admin/js/event.js')}}"></script>
 <script>
     
 </script>

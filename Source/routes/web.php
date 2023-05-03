@@ -3,9 +3,9 @@
 use App\Http\Controllers\admin\basecontroller as AdminBasecontroller;
 use App\Http\Controllers\admin\category\categoryController;
 use App\Http\Controllers\admin\event\event_categorycontroller;
-use App\Http\Controllers\admin\event\eventcontroller as EventEventcontroller;
+use App\Http\Controllers\admin\event\event_detailcontroller;
+use App\Http\Controllers\admin\event\eventcontroller;
 use App\Http\Controllers\client\baseController;
-use App\Http\Controllers\client\eventcontroller;
 use App\Http\Controllers\client\loginController;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
@@ -53,10 +53,18 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/create',[event_categorycontroller::class,'create_category']);
             Route::delete('/delete/{id}',[event_categorycontroller::class,'deleteOneCategory']);
             Route::delete('/deleteMany',[event_categorycontroller::class,'deleteManyCategory']);
-            
+            Route::get('/getall',[event_categorycontroller::class,'getall']);
         });
         Route::prefix('/event')->group(function(){
-            Route::get('/index',[EventEventcontroller::class,'index']);
+            Route::get('/index',[eventcontroller::class,'index']);
+            Route::post('/create',[eventcontroller::class,'create_store']);
+            Route::get('/find/{id}',[eventcontroller::class,'find']);
+            Route::post('/edit/{id}',[eventcontroller::class,'edit_store']);
+            Route::delete('/delete/{id}',[eventcontroller::class,'deleteOneevent']);
+            Route::delete('/deleteMany',[eventcontroller::class,'deleteManyEvent']);
+        });
+        Route::prefix('event_detail/{id_sukien}')->group(function(){
+            Route::get('/index',[event_detailcontroller::class,'index']);
         });
     });
 });
