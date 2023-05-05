@@ -12,5 +12,8 @@ class province extends Model
         'id_tinhthanh',
         'tentinhthanh'
     ];
+    public function district(){
+        return $this->hasMany(district::class,'id','id_quanhuyen');
+    }
     protected $table= 'tinhthanh';
 }

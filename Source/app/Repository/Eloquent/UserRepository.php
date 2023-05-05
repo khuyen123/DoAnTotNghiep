@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
    }
    public function getAll()
    {
-        return User::all();
+        return User::orderby('id')->paginate(10);
    }
    public function changePass($request, $user)
    {    

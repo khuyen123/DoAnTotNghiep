@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\category\categoryController;
 use App\Http\Controllers\admin\event\event_categorycontroller;
 use App\Http\Controllers\admin\event\event_detailcontroller;
 use App\Http\Controllers\admin\event\eventcontroller;
+use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
+use App\Http\Controllers\admin\user\usercontroller;
 use App\Http\Controllers\client\baseController;
 use App\Http\Controllers\client\loginController;
 use Illuminate\Auth\Events\Login;
@@ -27,16 +29,17 @@ Route::get('/client/login',[loginController::class,'login'])->name('login');
 Route::get('/client/register',[loginController::class,'sigup'])->name('sigup');
 Route::post('/client/register/store',[loginController::class,'sigup_function'])->name('sigup_function');
 Route::get('/client/aboutus',[baseController::class,'aboutus'])->name('aboutus');
-Route::get('client/event_detail',[eventcontroller::class,'eventdetail'])->name('event_detail');
+Route::get('client/event_detail',[clienteventcontroller::class,'eventdetail'])->name('event_detail');
 Route::get('/',[baseController::class,'index'])->name('home');
 Route::get('/client/events',[baseController::class,'events'])->name('client_events');
-
+Route::get('/getdistrict/{province_id}',[baseController::class,'getdistrict']);
+Route::get('/getwards/{district_id}',[baseController::class,'getwards']);
 //Route with auth:
 Route::middleware(['auth'])->group(function() {
     Route::get('client/logout',[loginController::class,'sigout'])->name('logout');
     //Client Route
     Route::prefix('client')->group( function() {
-        
+        Route::get('/infor/{user_id}',[baseController::class,'client_infor']);
         Route::get('/register/active/{user}/{token}',[loginController::class,'active_account'])->name('active_account');
     });
     //Admin Route
@@ -65,6 +68,19 @@ Route::middleware(['auth'])->group(function() {
         });
         Route::prefix('event_detail/{id_sukien}')->group(function(){
             Route::get('/index',[event_detailcontroller::class,'index']);
+            Route::get('/create',[event_detailcontroller::class,'create_index']);
+            Route::post('/create/store',[event_detailcontroller::class,'create_store']);
+            Route::get('/edit/{eventdetail_id}',[event_detailcontroller::class,'edit_index']);
+            Route::post('/edit/{eventdetail_id}',[event_detailcontroller::class,'edit_store']);
+            route::delete('/delete/{eventdetail_id}',[event_detailcontroller::class,'delete']);
+        });
+        Route::prefix('user')->group(function(){
+            Route::get('/index',[usercontroller::class,'index']);
+            Route::get('/edit/{user_id}',[usercontroller::class,'edit']);
+            Route::POST('/edit/lock_user/{user_id}',[usercontroller::class,'edit_store']);
+            Route::POST('/edit/unlock_user/{user_id}',[usercontroller::class,'edit_store']);
+            Route::POST('/edit/changerole/{user_id}',[usercontroller::class,'edit_store']);
+            Route::delete('/delete/{user_id}',[usercontroller::class,'deleteuser']);
         });
     });
 });

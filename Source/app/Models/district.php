@@ -14,5 +14,11 @@ class district extends Model
         'id_tinhthanh'
         
     ];
+    public function wards(){
+        return $this->hasMany(wards::class,'id','id_xaphuong');
+    }
+    public function province(){
+        return $this->hasOne(province::class,'id','id_tinhthanh');
+    }
     protected $table= 'quanhuyen';
 }

@@ -1,87 +1,150 @@
 @extends('admin.main')
 
 @section('head')
-
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
 @endsection
 
 @section('content')
-
     <form action="" method="POST">
         <div class="card-body">
             <div class="form-group">
                 <label for="name">Họ tên</label>
-                <input type="hidden" value="{{$user->id}}" name="id">
-                <input type="text" value="{{$user->name}}" class="form-control" name="name" id="name" placeholder="Nhập họ tên">
+                <input readonly type="text" value="{{$user->hoten}}" class="form-control" name="user_name" id="user_name" >
+            </div>
+            <div class="form-group">
+                <label for="name">Ngày sinh</label>
+                <input readonly type="date" value="{{$user->ngaySinh}}" class="form-control" name="NgaySinh" id="NgaySinh" >
+            </div>
+            <div class="form-group">
+                <label for="name">Địa chỉ</label>
+                <input readonly type="text" value="{{$user->diachi.' '.$user->wards->tenxaphuong. ' '.$user->wards->district->tenquanhuyen.' '.$user->wards->district->province->tentinhthanh}}" class="form-control" name="DiaChi" id="diachi" placeholder="Nhập nội dung">
             </div>
            
             <div class="form-group">
-                <label for="DiaChi">Địa chỉ</label>
-                <input type="text" id="DiaChi" value="{{$user->DiaChi}}" name="DiaChi" class="form-control"></input>
+                <label for="name">Số điện thoại</label>
+                <input readonly type="text" value="{{$user->sdt}}" class="form-control" name="SDT" id="SDT" placeholder="Nhập nội dung">
             </div>
             <div class="form-group">
-                <label for="DiaChi">Số điện thoại</label>
-                <input id="SDT" value="{{$user->SDT}}" name="SDT" class="form-control"></input>
+                <label for="name">Email</label>
+                <input readonly type="text" value="{{$user->email}}" class="form-control" name="email" id="email" placeholder="Nhập nội dung">
+            </div>
+            <div class="form-group" style="display:flex">
+                <label for="name">Trạng Thái: &nbsp;</label>
+                <?php
+                    $html = '';
+                    if ($user->trangthai == 1){
+                        $html = '<span style="font-size:15px;padding-top:10px" class="badge badge-success ">Đang hoạt động</span>';
+                        $html .='<a style="margin-left:10px" class="btn btn-danger" onClick="lockuser('.$user->id.')"><i class="fa fa-ban" ></i>&nbsp;Khoá</a>';
+                        echo $html;
+                    } else {
+                        $html = '<span style="font-size:15px;padding-top:10px" class="badge badge-danger ">Đang bị khoá</span>';
+                        $html .='<a style="margin-left:10px" class="btn btn-success" onClick="unlockuser('.$user->id.')"><i class="fa fa-unlock" ></i>&nbsp;Mở Khoá</a>';
+                        echo $html;
+                    }
+                ?>
+                
             </div>
             <div class="form-group">
-                <label>Giới tính</label>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value=1 type="radio" id="Nam" name="GioiTinh" 
-                    {{$user->GioiTinh == 1 ? 'checked':''}}>
-                    <label for="Nam" class="custom-control-label">Nam</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value=2 type="radio" id="Nu" name="GioiTinh" 
-                    {{$user->GioiTinh == 2 ? 'checked':''}}>
-                    <label for="Nu" class="custom-control-label">Nữ</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="description">Ngày sinh</label>
-                <input value="{{$user->NgaySinh}}" type="text" id="from-datepicker" name="NgaySinh" class="form-control"/>
-            </div>
-            <div class="form-group">
-                <label for="description">Email</label>
-                <input readonly value="{{$user->email}}" id="email" name="email" class="form-control"></input>
-            </div>
-            <div class="form-group">
-                <label for="password">Mật khẩu: </label>
-                <a class="btn btn-danger" href="changePass/{{$user->id}}">
-                    <i class="fas fa-password">Thay đổi mật khẩu</i>
-                </a>
-            </div>
-            <div class="form-group">
-                <label>Quyền truy cập</label>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value=2 type="radio" id="employee" name="roles" 
-                    {{$user->roles == 2 ? 'checked':''}}>
-                    <label for="employee" class="custom-control-label">Nhân viên</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value=3 type="radio" id="client" name="roles" 
-                    {{$user->roles == 3 ? 'checked':''}}>
-                    <label for="client" class="custom-control-label">Khách hàng</label>
-                </div>
-            </div>
+                <label for="name">Quyền truy cập</label>
+               <select id="user_role" onchange="changerole({{$user->id}})" class="form-control" style="width:300px">
+                    <option value="1" >Khách hàng</option>
+                    <option value="2" >Ban tổ chức</option>
+                    <option selected value="{{$user->quyentruycap}}" >{{$user->roles->tenquyentruycap}}</option>
+               </select>
         </div>
         <!-- /.card-body -->
 
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
-        </div>
+        
         @csrf
     </form>
 @endsection
 
 @section('footer')
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor 4
+        // instance, using default configuration.
+        CKEDITOR.replace( 'content' );
+    </script>
+    <script>
+        function lockuser(id){
+            var data = {
+                'trangthai':0
+            }
+            Swal.fire(
+                'Khoá người dùng?',
+                'Bạn có chắc chắn muốn khoá người dùng này không?',
+                'warning'
+            ).then(function(){
+                $.ajax({
+                    type:"POST",
+                    url:'lock_user/'+id,
+                    data:data,
+                    dataType: "JSON",
+                    success: function(response){
+                        Swal.fire(
+                            'Thành Công!',
+                            'Khoá người dùng thành công!',
+                            'success'
+                        ).then(function(){
+                            location.reload();
+                        })
+                    }
+                })
+            })
+        }
+        function unlockuser(id){
+            var data = {
+                'trangthai':1
+            }
+            Swal.fire(
+                'Mở Khoá người dùng?',
+                'Bạn có chắc chắn muốn mở khoá người dùng này không?',
+                'warning'
+            ).then(function(){
+                $.ajax({
+                    type:"POST",
+                    url:'unlock_user/'+id,
+                    data:data,
+                    dataType: "JSON",
+                    success: function(response){
+                        Swal.fire(
+                            'Thành Công!',
+                            'Mở Khoá người dùng thành công!',
+                            'success'
+                        ).then(function(){
+                            location.reload();
+                        })
+                    }
+                })
+            })
+        }
+        function changerole(id){ 
+            var data = {
+                'quyentruycap':$('#user_role').val()
+            }
+            Swal.fire(
+                'Đổi quyền truy cập',
+                'Bạn có muốn đổi quyền truy cập cho người dùng này không?',
+                'warning'
+            ).then(function(){
+                $.ajax({
+                    type:"POST",
+                    url:'changerole/'+id,
+                    dataType: "JSON",
+                    data: data,
+                    success: function(response){
+                        Swal.fire(
+                            'Thành công',
+                            'Thay đổi quyền truy cập thành công!',
+                            'success'
+                        ).then(function(){
+                            location.reload();
+                        })
+                    }
+                })
+            })
+        }
+        
+    </script>
 
-    <!-- Change date Formet to yyyy/mm/đ -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script> 
-    <script> 
-        $( document ).ready(function() {     
-        $("#from-datepicker").datepicker({          
-        format: 'yyyy-mm-dd' 
-        });      
-        });  
-    </script> 
 @endsection

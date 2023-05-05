@@ -4,6 +4,7 @@
     <div class="container-fluid">
         <button style="width:150px" type="button" class="btn btn-success" data-toggle="modal" data-target="#create_event_js">
             Thêm Sự kiện
+        </button>
         <button style="width:150px" type="button" class="btn btn-warning" data-toggle="modal" id="unselectall_event">
             Bỏ chọn
         </button>

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use app\Models\Category;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 class Helper
 {
@@ -42,20 +43,83 @@ class Helper
                         <td>'. $event->motaSuKien .'</td>
                         <td>'. $event->category->tenDanhmuc .'</td>
                         <td>
+                            <a class="btn btn-info btn-sm" href="/admin/event_detail/'.$event->id.'/index">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
                             <a class="btn btn-primary btn-sm" onclick="show_event('.$event->id.')">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a class="btn btn-danger btn-sm" onclick="deleteEvent('.$event->id.')">
                                 <i class="fas fa-trash"></i>
                             </a>
-                            <a class="btn btn-info btn-sm" href="/admin/event_detail/'.$event->id.'/index">
-                                <i class="fas fa-info-circle"></i>
-                            </a>
+                           
                         </td>
                     </tr>
 
                 ';
         }
         return $html;
+    }
+    public static function event_detail($event_details){
+        $html='';
+        $i=1;
+        foreach ($event_details as $key=>$event_detail){
+                $html .= '
+                    <tr>
+                        
+                        <td>'. $event_detail->event->tenSukien .'</td>
+                        <td>'. $event_detail->ten_lienhe .'</td>
+                        <td>'. $event_detail->event->category->tenDanhmuc .'</td>
+                        <td>'. $event_detail->wards->district->province->tentinhthanh .'</td>
+                        <td>'. $event_detail->khuvuc .'</td>
+                        <td>'. $event_detail->giave .'</td>
+                        <td>'. self::active($event_detail->trangthai) .'</td>
+                        <td>
+                      
+                            <a class="btn btn-primary btn-sm" href="/admin/event_detail/'.$event_detail->id.'/edit/'.$event_detail->id.'">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" onclick="deleteEventdetail('.$event_detail->id.')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                           
+                        </td>
+                    </tr>
+
+                ';
+        }
+        return $html;
+    }
+    public static function user($users){
+        $html='';
+        $i=1;
+        foreach ($users as $key=>$user){
+                $html .= '
+                    <tr>
+                        <td>'.$i.'</td>
+                        <td>'. $user->hoten .'</td>
+                        <td>'. $user->ngaySinh .'</td>
+                        <td>'.self::active($user->trangthai).'</td>
+                        <td>'. $user->gioiTinh .'</td>
+                        <td> ';
+                        if (Auth::user()->id != $user->id && $user->quyentruycap !=3){
+                        $html .='
+                            <a class="btn btn-primary btn-sm" href="edit/'.$user->id.'">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm" onclick="deleteuser('.$user->id.')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                ';}
+                $i++;
+        }
+        return $html;
+    }
+    public static function active($active=0):string
+    {
+        return $active==0 ? ' <span style="font-size:15px" class="badge badge-danger">Kết thúc</span>':'<span style="font-size:15px" class="badge badge-success ">Đang hoạt động</span>';
     }
 }

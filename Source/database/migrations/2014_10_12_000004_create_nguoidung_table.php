@@ -26,10 +26,12 @@ return new class extends Migration
             $table->string('sdt')->nullable();          
             $table->string('gioiTinh')->nullable();
             $table->string('diachi')->nullable();
-            $table->integer('quyentruycap')->nullable();
+
             $table->string('token')->nullable();
             $table->unsignedBigInteger('id_xaphuong');
+            $table->unsignedBigInteger('quyentruycap');
             $table->foreign('id_xaphuong')->references('id')->on('xaphuong');
+            $table->foreign('quyentruycap')->references('id')->on('quyentruycap');
             $table->rememberToken();
             $table->timestamps();
         });

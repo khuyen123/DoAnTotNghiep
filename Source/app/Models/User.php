@@ -33,7 +33,12 @@ class User extends Authenticatable
         'id_xaphuong',
         'token'
     ];
-
+    public function wards(){
+        return $this->hasOne(wards::class,'id','id_xaphuong');
+    }
+    public function roles(){
+        return $this->hasOne(roles::class,'id','quyentruycap');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

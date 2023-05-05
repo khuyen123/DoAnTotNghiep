@@ -27,5 +27,11 @@ class event_detail extends Model
         'id_xaphuong'
         
     ];
+    public function event(){
+        return $this->hasOne(event::class,'id','id_sukien');
+    }
+    public function wards(){
+        return $this->hasOne(wards::class,'id','id_xaphuong');
+    }
     protected $table= 'chitietsukien';
 }
