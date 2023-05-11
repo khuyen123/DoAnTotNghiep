@@ -38,14 +38,7 @@
                                     <option value="">Cắm trại dã ngoại</option>
                                 </select>
                             </div>
-                            <div class="select-option">
-                                <label for="cus_provice">Chọn thành phố mà bạn sống:</label>
-                                <select id="cus_provice">
-                                    <option value="">Đà Nẵng</option>
-                                    <option value="">Quảng Nam</option>
-                                </select>
-                            </div>
-                            <button type="submit">Kiểm tra</button>
+                            
                         </form>
                     </div>
                 </div>

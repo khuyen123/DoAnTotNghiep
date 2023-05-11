@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('sovetoida');
             $table->integer('sovedaban');
             $table->integer('trangthai');
-            $table->decimal('giave');
+            $table->bigInteger('giave');
             $table->string('sdt_lienhe')->nullable();
             $table->string('email_lienhe')->nullable();
             $table->string('ten_lienhe')->nullable();

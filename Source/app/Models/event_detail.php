@@ -39,5 +39,8 @@ class event_detail extends Model
     public function singleImage(){
         return $this->hasMany(event_image::class,'id','id_chitietsukien')->select('hinhanh')->limit(1);
     }
+    public function titkettype(){
+        return $this->hasOne(titkettype::class,'id','id_hinhthucve');
+    }
     protected $table= 'chitietsukien';
 }

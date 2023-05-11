@@ -156,7 +156,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Mây lang thang</h2>
+                        <h2>{{$event_detail->event->tenSukien}}</h2>
                         <div class="bt-option">
                             <a href="{{Route('client_events')}}">Sự kiện</a>
                             <span>chi tiết sự kiện</span>
@@ -174,10 +174,14 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="room-details-item">
-                        <img src="{{asset('client/img/room/room-b2.jpg')}}" alt="">
+                    <div id="detail_slide" class="hero-slider owl-carousel" >
+                            <img class="hs-item set-bg" src="{{asset('client/Image/hero/hero-1.jpg')}}">
+                            <img class="hs-item set-bg" src="{{asset('client/Image/hero/hero-2.jpg')}}">
+                            <img class="hs-item set-bg" src="{{asset('client/Image/hero/hero-3.jpg')}}">
+                    </div>
                         <div class="rd-text">
                             <div class="rd-title">
-                                <h3>Đêm nhạc Mây lang thang</h3>
+                                <h3>{{$event_detail->event->tenSukien.'-'.$event_detail->wards->district->province->tentinhthanh}}</h3>
                                 <div class="rdt-right">
                                     <div class="rating">
                                         <i class="icon_star"></i>
@@ -189,36 +193,46 @@
                                     
                                 </div>
                             </div>
-                            <h2>150.000 VNĐ<span>/Vé</span></h2>
+                            <h2>{{number_format($event_detail->giave,0,',','.')}} VNĐ<span>/Vé</span></h2>
                             <table>
                                 <tbody>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974;">Người liên hệ:</td>
-                                        <td>Phạm Khuyến</td>
+                                        <td>{{$event_detail->ten_lienhe}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Email liên hệ:</td>
-                                        <td>khuyenphamno0@gmail.com</td>
+                                        <td>{{$event_detail->email_lienhe}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Số điện thoại :</td>
-                                        <td>0336482917</td>
+                                        <td>{{$event_detail->sdt_lienhe}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Hình thức vé:</td>
-                                        <td>Vé vào cổng</td>
+                                        <td>{{$event_detail->titkettype->tenhinhthuc}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Độ tuổi:</td>
-                                        <td>Lớn hơn 7</td>
+                                        <td>Lớn hơn {{$event_detail->dotuoichophep}}</td>
                                     </tr>
                                     <tr>
-                                        <td class="r-o" style="color:#dfa974">Tình trạng:</td>
-                                        <td>Còn vé</td>
+                                        <td class="r-o" style="color:#dfa974">Tình trạng Vé:</td>
+                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? "Hết vé":"Còn Vé"}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Hoạt động:</td>
-                                        <td>Đang hoạt động</td>
+                                        <td><span style="font-size:15px" class="badge badge-warning">{{$event_detail->trangthai == 0 ? "Đã kết thúc":"Đang hoạt động"}}</span></td>
+                                        <td>
+                                            <?php 
+                                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                                $today = date("y-m-d  G:i:s");
+                                                $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
+                                                if ($check_availble<= 25700){
+                                                    echo '<span style="font-size:15px" class="badge badge-danger">Hết thời gian đặt vé</span>';
+                                                }
+                                            ?>
+                                        </td>
                                     </tr>
                                     <tr >
                                         <td class="r-o" style="color:#dfa974; font-size:23px">Mô tả sự kiện:</td>
@@ -226,9 +240,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <p class="f-para">Đêm nhạc Mây Lang Thang được tổ chức bởi Khuyến Phạm Studio, nơi hội tụ những giọng ca tuyệt vời 
-                                và nổi tiếng như Tăng Phúc, Noo Phước Thịnh,... Hứa hẹn sẽ đem lại cho các bạn những giây phút thư giãn tuyệt vời 
-                                cũng như những tiết mục đặc sắc. Sự kiện diễn ra liên tục hằng tuần tại mỗi tỉnh thành và sẽ kết thúc khi nào kết thúc.</p>
+                            <p class="f-para">{{$event_detail->mota}}</p>
                             
                         </div>
                     </div>
@@ -302,8 +314,8 @@
                         <h3>Đặt vé Ngay</h3>
                         <form action="#">
                             <div class="check-date">
-                                <label for="client_titket_num"> Họ tên:</label>
-                                <input value="Phạm Khuyến" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                                <label for="client_titket_name"> Họ tên:</label>
+                                <input value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->hoten; ?>" style=" font-size:15px" type="text"  id="client_titket_name" name="client_titket_name"/>
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_num"> Số điện thoại</label>
@@ -330,7 +342,16 @@
                                     <option value="">Ghế 3</option>
                                 </select>
                             </div>
-                            <button type="submit">Đặt ngay</button>
+                            <?php 
+                                date_default_timezone_set('Asia/Ho_Chi_Minh');
+                                $today = date("y-m-d  G:i:s");
+                                $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
+                                if ($check_availble> 25500 && $event_detail->trangthai == 1){
+                                    echo '<button type="submit">Đặt ngay</button>';
+                                }
+                            ?>
+                            
+                            
                         </form>
                     </div>
                 </div>

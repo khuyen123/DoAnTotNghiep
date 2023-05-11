@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('noidung');
             $table->timestamps();
-            $table->unsignedBigInteger('id_sukien');
+            $table->unsignedBigInteger('id_chitietsukien');
             $table->unsignedBigInteger('id_nguoidung');
-            $table->foreign('id_sukien')->references('id')->on('sukien')->onDelete('cascade');
+            $table->foreign('id_chitietsukien')->references('id')->on('chitietsukien')->onDelete('cascade');
             $table->foreign('id_nguoidung')->references('id')->on('users')->onDelete('cascade');
             
         });

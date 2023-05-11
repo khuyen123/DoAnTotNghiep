@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('sdt')->nullable();          
             $table->string('gioiTinh')->nullable();
             $table->string('diachi')->nullable();
-
+            $table->string('anhdaidien',1000)->nullable();
             $table->string('token')->nullable();
             $table->unsignedBigInteger('id_xaphuong');
             $table->unsignedBigInteger('quyentruycap');

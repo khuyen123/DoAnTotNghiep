@@ -29,9 +29,6 @@ class baseController extends Controller
             'event_details' => $events
         ]);
     }
-    public function eventdetail(){
-        return view('client.event.detail');
-    }
     public function creator(){
         echo "Trang quản trị";
     }

@@ -1246,6 +1246,13 @@ ul, ol {
 .room-details-item img {
 	margin-bottom: 40px;
 }
+.room-details-item #detail_slide{
+	margin-bottom: 40px;
+	width:470px; 
+	height:517px;
+	margin-bottom:40px;
+	position: relative;
+}
 .room-details-item .rd-text .rd-title {
 	overflow: hidden;
 	margin-bottom: 8px;

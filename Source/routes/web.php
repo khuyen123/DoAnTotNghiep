@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\basecontroller as AdminBasecontroller;
 use App\Http\Controllers\admin\category\categoryController;
 use App\Http\Controllers\admin\event\event_categorycontroller;
 use App\Http\Controllers\admin\event\event_detailcontroller;
+use App\Http\Controllers\admin\event\event_imagecontroller;
 use App\Http\Controllers\admin\event\eventcontroller;
 use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
 use App\Http\Controllers\admin\user\usercontroller;
@@ -29,7 +30,7 @@ Route::get('/client/login',[loginController::class,'login'])->name('login');
 Route::get('/client/register',[loginController::class,'sigup'])->name('sigup');
 Route::post('/client/register/store',[loginController::class,'sigup_function'])->name('sigup_function');
 Route::get('/client/aboutus',[baseController::class,'aboutus'])->name('aboutus');
-Route::get('/client/event_detail/{detail_id}',[baseController::class,'eventdetail'])->name('event_detail');
+Route::get('/client/event_detail/{detail_id}',[clienteventcontroller::class,'eventdetail'])->name('event_detail');
 Route::get('/',[baseController::class,'index'])->name('home');
 Route::get('/client/events',[baseController::class,'events'])->name('client_events');
 Route::get('/getdistrict/{province_id}',[baseController::class,'getdistrict']);
@@ -75,6 +76,9 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/edit/{eventdetail_id}',[event_detailcontroller::class,'edit_index']);
             Route::post('/edit/{eventdetail_id}',[event_detailcontroller::class,'edit_store']);
             route::delete('/delete/{eventdetail_id}',[event_detailcontroller::class,'delete']);
+        });
+        Route::prefix('/event_image')->group(function(){
+            Route::get('/index',[event_imagecontroller::class,'index']);
         });
         Route::prefix('user')->group(function(){
             Route::get('/index',[usercontroller::class,'index']);

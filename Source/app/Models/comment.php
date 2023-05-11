@@ -13,7 +13,9 @@ class comment extends Model
         'noidung',
         'id_sukien',
         'id_nguoidung'
-        
     ];
+    public function event_detail(){
+        return $this->hasOne(event_detail::class,'id','id_sukien');
+    }
     protected $table= 'binhluan';
 }

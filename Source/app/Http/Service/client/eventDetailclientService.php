@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class eventDetailclientService {
-    const LIMIT=6;
+    const LIMIT=150;
+    protected $eventdetailrepository;
+    public function __construct(EventDetailRepository $eventdetailrepository)
+    {
+        $this->eventdetailrepository = $eventdetailrepository;
+    }
     public function getevent(){
         $sukien =  DB::table('chitietsukien')
         ->join('hinhanh','hinhanh.id_chitietsukien','=','chitietsukien.id')
@@ -29,5 +34,8 @@ class eventDetailclientService {
             'chitietsukien.dotuoichophep'
         ));
         return $sukien;
+    }
+    public function geteventdetail($id){
+        return $this->eventdetailrepository->find($id);
     }
 }

@@ -31,7 +31,8 @@ class User extends Authenticatable
         'diachi',
         'quyentruycap',
         'id_xaphuong',
-        'token'
+        'token',
+        'anhdaidien'
     ];
     public function wards(){
         return $this->hasOne(wards::class,'id','id_xaphuong');

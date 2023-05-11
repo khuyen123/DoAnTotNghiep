@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('danhgia', function (Blueprint $table) {
             $table->id();
             $table->double('sosao');
-            $table->unsignedBigInteger('id_sukien');
+            $table->unsignedBigInteger('id_chitietsukien');
             $table->unsignedBigInteger('id_nguoidung');
-            $table->foreign('id_sukien')->references('id')->on('sukien')->onDelete('cascade');
+            $table->foreign('id_chitietsukien')->references('id')->on('chitietsukien')->onDelete('cascade');
             $table->foreign('id_nguoidung')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

@@ -58,7 +58,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/admin/event_image/index" class="nav-link">
                         <i class="nav-icon fas fa-images"></i>
                         <p>
                             Ảnh sự kiện
