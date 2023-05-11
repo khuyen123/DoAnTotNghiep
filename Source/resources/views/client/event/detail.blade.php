@@ -8,22 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sự kiện số | Chi tiết sự kiện</title>
-
+    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/flaticon.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/jquery-ui.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/magnific-popup.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('client/css/style.css')}}" type="text/css">
 </head>
 
 <body>
@@ -124,7 +124,7 @@
                     <div class="col-lg-2">
                     <div class="logo">
                             <a href="/">
-                                <img style="width:90px;height:90px" src="img/logo.png" alt="">
+                                <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="room-details-item">
-                        <img src="img/room/room-b2.jpg" alt="">
+                        <img src="{{asset('client/img/room/room-b2.jpg')}}" alt="">
                         <div class="rd-text">
                             <div class="rd-title">
                                 <h3>Đêm nhạc Mây lang thang</h3>
@@ -236,7 +236,7 @@
                         <h4>Bình luận</h4>
                         <div class="review-item">
                             <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-1.jpg" alt="">
+                                <img src="{{asset('client/img/room/avatar/avatar-1.jpg')}}" alt="">
                             </div>
                             <div class="ri-text">
                                 <span>27/08/2022</span>
@@ -253,7 +253,7 @@
                         </div>
                         <div class="review-item">
                             <div class="ri-pic">
-                                <img src="img/room/avatar/avatar-1.jpg" alt="">
+                                <img src="{{asset('client/img/room/avatar/avatar-1.jpg')}}" alt="">
                             </div>
                             <div class="ri-text">
                                 <span>27/08/2022</span>
@@ -348,7 +348,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img style="width:90px;height:90px" src="img/logo.png" alt="">
+                                    <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
                                 </a>
                             </div>
                             <p>Chúng tôi tạo ra trang web để bạn được chill<br /> Đồ án tốt nghiệp</p>
@@ -400,14 +400,14 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="{{asset('client/js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('client/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('client/js/jquery.nice-select.min.js')}}"></script>
+    <script src="{{asset('client/js/jquery-ui.min.js')}}"></script>
+    <script src="{{asset('client/js/jquery.slicknav.js')}}"></script>
+    <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('client/js/main.js')}}"></script>
 </body>
 
 </html>

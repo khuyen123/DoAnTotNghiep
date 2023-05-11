@@ -15,5 +15,8 @@ class event_image extends Model
         'id_chitietsukien'
         
     ];
+    public function event_detail(){
+        return $this->hasOne(event_detail::class,'id','id_chitietsukien');
+    }
     protected $table= 'hinhanh';
 }

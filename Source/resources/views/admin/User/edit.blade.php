@@ -53,8 +53,6 @@
                </select>
         </div>
         <!-- /.card-body -->
-
-        
         @csrf
     </form>
 @endsection

@@ -52,7 +52,11 @@ use Illuminate\Support\Facades\Auth;
 
 $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
 $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-$html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+$html_logined = '';
+if (isset(Auth::user()->id)){
+    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+}
+
 if(isset(Auth::user()->hoten)) {
     $html_logined .= Auth::user()->hoten;
 }
@@ -101,7 +105,11 @@ if (Auth::check()) {
                         <?php   
                             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-                            $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                            $html_logined = '';
+                            if (isset(Auth::user()->id)){
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                            }
+                            
                             if(isset(Auth::user()->hoten)) {
                                 $html_logined .= Auth::user()->hoten;
                             }
@@ -172,17 +180,21 @@ if (Auth::check()) {
     <section class="rooms-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+                <?php
+                $html_detail = '';
+                $route = "'event_detail',['detail_id' =>";
+                foreach ($event_details as $key =>$event_detail) {
+                    $html_detail .='<div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
+                        <img style=" height:233px" src="'.$event_detail->noidung.'" alt="">
                         <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
+                            <h4>'.$event_detail->tenSukien.'</h4>
+                            <h3>'.$event_detail->giave.' VNĐ<span>/Vé</span></h3>
                             <table>
                                 <tbody>
                                 <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
+                                            <td class="r-o">Địa chỉ:</td>
+                                            <td style="height:160px">'.$event_detail->diachi.'</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Hình thức vé:</td>
@@ -190,200 +202,34 @@ if (Auth::check()) {
                                         </tr>
                                         <tr>
                                             <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
+                                            <td>Lớn hơn '.$event_detail->dotuoichophep.'</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
+                                            <td>';$event_detail->sovedaban >= $event_detail->sovetoida ? $html_detail .='Hết vé': $html_detail.='Còn vé';
+                                            $html_detail .='</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
+                                            <td>';
+                                            $event_detail->trangthai == 1?$html_detail.='Còn hoạt động' : $html_detail.='Ngưng hoạt động';
+                                            $html_detail .='</td>
                                         </tr>
                                 </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
+                            </table>';
+                           
+                            $html_detail .=
+                            '<a href="/client/event_detail/'.$event_detail->id_chitietsukien.'" class="primary-btn">Xem chi tiết</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img style=" height:233px" src="img/room/room-b2.jpg" alt="">
-                        <div class="ri-text">
-                            <h4>Mây Lang Thang</h4>
-                            <h3>150.000 VNĐ<span>/Vé</span></h3>
-                            <table>
-                                <tbody>
-                                <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                </tbody>
-                            </table>
-                            <a href="{{Route('event_detail')}}" class="primary-btn">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="room-pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">Next <i class="fa fa-long-arrow-right"></i></a>
-                    </div>
-                </div>
+                </div>';
+                }
+                echo $html_detail;
+                ?>
+                   
+                  
             </div>
+           
         </div>
     </section>
     <!-- Rooms Section End -->
@@ -457,6 +303,22 @@ if (Auth::check()) {
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            findprovince(6271);
+        });
+        function findprovince(id){
+            var data;
+            $.ajax({
+                type: "GET",
+                url: '/finddistrict/'+id,
+                dataType: "JSON",
+                success: function(response){
+                   console.log(response.province.tentinhthanh);
+                }
+            })
+        }
+    </script>
 </body>
 
 </html>

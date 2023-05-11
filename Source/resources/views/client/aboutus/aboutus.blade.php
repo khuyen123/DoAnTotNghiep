@@ -52,7 +52,11 @@ use Illuminate\Support\Facades\Auth;
 
 $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
 $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-$html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+$html_logined = '';
+if (isset(Auth::user()->id)){
+    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+}
+
 if(isset(Auth::user()->hoten)) {
     $html_logined .= Auth::user()->hoten;
 }
@@ -101,7 +105,11 @@ if (Auth::check()) {
                         <?php   
                             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-                            $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                            $html_logined = '';
+                            if (isset(Auth::user()->id)){
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                            }
+                            
                             if(isset(Auth::user()->hoten)) {
                                 $html_logined .= Auth::user()->hoten;
                             }

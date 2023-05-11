@@ -33,5 +33,11 @@ class event_detail extends Model
     public function wards(){
         return $this->hasOne(wards::class,'id','id_xaphuong');
     }
+    public function event_image(){
+        return $this->hasMany(event_image::class,'id','id_chitietsukien');
+    }
+    public function singleImage(){
+        return $this->hasMany(event_image::class,'id','id_chitietsukien')->select('hinhanh')->limit(1);
+    }
     protected $table= 'chitietsukien';
 }

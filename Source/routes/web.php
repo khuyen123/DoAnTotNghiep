@@ -29,11 +29,13 @@ Route::get('/client/login',[loginController::class,'login'])->name('login');
 Route::get('/client/register',[loginController::class,'sigup'])->name('sigup');
 Route::post('/client/register/store',[loginController::class,'sigup_function'])->name('sigup_function');
 Route::get('/client/aboutus',[baseController::class,'aboutus'])->name('aboutus');
-Route::get('client/event_detail',[clienteventcontroller::class,'eventdetail'])->name('event_detail');
+Route::get('/client/event_detail/{detail_id}',[baseController::class,'eventdetail'])->name('event_detail');
 Route::get('/',[baseController::class,'index'])->name('home');
 Route::get('/client/events',[baseController::class,'events'])->name('client_events');
 Route::get('/getdistrict/{province_id}',[baseController::class,'getdistrict']);
 Route::get('/getwards/{district_id}',[baseController::class,'getwards']);
+Route::get('/finddistrict/{ward_id}',[baseController::class,'findprovince']);
+
 //Route with auth:
 Route::middleware(['auth'])->group(function() {
     Route::get('client/logout',[loginController::class,'sigout'])->name('logout');

@@ -16,7 +16,9 @@ class eventDetailService {
         $this->eventdetailRepository = $eventdetailRepository;
         $this->eventRepository = $eventRepository;
     }
-    
+    public function getAllforclient(){
+        return $this->eventdetailRepository->getAll();
+    }
     public function getAll($id_sukien){
         return $this->eventdetailRepository->searchEvent($id_sukien);
     }

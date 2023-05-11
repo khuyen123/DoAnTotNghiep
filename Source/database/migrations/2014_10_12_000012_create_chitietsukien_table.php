@@ -30,7 +30,9 @@ return new class extends Migration
             $table->string('mota',10000)->nullable();
             $table->unsignedBigInteger('id_sukien');
             $table->unsignedBigInteger('id_xaphuong');
+            $table->unsignedBigInteger('id_hinhthucve');
             $table->foreign('id_xaphuong')->references('id')->on('xaphuong');
+            $table->foreign('id_hinhthucve')->references('id')->on('hinhthucve');
             $table->foreign('id_sukien')->references('id')->on('sukien')->onUpdate('restrict')->onDelete('cascade');
             $table->timestamps();
             
