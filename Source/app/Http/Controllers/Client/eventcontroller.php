@@ -15,8 +15,10 @@ class eventcontroller extends Controller
     }
     public function eventdetail($detail_id){
         $event_detail = $this->eventdetailservice->geteventdetail($detail_id);
+        $images = $this->eventdetailservice->getimage($detail_id);
         return view('client.event.detail',[
-            'event_detail' => $event_detail
+            'event_detail' => $event_detail,
+            'images' => $images
         ]);
     }
     

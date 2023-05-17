@@ -24,7 +24,8 @@ class event_detail extends Model
         'dotuoichophep',
         'mota',
         'id_sukien',
-        'id_xaphuong'
+        'id_xaphuong',
+        'id_hinhthucve'
         
     ];
     public function event(){

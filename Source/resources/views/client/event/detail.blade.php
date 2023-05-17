@@ -52,7 +52,10 @@
 
             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-            $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+            $html_logined = '';
+            if (isset(Auth::user()->id)){
+                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+            }
             if(isset(Auth::user()->hoten)) {
                 $html_logined .= Auth::user()->hoten;
             }
@@ -101,7 +104,9 @@
                         <?php   
                             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-                            $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                            if (isset(Auth::user()->id)){
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                            }
                             if(isset(Auth::user()->hoten)) {
                                 $html_logined .= Auth::user()->hoten;
                             }
@@ -175,9 +180,9 @@
                 <div class="col-lg-8">
                     <div class="room-details-item">
                     <div id="detail_slide" class="hero-slider owl-carousel" >
-                            <img class="hs-item set-bg" src="{{asset('client/Image/hero/hero-1.jpg')}}">
-                            <img class="hs-item set-bg" src="{{asset('client/Image/hero/hero-2.jpg')}}">
-                            <img class="hs-item set-bg" src="{{asset('client/Image/hero/hero-3.jpg')}}">
+                        @foreach($images as $image)
+                            <img class="hs-item set-bg" src="{{asset('client/'.$image->noidung)}}">
+                        @endforeach
                     </div>
                         <div class="rd-text">
                             <div class="rd-title">
@@ -240,7 +245,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <p class="f-para">{{$event_detail->mota}}</p>
+                            <p class="f-para">{{trim(trim($event_detail->mota,'<p>'),'</p>')}}</p>
                             
                         </div>
                     </div>
@@ -312,44 +317,55 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3>Đặt vé Ngay</h3>
-                        <form action="#">
+                        <form method="post" action="{{$event_detail->id}}/titket/index">
                             <div class="check-date">
                                 <label for="client_titket_name"> Họ tên:</label>
-                                <input value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->hoten; ?>" style=" font-size:15px" type="text"  id="client_titket_name" name="client_titket_name"/>
+                                <input  value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->hoten; ?>" style=" font-size:15px" type="text"  id="client_titket_name" name="client_titket_name"/>
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_num"> Số điện thoại</label>
-                                <input value="0336482917" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                                <input  value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->sdt; ?>" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
                             </div>
                             <div class="check-date">
-                                <label for="client_titket_num"> Nhập số vé</label>
-                                <input style=" font-size:15px" type="number"  id="client_titket_num" name="client_titket_num"/>
+                                <label for="client_titket_email"> Email</label>
+                                <input  value="<?php if (isset(Auth::user()->email)) echo Auth::user()->email; ?>" style=" font-size:15px" type="text"  id="client_titket_email" name="client_titket_email"/>
                             </div>
-                            
-                            <div class="select-option">
-                                <label for="cus_cate">Chọn dãy ghế Vé 1:</label>
-                                <select id="cus_cate">
-                                    <option value="">Dãy A</option>
-                                    <option value="">Dãy B</option>
-                                    <option value="">Dãy C</option>
-                                </select>
+                          
+                            <div class="cnt_full">
+                                <div class="cnt_min">
+                                <input checked type="radio" id="tienmat" name="card"/><img src="{{asset('client\Image\tienmat.png')}}" alt="Select payment method" class="selected_img" >
+                                    <label for="tienmat">Thanh toán tiền mặt</label>
                             </div>
-                            <div class="select-option">
-                                <label for="cus_cate">Chọn Số ghế Vé 1:</label>
-                                <select id="cus_cate">
-                                    <option value="">Ghế 1</option>
-                                    <option value="">Ghế 2</option>
-                                    <option value="">Ghế 3</option>
-                                </select>
+                                <div class="cnt_min">
+                                <input type="radio" id="momo" name="card"/><img src="{{asset('client\Image\momo.jpg')}}" alt="Select payment method"  class="selected_img" >
+                                                <label for="momo">Thanh toán bằng ví MOMO</label>
                             </div>
-                            <?php 
-                                date_default_timezone_set('Asia/Ho_Chi_Minh');
-                                $today = date("y-m-d  G:i:s");
-                                $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
-                                if ($check_availble> 25500 && $event_detail->trangthai == 1){
-                                    echo '<button type="submit">Đặt ngay</button>';
-                                }
-                            ?>
+                                <div class="cnt_min">
+                                <input type="radio" id="airpay" name="card"/><img src="{{asset('client\Image\air-pay.jpg')}}" alt="Select payment method"  class="selected_img">
+                                                <label for="airpay">Thanh toán bằng ví Airpay</label>
+                            </div>
+                            </div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        Sân khấu
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox">
+                                    </td>
+                                </tr>
+                            </table>
                             
                             
                         </form>
@@ -429,6 +445,15 @@
     <script src="{{asset('client/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('client/js/main.js')}}"></script>
+    <script>
+        $(document).on('click','#submit_titket',function(){
+            // localStorage.setItem('titket_name',)
+             localStorage.setItem('client_titket_name',$("#client_titket_name").val());
+             localStorage.setItem('client_titket_num',$("#client_titket_num").val());
+             localStorage.setItem('client_titket_email',$("#client_titket_email").val());
+        })
+        
+    </script>
 </body>
 
 </html>

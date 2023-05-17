@@ -10,6 +10,8 @@ use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
 use App\Http\Controllers\admin\user\usercontroller;
 use App\Http\Controllers\client\baseController;
 use App\Http\Controllers\client\loginController;
+use App\Http\Controllers\client\titketController;
+use App\Models\event_image;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +46,7 @@ Route::middleware(['auth'])->group(function() {
     Route::prefix('client')->group( function() {
         Route::get('/infor/{user_id}',[baseController::class,'client_infor']);
         Route::get('/register/active/{user}/{token}',[loginController::class,'active_account'])->name('active_account');
+        ROute::post('/event_detail/{detail_id}/titket/index',[titketController::class,'index']);
     });
     //Admin Route
     Route::group([
@@ -79,6 +82,9 @@ Route::middleware(['auth'])->group(function() {
         });
         Route::prefix('/event_image')->group(function(){
             Route::get('/index',[event_imagecontroller::class,'index']);
+            Route::get('/create',[event_imagecontroller::class,'create']);
+            Route::post('create',[event_imagecontroller::class,'store']);
+            Route::delete('/delete/{image_id}',[event_imagecontroller::class,'delete']);
         });
         Route::prefix('user')->group(function(){
             Route::get('/index',[usercontroller::class,'index']);

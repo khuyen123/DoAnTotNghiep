@@ -76,7 +76,7 @@ class Helper
                         <td>'. self::active($event_detail->trangthai) .'</td>
                         <td>
                       
-                            <a class="btn btn-primary btn-sm" href="/admin/event_detail/'.$event_detail->id.'/edit/'.$event_detail->id.'">
+                            <a class="btn btn-primary btn-sm" href="/admin/event_detail/'.$event_detail->event->id.'/edit/'.$event_detail->id.'">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a class="btn btn-danger btn-sm" onclick="deleteEventdetail('.$event_detail->id.')">
@@ -114,6 +114,29 @@ class Helper
                     </tr>
 
                 ';}
+                $i++;
+        }
+        return $html;
+    }
+    public static function image($images){
+        $html='';
+        $i=1;
+     
+        foreach ($images as $key=>$image){
+            $html .= '
+                    <tr>
+                        <td>'.$i.'</td>
+                        <td>'. $image->event_detail->event->tenSukien.'-' .$image->event_detail->wards->district->province->tentinhthanh.'</td>
+                        <td><a  target="_blank"><img src="admin\Image" width="100px"></a></td>
+                        <td>'. $image->updated_at .'</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="#" onclick="removeRow('. $image->id . ',\'/admin/image/destroy\')">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+
+                ';
                 $i++;
         }
         return $html;

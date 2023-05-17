@@ -57,7 +57,13 @@
                 <label for="name">Số vé tối đa</label>
                 <input  class="form-control" type="number" id="detail_maxtitket" name="detail_maxtitket">
             </div>
-           
+            <div class="form-group">
+                <label for="name">Hình thức vé</label>
+                <select class="form-control" name="hinhthucve" id="hinhthucve">
+                    <option value = "1">Vé ghế ngồi</option>
+                    <option value = "2">Vé vào cổng</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="name">Giá vé </label>
                 <input  class="form-control" type="decimal" id="detail_prince" name="detail_prince">
@@ -69,7 +75,7 @@
             </div>
             <div class="form-group">
                 <label for="detail_description">Mô tả: </label>
-                <textarea id="content" name="detail_description" class="form-control"></textarea>
+                <input type="text" id="content" name="detail_description" class="form-control">
             </div>
             
 
@@ -84,16 +90,7 @@
 @endsection
 
 @section('footer')
-    <script>
-        // Replace the <textarea id="editor1"> with a CKEditor 4
-        // instance, using default configuration.
-        CKEDITOR.replace( 'content' );
-    </script>
-    <script>
-        // Replace the <textarea id="editor1"> with a CKEditor 4
-        // instance, using default configuration.
-        CKEDITOR.replace( 'contentDetail' );
-    </script>
+  
     <script>
         
         

@@ -19,7 +19,7 @@ class Event_ImageRepository extends BaseRepository implements Event_ImageReposit
    }
    public function getAll()
    {
-        return event_image::orderby('id')->paginate(5);
+        return event_image::orderby('id')->paginate(7);
    }
    
    public function destroyMany($request)

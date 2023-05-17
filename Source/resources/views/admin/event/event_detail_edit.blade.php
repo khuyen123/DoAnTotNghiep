@@ -59,6 +59,7 @@
                 <label for="name">Số vé tối đa</label>
                 <input value="{{$event_detail->sovetoida}}" class="form-control" type="number" id="detail_maxtitket" name="detail_maxtitket">
             </div>
+            
             <div class="form-group">
                 <label>Hoạt động</label>
                 <div class="custom-control custom-radio">

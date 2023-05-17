@@ -22,10 +22,10 @@ class event_detailcontroller extends Controller
             'event_details'=>$this->eventdetailService->getAll($id_sukien)
         ]);
     }
-    public function edit_index($eventdetail_id){
-        echo $eventdetail_id;
+    public function edit_index($id_sukien,$eventdetail_id){
+        $event = $this->eventdetailService->getEvent($id_sukien);
         return view('admin.event.event_detail_edit',[
-            'title'=>'Chỉnh sửa sự kiện: '.$this->eventdetailService->find($eventdetail_id)->event->tenSukien,
+            'title'=>'Chỉnh sửa sự kiện: '.$event->tenSukien,
             'provinces' => province::all(),
             'event_detail' => $this->eventdetailService->find($eventdetail_id)
         ]);
@@ -53,9 +53,11 @@ class event_detailcontroller extends Controller
         $data['ten_lienhe'] = $request->contact_name_detail;
         $data['id_sukien'] = $id_sukien;
         $data['id_xaphuong'] = $request->detail_wards;
+        $data['id_hinhthucve'] = $request->hinhthucve;
         $this->eventdetailService->create($data);
         $url='admin/event_detail/'.$id_sukien.'/index';
         return redirect($url);
+        
     }
     public function edit_store(eventdetail_updateRequest $request,$id_sukien,$eventdetail_id){
 
