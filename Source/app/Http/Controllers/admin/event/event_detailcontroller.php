@@ -54,6 +54,8 @@ class event_detailcontroller extends Controller
         $data['id_sukien'] = $id_sukien;
         $data['id_xaphuong'] = $request->detail_wards;
         $data['id_hinhthucve'] = $request->hinhthucve;
+        $data['sohangghe'] = $request->totalrow_creat;
+        $data['soghemoihang'] = $request->totalseat_row_create;
         $this->eventdetailService->create($data);
         $url='admin/event_detail/'.$id_sukien.'/index';
         return redirect($url);
@@ -76,6 +78,9 @@ class event_detailcontroller extends Controller
         $data['ten_lienhe'] = $request->contact_name_detail;
         $data['id_sukien'] = $id_sukien;
         $data['id_xaphuong'] = $request->detail_wards;
+        $data['id_hinhthucve'] = $request->hinhthucve;
+        $data['sohangghe'] = $request->totalrow_creat;
+        $data['soghemoihang'] = $request->totalseat_row_create;
         $event_detail = $this->eventdetailService->find($eventdetail_id);
         $this->eventdetailService->update($event_detail,$data);
         $url='admin/event_detail/'.$id_sukien.'/index';

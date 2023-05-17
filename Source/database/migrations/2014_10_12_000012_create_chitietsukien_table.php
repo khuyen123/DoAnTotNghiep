@@ -27,6 +27,8 @@ return new class extends Migration
             $table->string('email_lienhe')->nullable();
             $table->string('ten_lienhe')->nullable();
             $table->integer('dotuoichophep');
+            $table->integer('sohangghe')->nullable();
+            $table->integer('soghemoihang')->nullable();
             $table->string('mota',10000)->nullable();
             $table->unsignedBigInteger('id_sukien');
             $table->unsignedBigInteger('id_xaphuong');

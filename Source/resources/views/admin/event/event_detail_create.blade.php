@@ -58,11 +58,15 @@
                 <input  class="form-control" type="number" id="detail_maxtitket" name="detail_maxtitket">
             </div>
             <div class="form-group">
-                <label for="name">Hình thức vé</label>
-                <select class="form-control" name="hinhthucve" id="hinhthucve">
-                    <option value = "1">Vé ghế ngồi</option>
-                    <option value = "2">Vé vào cổng</option>
+                <label for="name">Hình thức chỗ ngồi</label>
+                <select class="form-control" onchange="seat_control()" name="hinhthucve" id="hinhthucve">
+                    <option value = "1">Chỗ ngồi theo ghế</option>
+                    <option value = "2">Chỗ ngồi tự do</option>
                 </select>
+                <input placeholder="Nhập số hàng ghế" class="form-control" type="number" style="margin-top:10px; width:200px" id="totalrow_creat" name="totalrow_creat">
+                <p class="text-danger" id="alert_seat" ></p>
+                <input placeholder="Nhập số ghế mỗi hàng" class="form-control" type="number" style="margin-top:10px;width:200px" id="totalseat_row_create" name="totalseat_row_create">
+                <p class="text-danger" id="alert_seat_2" ></p>
             </div>
             <div class="form-group">
                 <label for="name">Giá vé </label>
@@ -83,7 +87,7 @@
         <!-- /.card-body -->
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Thêm mới</button>
+            <button type="submit" id="submit_create_detail" class="btn btn-primary">Thêm mới</button>
         </div>
         @csrf
     </form>
@@ -92,8 +96,72 @@
 @section('footer')
   
     <script>
+        //check total seat:
+        var total_seat
+        var row_seat
+        var total_row
+        $(document).on('keyup',"#totalrow_creat",function(){
+            total_seat = parseInt($("#detail_maxtitket").val())
+            total_row = parseInt($("#totalrow_creat").val())
+            row_seat = parseInt($("#totalseat_row_create").val())
+            var seat = total_row*row_seat
+            if (seat < total_seat) {
+                document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang nhỏ hơn số vé tối đa";
+                document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang nhỏ hơn số vé tối đa";
+                document.getElementById("submit_create_detail").disabled = true;
+            } else {
+                if (seat <= total_seat+10){
+                    document.getElementById("alert_seat").innerText = "";
+                    document.getElementById("alert_seat_2").innerText = "";
+                    document.getElementById("submit_create_detail").disabled = false;
+                } else {
+                    if(seat>total_seat+10){
+                        document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("submit_create_detail").disabled= true;
+                    }
+                }
+            }
         
-        
+        })
+        $(document).on('keyup',"#totalseat_row_create",function(){
+            total_seat = parseInt($("#detail_maxtitket").val())
+            total_row = parseInt($("#totalrow_creat").val())
+            row_seat = parseInt($("#totalseat_row_create").val())
+            var seat = total_row*row_seat
+            if (seat < total_seat) {
+                document.getElementById("alert_seat").innerText = "Số ghế nhập vào nhỏ hơn số vé tối đa";
+                document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào nhỏ hơn số vé tối đa";
+                document.getElementById("submit_create_detail").disabled = true;
+            } else {
+                if (seat <= total_seat+5){
+                    document.getElementById("alert_seat").innerText = "";
+                    document.getElementById("alert_seat_2").innerText = "";
+                    document.getElementById("submit_create_detail").disabled = false;
+                } else {
+                    if(seat>total_seat+10){
+                        document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("submit_create_detail").disabled = true;
+                    }
+                }
+            }
+        })
+        function seat_control(){
+            var seat_type = $("#hinhthucve").val()
+            
+            if (seat_type == 2) {
+                document.getElementById("totalrow_creat").readOnly = true;
+                document.getElementById("totalseat_row_create").readOnly = true;
+                document.getElementById("totalrow_creat").value = "";
+                document.getElementById("totalseat_row_create").value = "";
+            } else {
+                document.getElementById("totalrow_creat").readOnly = false;
+                document.getElementById("totalseat_row_create").readOnly = false;
+                document.getElementById("totalrow_creat").value = "";
+                document.getElementById("totalseat_row_create").value = "";
+            } 
+        }
         function finddistrict(){
             var id= '';
             id = $('#detail_province').val();

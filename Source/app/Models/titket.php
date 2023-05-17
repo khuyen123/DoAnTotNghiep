@@ -11,9 +11,7 @@ class titket extends Model
     protected $fillable=[
         'tinhtrang',
         'hangGhe',
-        'soGhe',
-        'soBan',
-        'soCong',
+        'soghe',
         'thanhtoan',
         'kiemtra',
         'id_nguoidung',

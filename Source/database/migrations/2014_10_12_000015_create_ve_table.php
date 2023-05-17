@@ -17,10 +17,7 @@ return new class extends Migration
             $table->string('id_ve',6);
             $table->primary('id_ve');
             $table->string('tinhtrang');
-            $table->string('hangGhe')->nullable();
-            $table->string('soGhe')->nullable();
-            $table->string('soBan')->nullable();
-            $table->string('soCong')->nullable();
+            $table->string('soghe')->nullable();
             $table->integer('thanhtoan');
             $table->integer('kiemtra');
             $table->unsignedBigInteger('id_nguoidung');

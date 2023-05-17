@@ -13,6 +13,7 @@
             </div>
             <div class="form-group">
                 <label for="name">Email liên hệ </label>
+                <input type="hidden" name="detail_id" id="detail_id" readonly value="{{$event_detail->id}}">
                 <input class="form-control" type="text" value="{{$event_detail->email_lienhe}}" id="contact_email_detail" name="contact_email_detail">
             </div>
             <div class="form-group">
@@ -59,17 +60,29 @@
                 <label for="name">Số vé tối đa</label>
                 <input value="{{$event_detail->sovetoida}}" class="form-control" type="number" id="detail_maxtitket" name="detail_maxtitket">
             </div>
-            
             <div class="form-group">
-                <label>Hoạt động</label>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value=1 type="radio" id="detail_status_active" name="detail_status" {{$event_detail->trangthai == 1 ? 'checked=""' : ''}}>
-                    <label for="detail_status_active" class="custom-control-label">Có</label>
-                </div>
-                <div class="custom-control custom-radio">
-                    <input class="custom-control-input" value=0 type="radio" id="detail_status_noactive" name="detail_status" {{$event_detail->trangthai == 0 ? 'checked=""' : ''}}>
-                    <label for="no_detail_status_noactiveactive" class="custom-control-label">Không</label>
-                </div>
+                <label for="name">Hình thức chỗ ngồi</label>
+                <select class="form-control" onchange="seat_control()" name="hinhthucve" id="hinhthucve">
+                    <option value="{{$event_detail->id_hinhthucve}}" selected>{{$event_detail->titkettype->tenhinhthuc}}</option>
+                    <option value = "1">Chỗ ngồi theo ghế</option>
+                    <option value = "2">Chỗ ngồi tự do</option>
+                </select>
+                <input placeholder="Nhập số hàng ghế" value="{{$event_detail->sohangghe}}" class="form-control" type="number" style="margin-top:10px; width:200px" id="totalrow_creat" name="totalrow_creat">
+                <p class="text-danger" id="alert_seat" ></p>
+                <input placeholder="Nhập số ghế mỗi hàng" value="{{$event_detail->soghemoihang}}" class="form-control" type="number" style="margin-top:10px;width:200px" id="totalseat_row_create" name="totalseat_row_create">
+                <p class="text-danger" id="alert_seat_2" ></p>
+            </div>
+            <div class="form-group">
+                <label>Hoạt động: </label>
+                <?php 
+                    date_default_timezone_set('Asia/Ho_Chi_Minh');
+                    $today = date("y-m-d  G:i:s");
+                    $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
+                    if ($check_availble<= 0){
+                        echo '<span style="font-size:15px" class="badge badge-danger">Sự kiện đã kết thúc</span>';
+                        echo '<span id="close_event_button" style="font-size:15px; margin-left:10px" class="btn btn-success" >Đóng sự kiện</span>';
+                    } else echo '<span style="font-size:15px" class="badge badge-success">Đang hoạt động</span>';
+                ?>
             </div>
             <div class="form-group">
                 <label for="name">Giá vé </label>
@@ -108,8 +121,25 @@
         CKEDITOR.replace( 'contentDetail' );
     </script>
     <script>
-        
-        
+        var detail_id = $('#detail_id').val()
+        $(document).on('click','#close_event_button',function(){
+            Swal.fire({
+                title: 'Đóng sự kiện',
+                text: 'Bạn có muốn đóng sự kiện này không?',
+                icon:'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xác nhận!'
+        }).then((result)=>{
+            if (result.isConfirmed){
+                    $.ajax({
+                        type: "POST",
+                        data: 
+                    })
+                }
+            })
+        })
         function finddistrict(){
             var id= '';
             id = $('#detail_province').val();
