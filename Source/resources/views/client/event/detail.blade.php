@@ -548,7 +548,7 @@
                 }
             }
         }
-        $(document).on('keyup','#client_titket_num',function(){
+        $(document).on('keyup','#client_titket_num',function(){                
             if (parseInt($('#client_titket_num').val())<=0){
                 document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
                 document.getElementById('submit_booking_titket').disabled = true
@@ -558,6 +558,7 @@
                     document.getElementById('submit_booking_titket').disabled = true
                 } else {
                     document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('client_titket_prince').value = parseInt($('#client_titket_num').val())*parseInt($('#giave').val())
                     document.getElementById('submit_booking_titket').disabled = false
                 }
             }
@@ -572,6 +573,7 @@
                     document.getElementById('submit_booking_titket').disabled = true
                 } else {
                     document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('client_titket_prince').value = parseInt($('#client_titket_num').val())*parseInt($('#giave').val())
                     document.getElementById('submit_booking_titket').disabled = false
                 }
             }

@@ -110,6 +110,7 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/index',[admintitketController::class,'index']);
             Route::post('/index',[admintitketController::class,'search']);
             Route::post('/checkin/{titket_id}',[admintitketController::class,'checkin']);
+            Route::get('/print_titket/{titket_id}',[admintitketController::class,'export_titket']);
         });
     });
 });

@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\Event\titketsearchRequest;
 use App\Http\Service\client\titketService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
-
+use PDF;
 class titketController extends Controller
 {
     protected $titketService;
@@ -36,5 +37,16 @@ class titketController extends Controller
         $titket = $this->titketService->search($titket_id);
         $data = $request->input();
         return $this->titketService->update($titket,$data);
+    }
+    public function export_titket($titket_id){
+        $titket = $this->titketService->search($titket_id);
+        $data = [
+            'title' => 'Chi Tiết Vé',
+            'new_titket' => $titket
+        ]; 
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadview('client.titket.titket_pdf',$data);
+        $file_name = 'VeSuKien'.$titket->id_ve.'.pdf';
+        return $pdf->download($file_name);
     }
 }

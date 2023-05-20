@@ -128,7 +128,7 @@
                         </tr>
                         <tr>
                             <td><button onclick="checkin()" @if($new_titket->kiemtra == 1) disabled @endif style="width:100px" class="btn btn-success" >Check-in</button></td>
-                            <td align="left"><button style="width:100px; margin-left:10px" class="btn btn-primary" >In vé</button></td>
+                            <td align="left"><a href="print_titket/{{$new_titket->id_ve}}" style="width:100px; margin-left:10px" class="btn btn-primary" >Tải vé PDF</a></td>
                         </tr>
                     </table>
                   </td>
