@@ -86,6 +86,10 @@ class event_detailcontroller extends Controller
         $url='admin/event_detail/'.$id_sukien.'/index';
         return redirect($url);
     }
+    public function close(Request $request,$id_sukien,$eventdetail_id){
+        $event_detail = $this->eventdetailService->find($eventdetail_id);
+        return $this->eventdetailService->update($event_detail,$request->input());
+    }
     public function delete($eventdetail_id){
         $result=$this->eventdetailService->delete($eventdetail_id);
         if ($result){

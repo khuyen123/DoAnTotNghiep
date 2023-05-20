@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Service\admin\bannerService;
 use App\Http\Service\client\eventDetailclientService;
 use App\Models\district;
 use App\Models\province;
@@ -15,13 +15,17 @@ use Illuminate\Support\Facades\Auth;
 
 class baseController extends Controller
 {
-    protected $eventdetailService;
-    public function __construct(eventDetailclientService $eventDetailService )
+    protected $eventdetailService,$bannerService;
+    public function __construct(eventDetailclientService $eventDetailService, bannerService $bannerService )
     {
+        $this->bannerService = $bannerService;
         $this->eventdetailService = $eventDetailService;
     }
     public function index(){
-       return view('client.index');
+        $banners = $this->bannerService->getAll();
+       return view('client.index',[
+            'banners' => $banners
+       ]);
     }
     public function events() {
         $events = $this->eventdetailService->getevent();

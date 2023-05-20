@@ -154,6 +154,8 @@ function selectManyevent(id){
     }
 }
 $(document).on('click','#unselectall_event',function(){
+    document.getElementById("delete_all_event").disabled = true;
+    document.getElementById("unselectall_event").disabled = true;
     event_id.forEach(key => {
          $('#check_event'+key).prop('checked',false);
          event_id = [];

@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\event\event_categorycontroller;
 use App\Http\Controllers\admin\event\event_detailcontroller;
 use App\Http\Controllers\admin\event\event_imagecontroller;
 use App\Http\Controllers\admin\event\eventcontroller;
+use App\Http\Controllers\admin\banner\bannerController;
 use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
 use App\Http\Controllers\admin\user\usercontroller;
 use App\Http\Controllers\client\baseController;
@@ -48,6 +49,9 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/register/active/{user}/{token}',[loginController::class,'active_account'])->name('active_account');
         ROute::post('/event_detail/{detail_id}/titket/index',[titketController::class,'index']);
     });
+    Route::prefix('titket')->group(function(){
+        Route::post('/create',[titketController::class,'titket_create']);
+    });
     //Admin Route
     Route::group([
         'prefix' => 'admin',
@@ -79,6 +83,7 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/edit/{eventdetail_id}',[event_detailcontroller::class,'edit_index']);
             Route::post('/edit/{eventdetail_id}',[event_detailcontroller::class,'edit_store']);
             route::delete('/delete/{eventdetail_id}',[event_detailcontroller::class,'delete']);
+            Route::post('/edit/closeevent/{eventdetail_id}',[event_detailcontroller::class,'close']);
         });
         Route::prefix('/event_image')->group(function(){
             Route::get('/index',[event_imagecontroller::class,'index']);
@@ -93,6 +98,12 @@ Route::middleware(['auth'])->group(function() {
             Route::POST('/edit/unlock_user/{user_id}',[usercontroller::class,'edit_store']);
             Route::POST('/edit/changerole/{user_id}',[usercontroller::class,'edit_store']);
             Route::delete('/delete/{user_id}',[usercontroller::class,'deleteuser']);
+        });
+        Route::prefix('banner')->group(function(){
+            Route::get('/index',[bannerController::class,'index']);
+            Route::get('/create',[bannerController::class,'create']);
+            Route::post('create',[bannerController::class,'store']);
+            Route::delete('/delete/{banner_id}',[bannerController::class,'delete']);
         });
     });
 });

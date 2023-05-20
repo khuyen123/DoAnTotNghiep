@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -165,6 +166,8 @@
                         <div class="bt-option">
                             <a href="{{Route('client_events')}}">Sự kiện</a>
                             <span>chi tiết sự kiện</span>
+                            <input type="hidden" readonly value="{{$event_detail->id}}" id="id_chitietsukien">
+                            <input type="hidden" readonly value="{{$event_detail->id_hinhthucve}}" id="titket_type">
                         </div>
                     </div>
                 </div>
@@ -223,18 +226,27 @@
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Tình trạng Vé:</td>
-                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? "Hết vé":"Còn Vé"}}</td>
+                                        <?php $veconlai = $event_detail->sovetoida - $event_detail->sovedaban ?>
+                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? 'Hết vé':'Còn Vé: '.$veconlai}}
+                                            <input type="hidden" value="{{$veconlai}}" id="veconlai">
+                                        </td>
+                                        
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Hoạt động:</td>
                                         <td><span style="font-size:15px" class="badge badge-warning">{{$event_detail->trangthai == 0 ? "Đã kết thúc":"Đang hoạt động"}}</span></td>
                                         <td>
                                             <?php 
+                                                $check = true;
                                                 date_default_timezone_set('Asia/Ho_Chi_Minh');
                                                 $today = date("y-m-d  G:i:s");
                                                 $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
                                                 if ($check_availble<= 25700){
+                                                    $check = false;
                                                     echo '<span style="font-size:15px" class="badge badge-danger">Hết thời gian đặt vé</span>';
+                                                }
+                                                if ($veconlai <=0) {
+                                                    $check = false;
                                                 }
                                             ?>
                                         </td>
@@ -317,62 +329,78 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3>Đặt vé Ngay</h3>
-                        <form method="post" action="{{$event_detail->id}}/titket/index">
+                        <form action="">
                             <div class="check-date">
                                 <label for="client_titket_name"> Họ tên:</label>
                                 <input  value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->hoten; ?>" style=" font-size:15px" type="text"  id="client_titket_name" name="client_titket_name"/>
+                                <input  value="<?php if (isset(Auth::user()->id)) echo Auth::user()->id; ?>" type="hidden"  id="client_id" name="client_id"/>
                             </div>
                             <div class="check-date">
-                                <label for="client_titket_num"> Số điện thoại</label>
-                                <input  value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->sdt; ?>" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                                <label for="client_titket_phone"> Số điện thoại</label>
+                                <input  value="<?php if (isset(Auth::user()->hoten)) echo Auth::user()->sdt; ?>" style=" font-size:15px" type="text"  id="client_titket_phone" name="client_titket_num"/>
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_email"> Email</label>
                                 <input  value="<?php if (isset(Auth::user()->email)) echo Auth::user()->email; ?>" style=" font-size:15px" type="text"  id="client_titket_email" name="client_titket_email"/>
                             </div>
-                          
+                            <div class="check-date">
+                                <label for="client_titket_num">Số vé muốn đặt</label>
+                                <input onchange="check_num()" @if($event_detail->id_hinhthucve == 1) readonly @endif type="number" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                                <p class="text-danger" id="alert_seat" ></p>
+                            </div>
+                            <div class="check-date">
+                                <label for="client_titket_seat">Ghế đã chọn</label>
+                                <input readonly  value="" style=" font-size:15px" type="text"  id="client_titket_seat" name="client_titket_seat"/>
+                            </div>
+                            
+                            @if($check)
                             <div class="cnt_full">
                                 <div class="cnt_min">
                                 <input checked type="radio" id="tienmat" name="card"/><img src="{{asset('client\Image\tienmat.png')}}" alt="Select payment method" class="selected_img" >
-                                    <label for="tienmat">Thanh toán tiền mặt</label>
+                                <label for="tienmat">Thanh toán tiền mặt</label>
                             </div>
                                 <div class="cnt_min">
                                 <input type="radio" id="momo" name="card"/><img src="{{asset('client\Image\momo.jpg')}}" alt="Select payment method"  class="selected_img" >
-                                                <label for="momo">Thanh toán bằng ví MOMO</label>
+                                <label for="momo">Thanh toán bằng ví MOMO</label>
                             </div>
                                 <div class="cnt_min">
                                 <input type="radio" id="airpay" name="card"/><img src="{{asset('client\Image\air-pay.jpg')}}" alt="Select payment method"  class="selected_img">
-                                                <label for="airpay">Thanh toán bằng ví Airpay</label>
+                                <label for="airpay">Thanh toán bằng ví Airpay</label>
                             </div>
                             </div>
-                            <table>
-                                <tr>
-                                    <td>
-                                        Sân khấu
+                            <table class="seat_picker">
+                                <tr colspan="{{$event_detail->soghemoihang}}">
+                                    <td align="center">
+                                        @if ($event_detail->id_hinhthucve == 1)<h4 style="margin-left: 130px ; font-weight:bold;color:red">Sân khấu</h4>@endif
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                    <td>
-                                        <input type="checkbox">
-                                    </td>
-                                </tr>
+                                <?php 
+                                    $alphabet = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+
+                                ?>
+                                @for($i = 0; $i<$event_detail->sohangghe;$i++)
+                                    <tr class="seats">
+                                        @for($j = 1; $j<=$event_detail->soghemoihang;$j++)
+                                                <?php $seat =  $alphabet[$i].$j;?>
+                                            <td class="seat">
+                                                <input @if(in_array($seat,$seats)) disabled @endif onclick="selectseat({{$i}},{{$j}},{{$veconlai}})" type="checkbox" id="{{$seat}}" value="{{$seat}}">
+                                                <label for="{{$seat}}" >{{$seat}}</label>
+                                            </td>
+                                        @endfor
+                                    </tr>
+                                @endfor
                             </table>
                             
-                            
+                            <button type="button" id="submit_booking_titket" class="primary-btn" style="justify-content:center">Đặt ngay</button>
+                            @endif
+                            @csrf
                         </form>
+                        
                     </div>
                 </div>
             </div>
         </div>
+        <div id="loading" style="position: fixed;top:0; left:0; bottom:0; right:0; z-index:990; display:flex; justify-content:center; align-items: center; background:rgba(0,0,0,0.9); opacity:0; pointer-events:none;" ><img src="{{asset('client/Image/loading.svg')}}"</div>
     </section>
     <!-- Rooms Section End -->
 
@@ -437,6 +465,7 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+    
     <script src="{{asset('client/js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{asset('client/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('client/js/jquery.magnific-popup.min.js')}}"></script>
@@ -445,14 +474,184 @@
     <script src="{{asset('client/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('client/js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).on('click','#submit_titket',function(){
-            // localStorage.setItem('titket_name',)
-             localStorage.setItem('client_titket_name',$("#client_titket_name").val());
-             localStorage.setItem('client_titket_num',$("#client_titket_num").val());
-             localStorage.setItem('client_titket_email',$("#client_titket_email").val());
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
+    <script>
+        var selected_seat = []
+        //selected seat lastLoad:
+        var a = localStorage.getItem('seat');
+        if(a!=null){
+        var current=a.split(',');
+        $.each(current, function(key,item){
+            selected_seat.push(item);
         })
-        
+        }
+        $(document).ready(function(){
+            selected_seat.forEach(key => {
+                document.getElementById(key).checked = true
+            })
+            document.getElementById('client_titket_num').value = selected_seat.length
+            document.getElementById('client_titket_seat').value = selected_seat.toString()
+            if (selected_seat.length == 0) {
+                document.getElementById('submit_booking_titket').disabled = true
+            }
+        })
+        const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
+        function selectseat(seat_row,seat_number,max_titket){
+            var seat_id = alphabet[seat_row]+seat_number
+            var check = document.getElementById(seat_id).checked
+            if(check){
+                selected_seat.push(seat_id)
+                localStorage.setItem('seat',selected_seat)
+                document.getElementById('client_titket_seat').value = selected_seat.toString()
+                document.getElementById('client_titket_num').value = selected_seat.length
+                if (selected_seat.length>max_titket) {
+                    document.getElementById('alert_seat').innerText = "Số vé muốn đặt đã vượt quá số vé còn lại"
+                    document.getElementById('submit_booking_titket').disabled = true
+                }
+                if (selected_seat.length<=0){
+                    document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
+                    document.getElementById('submit_booking_titket').disabled = true
+                } else {
+                    document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('submit_booking_titket').disabled = false
+                }
+            } else {
+                selected_seat.splice(selected_seat.indexOf(seat_id),1);
+                localStorage.setItem('seat',selected_seat)
+                document.getElementById('client_titket_seat').value = selected_seat.toString()
+                document.getElementById('client_titket_num').value = selected_seat.length
+                if (selected_seat.length<=max_titket) {
+                    document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('submit_booking_titket').disabled = false
+                }
+                if (selected_seat.length<=0){
+                    document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
+                    document.getElementById('submit_booking_titket').disabled = true
+                    localStorage.removeItem('seat')
+                } else {
+                    document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('submit_booking_titket').disabled = false
+                }
+            }
+        }
+        $(document).on('keyup','#client_titket_num',function(){
+            if (parseInt($('#client_titket_num').val())<=0){
+                document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
+                document.getElementById('submit_booking_titket').disabled = true
+            } else {
+                if (parseInt($('#client_titket_num').val())>parseInt($('#veconlai').val())){
+                    document.getElementById('alert_seat').innerText = "Số vé đặt đã vượt quá số vé còn lại"
+                    document.getElementById('submit_booking_titket').disabled = true
+                } else {
+                    document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('submit_booking_titket').disabled = false
+                }
+            }
+        })
+        function check_num(){
+            if (parseInt($('#client_titket_num').val())<=0){
+                document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
+                document.getElementById('submit_booking_titket').disabled = true
+            } else {
+                if (parseInt($('#client_titket_num').val())>parseInt($('#veconlai').val())){
+                    document.getElementById('alert_seat').innerText = "Số vé đặt đã vượt quá số vé còn lại"
+                    document.getElementById('submit_booking_titket').disabled = true
+                } else {
+                    document.getElementById('alert_seat').innerText = ""
+                    document.getElementById('submit_booking_titket').disabled = false
+                }
+            }
+        }
+        var event_id = $('#id_chitietsukien').val()
+        var titket_type = $('#titket_type').val()
+        var user_id = $('#client_id').val()
+        $(document).on('click','#submit_booking_titket',function(){
+                if (document.getElementById('tienmat').checked = true){
+                    Swal.fire({
+                        title: 'Thông tin chính xác?',
+                        text: "Bạn chắc chắn rằng thông tin đặt vé đã chính xác?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Xác nhận!'
+                    }).then((result)=>{
+                        if (result.isConfirmed) {
+                            var data = {
+                                'tinhtrang' : 1,
+                                'id_ve' : generate_string(6),
+                                'soCho' : parseInt($('#client_titket_num').val()),
+                                'soGhe' : selected_seat.toString(),
+                                'thanhtoan' : 0,
+                                'kiemtra' : 0,
+                                'id_nguoidung' : user_id,
+                                'id_chitietsukien' : event_id,
+                                'ten_nguoidat': $('#client_titket_name').val(),
+                                'sdt_nguoidat':$('#client_titket_phone').val(),
+                                'email_nguoidat':$('#client_titket_email').val()
+                            }
+                            $('#loading').css('opacity','1');
+                            $.ajax({
+                                type: "POST",
+                                dataType: "JSON",
+                                data: data,
+                                url: '/titket/create',
+                                success: function(response){
+                                    $('#loading').css('opacity','0');
+                                    Swal.fire({
+                                        title: 'Thành công! Vé của bạn đã được gửi qua Email!',
+                                        text: "Bạn có thể bấm xác nhận để kiểm tra lịch sử đặt vé của mình",
+                                        icon: 'success',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Xác nhận!'
+                                    }).then((result_2)=>{
+                                        if (result_2.isConfirmed) {
+                                            location.href = ''
+
+                                        }
+                                    })
+                                    localStorage.removeItem('seat')
+                                },
+                                error: function(response){
+                                    Swal.fire(
+                                        'Thất Bại!',
+                                        'Đặt vé thất bại',
+                                        'error'
+                                    ).then(function(){
+                                        $('#loading').css('opacity','0');
+                                    })
+                                }
+                            })
+                        }
+                    })
+                } else {
+                    if (document.getElementById('momo').checked = true) {
+                        console.log('MOMO')
+                    } else {
+                        if (document.getElementById('airpay').checked = true) {
+                            console.log('airpay')
+                        }
+                    }
+                }
+        })
+
+    function generate_string(n) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    for (var i = 0; i < n; i++){
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+    }
     </script>
 </body>
 

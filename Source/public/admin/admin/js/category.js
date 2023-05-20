@@ -148,6 +148,8 @@ function selectManycategory(id){
 }
 //Unselect:
 $(document).on('click','#unselectall_categories',function(){
+    document.getElementById("delete_all_categories").disabled = true;
+            document.getElementById("unselectall_categories").disabled = true;
    category_id.forEach(key => {
         $('#check_category'+key).prop('checked',false);
         category_id = [];

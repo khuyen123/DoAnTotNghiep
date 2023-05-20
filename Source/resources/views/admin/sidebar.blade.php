@@ -77,7 +77,7 @@
                    
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="/admin/banner/index" class="nav-link">
                         <i class="nav-icon fas fa-id-card"></i>
                         <p>
                             Banner

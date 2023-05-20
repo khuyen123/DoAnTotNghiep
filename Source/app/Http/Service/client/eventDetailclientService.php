@@ -4,6 +4,7 @@ namespace App\Http\Service\client;
 
 use App\Models\event_detail;
 use App\Models\event_image;
+use App\Models\titket;
 use App\Repository\Eloquent\EventDetailRepository;
 use App\Repository\Eloquent\EventRepository;
 use Illuminate\Support\Facades\DB;
@@ -45,5 +46,11 @@ class eventDetailclientService {
         ->where('id_chitietsukien','LIKE',$detail_id)
         ->get();
         return $images;
+    }
+    public function gettitket($detail_id){
+        $titkets = titket::query()
+        ->where('id_chitietsukien','LIKE',$detail_id)
+        ->get();
+        return $titkets;
     }
 }

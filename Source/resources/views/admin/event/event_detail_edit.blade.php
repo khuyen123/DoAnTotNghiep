@@ -95,7 +95,7 @@
             </div>
             <div class="form-group">
                 <label for="detail_description">Mô tả: </label>
-                <textarea id="content" name="detail_description" class="form-control">{{$event_detail->mota}}</textarea>
+                <input type="text" id="content" name="detail_description" class="form-control" value="{{$event_detail->mota}}">
             </div>
             
 
@@ -103,26 +103,84 @@
         <!-- /.card-body -->
 
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <button type="submit" id="submit_edit_detail" class="btn btn-primary">Cập nhật</button>
         </div>
         @csrf
     </form>
 @endsection
 
 @section('footer')
+    
     <script>
-        // Replace the <textarea id="editor1"> with a CKEditor 4
-        // instance, using default configuration.
-        CKEDITOR.replace( 'content' );
-    </script>
-    <script>
-        // Replace the <textarea id="editor1"> with a CKEditor 4
-        // instance, using default configuration.
-        CKEDITOR.replace( 'contentDetail' );
-    </script>
-    <script>
+                //check total seat:
+                var total_seat
+        var row_seat
+        var total_row
+        $(document).on('keyup',"#totalrow_creat",function(){
+            total_seat = parseInt($("#detail_maxtitket").val())
+            total_row = parseInt($("#totalrow_creat").val())
+            row_seat = parseInt($("#totalseat_row_create").val())
+            var seat = total_row*row_seat
+            if (seat < total_seat) {
+                document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang nhỏ hơn số vé tối đa";
+                document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang nhỏ hơn số vé tối đa";
+                document.getElementById("submit_edit_detail").disabled = true;
+            } else {
+                if (seat <= total_seat+10){
+                    document.getElementById("alert_seat").innerText = "";
+                    document.getElementById("alert_seat_2").innerText = "";
+                    document.getElementById("submit_edit_detail").disabled = false;
+                } else {
+                    if(seat>total_seat+10){
+                        document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("submit_edit_detail").disabled= true;
+                    }
+                }
+            }
+        
+        })
+        $(document).on('keyup',"#totalseat_row_create",function(){
+            total_seat = parseInt($("#detail_maxtitket").val())
+            total_row = parseInt($("#totalrow_creat").val())
+            row_seat = parseInt($("#totalseat_row_create").val())
+            var seat = total_row*row_seat
+            if (seat < total_seat) {
+                document.getElementById("alert_seat").innerText = "Số ghế nhập vào nhỏ hơn số vé tối đa";
+                document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào nhỏ hơn số vé tối đa";
+                document.getElementById("submit_edit_detail").disabled = true;
+            } else {
+                if (seat <= total_seat+5){
+                    document.getElementById("alert_seat").innerText = "";
+                    document.getElementById("alert_seat_2").innerText = "";
+                    document.getElementById("submit_edit_detail").disabled = false;
+                } else {
+                    if(seat>total_seat+10){
+                        document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                        document.getElementById("submit_edit_detail").disabled = true;
+                    }
+                }
+            }
+        })
+        function seat_control(){
+            var seat_type = $("#hinhthucve").val()
+            
+            if (seat_type == 2) {
+                document.getElementById("totalrow_creat").readOnly = true;
+                document.getElementById("totalseat_row_create").readOnly = true;
+                document.getElementById("totalrow_creat").value = "";
+                document.getElementById("totalseat_row_create").value = "";
+            } else {
+                document.getElementById("totalrow_creat").readOnly = false;
+                document.getElementById("totalseat_row_create").readOnly = false;
+                document.getElementById("totalrow_creat").value = "";
+                document.getElementById("totalseat_row_create").value = "";
+            } 
+        }
         var detail_id = $('#detail_id').val()
         $(document).on('click','#close_event_button',function(){
+            var data = {'trangthai' : parseInt(0)}
             Swal.fire({
                 title: 'Đóng sự kiện',
                 text: 'Bạn có muốn đóng sự kiện này không?',
@@ -135,7 +193,16 @@
             if (result.isConfirmed){
                     $.ajax({
                         type: "POST",
-                        data: 
+                        dataType: "JSON",
+                        data: data,
+                        url: "closeevent/" +detail_id,
+                        success: function(response){
+                            Swal.fire(
+                                'Thành công!',
+                                'Đóng sự kiện thành công',
+                                'success'
+                            )
+                        }
                     })
                 }
             })

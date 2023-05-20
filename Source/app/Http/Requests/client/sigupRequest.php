@@ -27,7 +27,7 @@ class sigupRequest extends FormRequest
             'username'=>'required',
             'password'=>'required',
             'repeat_password' => 'required | same:password',
-            'email' => 'required',
+            'email' => 'required|email',
 
         ];
     }
@@ -40,6 +40,7 @@ class sigupRequest extends FormRequest
             'email.required'=>'Bạn chưa nhập Email',
             'repeat_password.same' => 'Mật khẩu nhập lại chưa đúng',
             'hoten.required' => 'Bạn chưa nhập họ tên',
+            'email.email'=>'Email sai định dạng'
             
         ];
     }

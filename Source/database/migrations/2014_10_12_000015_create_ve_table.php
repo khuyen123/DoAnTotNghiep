@@ -18,6 +18,10 @@ return new class extends Migration
             $table->primary('id_ve');
             $table->string('tinhtrang');
             $table->string('soghe')->nullable();
+            $table->string('ten_nguoidat')->nullable();
+            $table->string('sdt_nguoidat')->nullable();
+            $table->string('email_nguoidat')->nullable();
+            $table->integer('soCho')->nullable();
             $table->integer('thanhtoan');
             $table->integer('kiemtra');
             $table->unsignedBigInteger('id_nguoidung');

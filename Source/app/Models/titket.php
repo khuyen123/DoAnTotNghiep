@@ -10,12 +10,19 @@ class titket extends Model
     use HasFactory;
     protected $fillable=[
         'tinhtrang',
-        'hangGhe',
-        'soghe',
+        'soCho',
+        'soGhe',
         'thanhtoan',
         'kiemtra',
+        'id_ve',
         'id_nguoidung',
-        'id_chitietsukien'
+        'id_chitietsukien',
+        'ten_nguoidat',
+        'sdt_nguoidat',
+        'email_nguoidat'
     ];
+    public function event_detail(){
+        return $this->hasOne(event_detail::class,'id','id_chitietsukien');
+    }
     protected $table= 've';
 }
