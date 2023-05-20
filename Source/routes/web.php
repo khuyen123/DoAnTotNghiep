@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\event\event_detailcontroller;
 use App\Http\Controllers\admin\event\event_imagecontroller;
 use App\Http\Controllers\admin\event\eventcontroller;
 use App\Http\Controllers\admin\banner\bannerController;
+use App\Http\Controllers\admin\titket\titketController as admintitketController;
 use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
 use App\Http\Controllers\admin\user\usercontroller;
 use App\Http\Controllers\client\baseController;
@@ -104,6 +105,11 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/create',[bannerController::class,'create']);
             Route::post('create',[bannerController::class,'store']);
             Route::delete('/delete/{banner_id}',[bannerController::class,'delete']);
+        });
+        Route::prefix('titket')->group(function(){
+            Route::get('/index',[admintitketController::class,'index']);
+            Route::post('/index',[admintitketController::class,'search']);
+            Route::post('/checkin/{titket_id}',[admintitketController::class,'checkin']);
         });
     });
 });

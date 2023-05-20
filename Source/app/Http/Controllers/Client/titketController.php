@@ -36,7 +36,5 @@ class titketController extends Controller
                 'status'=>404
             ]);
         }
-       
-        
     }
 }

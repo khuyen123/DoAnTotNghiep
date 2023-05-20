@@ -240,6 +240,14 @@
                         </tr>
                         <tr>
                             <td align="center"  style="border-radius: 5px;">
+                                <h4>Tổng tiền: </h4>
+                            </td>  
+                            <td align="center"  style="border-radius: 5px;">
+                                <h4> {{$new_titket->tongtien}}</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center"  style="border-radius: 5px;">
                                 <h4>Thanh toán: </h4>
                             </td>  
                             <td align="center"  style="border-radius: 5px;">

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('sdt_nguoidat')->nullable();
             $table->string('email_nguoidat')->nullable();
             $table->integer('soCho')->nullable();
+            $table->integer('tongtien')->nullable();
             $table->integer('thanhtoan');
             $table->integer('kiemtra');
             $table->unsignedBigInteger('id_nguoidung');

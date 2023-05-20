@@ -19,7 +19,8 @@ class titket extends Model
         'id_chitietsukien',
         'ten_nguoidat',
         'sdt_nguoidat',
-        'email_nguoidat'
+        'email_nguoidat',
+        'tongtien'
     ];
     public function event_detail(){
         return $this->hasOne(event_detail::class,'id','id_chitietsukien');

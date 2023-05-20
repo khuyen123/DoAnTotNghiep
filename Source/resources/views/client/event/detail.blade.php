@@ -202,6 +202,7 @@
                                 </div>
                             </div>
                             <h2>{{number_format($event_detail->giave,0,',','.')}} VNĐ<span>/Vé</span></h2>
+                            <input type="hidden" id="giave" value="{{$event_detail->giave}}" >
                             <table>
                                 <tbody>
                                     <tr>
@@ -352,7 +353,10 @@
                                 <label for="client_titket_seat">Ghế đã chọn</label>
                                 <input readonly  value="" style=" font-size:15px" type="text"  id="client_titket_seat" name="client_titket_seat"/>
                             </div>
-                            
+                            <div class="check-date">
+                                <label for="client_titket_seat">Tổng tiền: </label>
+                                <input readonly  value="" style=" font-size:15px" type="text"  id="client_titket_prince" name="client_titket_prince"/>
+                            </div>
                             @if($check)
                             <div class="cnt_full">
                                 <div class="cnt_min">
@@ -498,6 +502,7 @@
             })
             document.getElementById('client_titket_num').value = selected_seat.length
             document.getElementById('client_titket_seat').value = selected_seat.toString()
+            document.getElementById('client_titket_prince').value = selected_seat.length*parseInt($('#giave').val())+ " VNĐ"
             if (selected_seat.length == 0) {
                 document.getElementById('submit_booking_titket').disabled = true
             }
@@ -511,6 +516,7 @@
                 localStorage.setItem('seat',selected_seat)
                 document.getElementById('client_titket_seat').value = selected_seat.toString()
                 document.getElementById('client_titket_num').value = selected_seat.length
+                document.getElementById('client_titket_prince').value = selected_seat.length*parseInt($('#giave').val())+ "VNĐ"
                 if (selected_seat.length>max_titket) {
                     document.getElementById('alert_seat').innerText = "Số vé muốn đặt đã vượt quá số vé còn lại"
                     document.getElementById('submit_booking_titket').disabled = true
@@ -527,6 +533,7 @@
                 localStorage.setItem('seat',selected_seat)
                 document.getElementById('client_titket_seat').value = selected_seat.toString()
                 document.getElementById('client_titket_num').value = selected_seat.length
+                document.getElementById('client_titket_prince').value = selected_seat.length*parseInt($('#giave').val())+ "VNĐ"
                 if (selected_seat.length<=max_titket) {
                     document.getElementById('alert_seat').innerText = ""
                     document.getElementById('submit_booking_titket').disabled = false
@@ -591,6 +598,7 @@
                                 'soGhe' : selected_seat.toString(),
                                 'thanhtoan' : 0,
                                 'kiemtra' : 0,
+                                'tongtien': parseInt($('#client_titket_prince').val()),
                                 'id_nguoidung' : user_id,
                                 'id_chitietsukien' : event_id,
                                 'ten_nguoidat': $('#client_titket_name').val(),
