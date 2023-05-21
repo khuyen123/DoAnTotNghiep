@@ -30,7 +30,7 @@
             <div class="form-group" style="display:flex">
                 <label for="name" style="width:100px">Địa điểm:</label>
                 <label for="name" style="width:100px">Tỉnh thành:</label>
-                <select onchange="finddistrict()" class="form-control" style="width:200px" id="detail_province" name="detail_province">
+                <select onchange="finddistrict()" class="form-control" style="background-color:aqua" id="detail_province" name="detail_province">
                     @foreach($provinces as $province)
                         <option  value="{{$province->id}}" >{{$province->tentinhthanh}}</option>
                     @endforeach

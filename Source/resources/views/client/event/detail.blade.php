@@ -203,6 +203,12 @@
                             </div>
                             <h2>{{number_format($event_detail->giave,0,',','.')}} VNĐ<span>/Vé</span></h2>
                             <input type="hidden" id="giave" value="{{$event_detail->giave}}" >
+                            
+                            @if (Session::has('booking_success'))
+                                
+                                    <input type ="hidden" value="{{Session::get('booking_success')}}" id="booking_success">
+                                
+                            @endif
                             <table>
                                 <tbody>
                                     <tr>
@@ -360,18 +366,20 @@
                             @if($check)
                             <div class="cnt_full">
                                 <div class="cnt_min">
-                                <input checked type="radio" id="tienmat" name="card"/><img src="{{asset('client\Image\tienmat.png')}}" alt="Select payment method" class="selected_img" >
+                                <input checked type="radio" id="tienmat" name="card"><img src="{{asset('client\Image\tienmat.png')}}" alt="Select payment method" class="selected_img" >
                                 <label for="tienmat">Thanh toán tiền mặt</label>
                             </div>
-                                <div class="cnt_min">
-                                <input type="radio" id="momo" name="card"/><img src="{{asset('client\Image\momo.jpg')}}" alt="Select payment method"  class="selected_img" >
+                            @if($event_detail->giave !=0)
+                            <div class="cnt_min">
+                                <input type="radio" id="momo" name="card"><img src="{{asset('client\Image\momo.jpg')}}" alt="Select payment method"  class="selected_img" >
                                 <label for="momo">Thanh toán bằng ví MOMO</label>
                             </div>
-                                <div class="cnt_min">
-                                <input type="radio" id="airpay" name="card"/><img src="{{asset('client\Image\air-pay.jpg')}}" alt="Select payment method"  class="selected_img">
+                            <div class="cnt_min">
+                                <input type="radio" id="airpay" name="card"><img src="{{asset('client\Image\air-pay.jpg')}}" alt="Select payment method"  class="selected_img">
                                 <label for="airpay">Thanh toán bằng ví Airpay</label>
                             </div>
                             </div>
+                            @endif
                             <table class="seat_picker">
                                 <tr colspan="{{$event_detail->soghemoihang}}">
                                     <td align="center">
@@ -496,6 +504,7 @@
             selected_seat.push(item);
         })
         }
+        var user_id = $('#client_id').val()
         $(document).ready(function(){
             selected_seat.forEach(key => {
                 document.getElementById(key).checked = true
@@ -505,6 +514,25 @@
             document.getElementById('client_titket_prince').value = selected_seat.length*parseInt($('#giave').val())+ " VNĐ"
             if (selected_seat.length == 0) {
                 document.getElementById('submit_booking_titket').disabled = true
+            }
+            
+            if($('#booking_success').val() == 1){
+                $('#loading').css('opacity','0');
+                Swal.fire({
+                    title: 'Thành công! Vé của bạn đã được gửi qua Email!',
+                    text: "Bạn có thể bấm xác nhận để kiểm tra lịch sử đặt vé của mình",
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Xác nhận!'
+                }).then((result_2)=>{
+                    if (result_2.isConfirmed) {
+                        localStorage.removeItem('seat')
+                        location.href = "/client/titket/titket_list/"+user_id
+                    }
+                })
+                
             }
         })
         const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
@@ -579,79 +607,94 @@
             }
         }
         var event_id = $('#id_chitietsukien').val()
-        var titket_type = $('#titket_type').val()
-        var user_id = $('#client_id').val()
-        $(document).on('click','#submit_booking_titket',function(){
-                if (document.getElementById('tienmat').checked = true){
-                    Swal.fire({
-                        title: 'Thông tin chính xác?',
-                        text: "Bạn chắc chắn rằng thông tin đặt vé đã chính xác?",
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Xác nhận!'
-                    }).then((result)=>{
-                        if (result.isConfirmed) {
-                            var data = {
-                                'tinhtrang' : 1,
-                                'id_ve' : generate_string(6),
-                                'soCho' : parseInt($('#client_titket_num').val()),
-                                'soGhe' : selected_seat.toString(),
-                                'thanhtoan' : 0,
-                                'kiemtra' : 0,
-                                'tongtien': parseInt($('#client_titket_prince').val()),
-                                'id_nguoidung' : user_id,
-                                'id_chitietsukien' : event_id,
-                                'ten_nguoidat': $('#client_titket_name').val(),
-                                'sdt_nguoidat':$('#client_titket_phone').val(),
-                                'email_nguoidat':$('#client_titket_email').val()
-                            }
-                            $('#loading').css('opacity','1');
-                            $.ajax({
-                                type: "POST",
-                                dataType: "JSON",
-                                data: data,
-                                url: '/titket/create',
-                                success: function(response){
-                                    $('#loading').css('opacity','0');
-                                    Swal.fire({
-                                        title: 'Thành công! Vé của bạn đã được gửi qua Email!',
-                                        text: "Bạn có thể bấm xác nhận để kiểm tra lịch sử đặt vé của mình",
-                                        icon: 'success',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Xác nhận!'
-                                    }).then((result_2)=>{
-                                        if (result_2.isConfirmed) {
-                                            location.href = ''
+        var titket_type = parseInt($('#titket_type').val())
+        var seat = "" 
 
-                                        }
-                                    })
+        $(document).on('click','#submit_booking_titket',function(){
+            Swal.fire({
+                title: 'Thông tin chính xác?',
+                text: "Bạn chắc chắn rằng thông tin đặt vé đã chính xác?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xác nhận!'
+            }).then((result)=>{
+                if (result.isConfirmed) {
+                    if (titket_type == 1){
+                        seat = selected_seat.toString()
+                    } 
+                    var data = {
+                        'tinhtrang' : 1,
+                        'id_ve' : generate_string(6),
+                        'soCho' : parseInt($('#client_titket_num').val()),
+                        'soGhe' : seat,
+                        'thanhtoan' : 0,
+                        'kiemtra' : 0,
+                        'tongtien': parseInt($('#client_titket_prince').val()),
+                        'id_nguoidung' : user_id,
+                        'id_chitietsukien' : event_id,
+                        'ten_nguoidat': $('#client_titket_name').val(),
+                        'sdt_nguoidat':$('#client_titket_phone').val(),
+                        'email_nguoidat':$('#client_titket_email').val()
+                    }
+                    if (document.getElementById('tienmat').checked ){
+                        $('#loading').css('opacity','1');
+                        $.ajax({
+                            type: "POST",
+                            dataType: "JSON",
+                            data: data,
+                            url: '/client/titket/create',
+                            success: function(response){
+                                $('#loading').css('opacity','0');
+                                Swal.fire({
+                                    title: 'Thành công! Vé của bạn đã được gửi qua Email!',
+                                    text: "Bạn có thể bấm xác nhận để kiểm tra lịch sử đặt vé của mình",
+                                    icon: 'success',
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: 'Xác nhận!'
+                                }).then((result_2)=>{
+                                    if (result_2.isConfirmed) {
+                                        localStorage.removeItem('seat')
+                                        location.href = "/client/titket/titket_list/"+user_id
+                                    }
+                                })
+                                localStorage.removeItem('seat')
+                            },
+                            error: function(response){
+                                Swal.fire(
+                                    'Thất Bại!',
+                                    'Đặt vé thất bại',
+                                    'error'
+                                ).then(function(){
+                                    $('#loading').css('opacity','0');
+                                })
+                            }
+                        })
+                    } else {
+                        if (document.getElementById('momo').checked ) {
+                            $.ajax({
+                                url:'/client/titket/momo_payment',
+                                data: data,
+                                dataType:"JSON",
+                                type:"POST",
+                                success: function(response){
                                     localStorage.removeItem('seat')
-                                },
-                                error: function(response){
-                                    Swal.fire(
-                                        'Thất Bại!',
-                                        'Đặt vé thất bại',
-                                        'error'
-                                    ).then(function(){
-                                        $('#loading').css('opacity','0');
-                                    })
+                                    location.href = response.payment_url
                                 }
                             })
-                        }
-                    })
-                } else {
-                    if (document.getElementById('momo').checked = true) {
-                        console.log('MOMO')
-                    } else {
-                        if (document.getElementById('airpay').checked = true) {
-                            console.log('airpay')
+                        } else {
+                            if (document.getElementById('airpay').checked ) {
+                                console.log('airpay')
+                            }
                         }
                     }
+                            
                 }
+            })
+                
         })
 
     function generate_string(n) {

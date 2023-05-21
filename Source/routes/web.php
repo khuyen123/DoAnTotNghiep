@@ -49,10 +49,16 @@ Route::middleware(['auth'])->group(function() {
         Route::get('/infor/{user_id}',[baseController::class,'client_infor']);
         Route::get('/register/active/{user}/{token}',[loginController::class,'active_account'])->name('active_account');
         ROute::post('/event_detail/{detail_id}/titket/index',[titketController::class,'index']);
+        // Booking Route:
+        Route::prefix('titket')->group(function(){
+            Route::post('/create',[titketController::class,'titket_create']);
+            Route::post('/momo_payment',[titketController::class,'momo_payment']);
+            Route::get('/momo_payment_success/{titket_id}',[titketController::class,'momo_payment_success']);
+            Route::get('/titket_list/{user_id}',[titketController::class,'ticket_list']);
+            Route::get('/titket_detail/{ticket_id}',[titketController::class,'ticket_detail']);
+        });
     });
-    Route::prefix('titket')->group(function(){
-        Route::post('/create',[titketController::class,'titket_create']);
-    });
+    
     //Admin Route
     Route::group([
         'prefix' => 'admin',

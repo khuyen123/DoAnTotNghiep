@@ -623,6 +623,93 @@ ul, ol {
 	left: 0;
 	top: 0;
 }
+.booking-form2 {
+	background: #ffffff;
+	padding: 44px 40px 50px 40px;
+	border-radius: 4px;
+}
+.booking-form2 h3 {
+	color: #19191a;
+	margin-bottom: 36px;
+}
+.booking-form2 .check-date {
+	position: relative;
+	margin-bottom: 15px;
+}
+.booking-form2 .check-date label {
+	font-size: 14px;
+	color: #707079;
+	display: block;
+	margin-bottom: 10px;
+}
+.booking-form2 .check-date input {
+	width: 100%;
+	height: 50px;
+	border: 1px solid #ebebeb;
+	border-radius: 2px;
+	font-size: 16px;
+	color: #19191a;
+	
+	font-weight: 500;
+	padding-left: 20px;
+}
+.booking-form2 .check-date i {
+	color: #dfa974;
+	position: absolute;
+	right: 18px;
+	bottom: 17px;
+}
+.booking-form2 .select-option {
+	margin-bottom: 15px;
+}
+.booking-form2 .select-option label {
+	font-size: 14px;
+	color: #707079;
+	display: block;
+	margin-bottom: 10px;
+}
+.booking-form2 .select-option .nice-select {
+	border-radius: 2px;
+	border: 1px solid #ebebeb;
+	height: 50px;
+	line-height: 50px;
+	outline: none;
+	padding-left: 20px;
+	width: 100%;
+	float: none;
+}
+.booking-form2 .select-option .nice-select:after {
+	border-bottom: 2px solid #dfa974;
+	border-right: 2px solid #dfa974;
+	height: 10px;
+	margin-top: 0;
+	right: 20px;
+	width: 10px;
+	top: 36%;
+}
+.booking-form2 .select-option .nice-select span {
+	font-size: 16px;
+	color: #19191a;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+.booking-form2 .select-option .nice-select .list {
+	margin-top: 0;
+	width: 100%;
+}
+.booking-form2 button {
+	display: block;
+	font-size: 14px;
+	text-transform: uppercase;
+	border: 1px solid #dfa974;
+	border-radius: 2px;
+	color: #dfa974;
+	font-weight: 500;
+	background: transparent;
+	width: 100%;
+	height: 46px;
+	margin-top: 30px;
+}
 .hero-slider.owl-carousel .owl-dots {
 	position: absolute;
 	left: 0;

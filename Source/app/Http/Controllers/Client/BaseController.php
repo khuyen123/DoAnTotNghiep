@@ -64,6 +64,8 @@ class baseController extends Controller
 
     }
     public function client_infor($user_id){
-        return view('client.user.userinfor');
+        return view('client.user.userinfor',[
+            'provinces'=>province::all()
+        ]);
     }
 }

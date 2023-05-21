@@ -7,8 +7,8 @@
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sự kiện số | Chi tiết sự kiện</title>
-    
+    <title>Sự kiện số | Lịch sử đặt vé</title>
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -48,25 +48,26 @@
            
         <?php
 
-            use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
-            $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
-            $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
-            $html_logined = '';
-            if (isset(Auth::user()->id)){
-                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
-            }
-            if(isset(Auth::user()->hoten)) {
-                $html_logined .= Auth::user()->hoten;
-            }
-            $html_logined .= '</a>';
-            $html_logined .='<a href="/client/logout" class="bkj-btn">Đăng xuất</a>';
-            if (Auth::check()) {
-                echo $html_logined;
-            } else {
-                echo $html;
-            }
-            ?>
+$html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
+$html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
+$html_logined = '';
+if (isset(Auth::user()->id)){
+    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+}
+
+if(isset(Auth::user()->hoten)) {
+    $html_logined .= Auth::user()->hoten;
+}
+$html_logined .= '</a>';
+$html_logined .='<a href="/client/logout" class="bkj-btn">Đăng xuất</a>';
+if (Auth::check()) {
+    echo $html_logined;
+} else {
+    echo $html;
+}
+?>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
@@ -104,9 +105,11 @@
                         <?php   
                             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
+                            $html_logined = '';
                             if (isset(Auth::user()->id)){
                                 $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
                             }
+                            
                             if(isset(Auth::user()->hoten)) {
                                 $html_logined .= Auth::user()->hoten;
                             }
@@ -129,7 +132,7 @@
                     <div class="col-lg-2">
                     <div class="logo">
                             <a href="/">
-                                <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
+                            <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -155,16 +158,16 @@
     </header>
     <!-- Header End -->
 
-    <!-- Rooms Section Begin -->
+    <!-- Breadcrumb Section Begin -->
     <div class="breadcrumb-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>{{$event_detail->event->tenSukien}}</h2>
+                        <h2>Sự kiện</h2>
                         <div class="bt-option">
-                            <a href="{{Route('client_events')}}">Sự kiện</a>
-                            <span>chi tiết vé</span>
+                            <a href="/">Trang chủ</a>
+                            <span>Lịch sử đặt vé</span>
                         </div>
                     </div>
                 </div>
@@ -173,137 +176,34 @@
     </div>
     <!-- Breadcrumb Section End -->
 
-    <!-- Room Details Section Begin -->
-    <section class="room-details-section spad">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%">
-
-<!-- start logo -->
-<tr>
-  <td align="center" bgcolor="#e9ecef">
-    <!--[if (gte mso 9)|(IE)]>
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-    <tr>
-    <td align="center" valign="top" width="600">
-    <![endif]-->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-      <tr>
-        <td align="center" valign="top" style="padding: 36px 24px;">
-          <a href="https://www.blogdesire.com" target="_blank" style="display: inline-block;">
-          </a>
-        </td>
-      </tr>
-    </table>
-    <!--[if (gte mso 9)|(IE)]>
-    </td>
-    </tr>
-    </table>
-    <![endif]-->
-  </td>
-</tr>
-<!-- end logo -->
-
-<!-- start hero -->
-<tr>
-  <td align="center" bgcolor="#e9ecef">
-    <!--[if (gte mso 9)|(IE)]>
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-    <tr>
-    <td align="center" valign="top" width="600">
-    <![endif]-->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-      <tr>
-        <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-          <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Xác thực email đăng ký</h1>
-        </td>
-      </tr>
-    </table>
-    
-  </td>
-</tr>
-<!-- end hero -->
-
-<!-- start copy block -->
-<tr>
-  <td align="center" bgcolor="#e9ecef">
-    <!--[if (gte mso 9)|(IE)]>
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-    <tr>
-    <td align="center" valign="top" width="600">
-    <![endif]-->
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-
-      <!-- start copy -->
-      <tr>
-        <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-          <p style="margin: 0;">Xin chào {{$new_user->hoten}}, Cảm ơn bạn đã đăng ký tài khoản trên hệ thống Sự Kiện Số! Mời bạn bấm vào nút dưới đây để tiến hành xác thực Email đăng ký và kích hoạt tài khoản.</p>
-        </td>
-      </tr>
-      <!-- end copy -->
-
-      <!-- start button -->
-      <tr>
-        <td align="left" bgcolor="#ffffff">
-          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!-- Rooms Section Begin -->
+    <section class="rooms-section spad">
+    <table class="table" style="width:1000px" align="center">
+        <thead>
+        <tr>
+            <th>Mã đặt vé</th>
+            <th>Tên sự kiện</th>
+            <th>Địa điểm</th>
+            <th>Số chỗ</th>
+            <th>Trạng Thái</th>
+            <th style="width: 150px">Thao tác</th>
+            <th style="width: 100px">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach($tickets as $ticket)
             <tr>
-              <td align="center" bgcolor="#ffffff" style="padding: 12px;">
-                <table border="0" cellpadding="0" cellspacing="0">
-                  <tr>
-                    <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                      <a href="{{route('active_account',['user'=>$new_user->id,'token'=>$new_user->makichhoat])}}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Kích hoạt tài khoản</a>
-                    </td>
-                  </tr>
-                </table>
-              </td>
+                <td><input style="width:80px; border:none" type="text" readonly value="{{$ticket->id_ve}}" id="ticket_id"></td>
+                <td>{{$ticket->event_detail->event->tenSukien}}</td>
+                <td>{{$ticket->event_detail->wards->district->province->tentinhthanh}}</td>
+                <td>{{$ticket->soCho}}</td>
+                <td>{{$ticket->kiemtra == 0 ?'Chưa check-in':'Đã Check-in'}}</td>
+                <td><button onclick="view_ticketdetail('{{$ticket->id_ve}}')" id="view_ticketdetail_button" class="btn btn-sm btn-success"><i class="fa fa-info-circle" ></i>&nbsp; Xem chi tiết</button></td>
+                
             </tr>
-          </table>
-        </td>
-      </tr>
-      <!-- end button -->
-
-      <!-- start copy -->
-      <tr>
-        <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-          <p style="margin: 0;">Bạn phải xác thực để tiến hành đăng nhập tài khoản!</p>
-        </td>
-      </tr>
-      <!-- end copy -->
-
-      <!-- start copy -->
-      <tr>
-        <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-          <p style="margin: 0;">Trân Trọng,<br> Khuyến</p>
-        </td>
-      </tr>
-      <!-- end copy -->
-
+            @endforeach       
+        </tbody>
     </table>
-  </td>
-</tr>
-<!-- end copy block -->
-
-<!-- start footer -->
-<tr>
-  <td align="center" bgcolor="#e9ecef" style="padding: 24px;">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-
-      <!-- start permission -->
-      <tr>
-        <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-        </td>
-      </tr>
-      <!-- end permission -->
-
-      <!-- start unsubscribe -->
-      <tr>
-        <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-          <p style="margin: 0;">Đà Nẵng, Việt Nam</p>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-<!-- end footer -->
-</table>
     </section>
     <!-- Rooms Section End -->
 
@@ -315,8 +215,8 @@
                     <div class="col-lg-4">
                         <div class="ft-about">
                             <div class="logo">
-                                <a href="#">
-                                    <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
+                                <a href="\">
+                                <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
                                 </a>
                             </div>
                             <p>Chúng tôi tạo ra trang web để bạn được chill<br /> Đồ án tốt nghiệp</p>
@@ -377,13 +277,9 @@
     <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('client/js/main.js')}}"></script>
     <script>
-        $(document).on('click','#submit_titket',function(){
-            // localStorage.setItem('titket_name',)
-             localStorage.setItem('client_titket_name',$("#client_titket_name").val());
-             localStorage.setItem('client_titket_num',$("#client_titket_num").val());
-             localStorage.setItem('client_titket_email',$("#client_titket_email").val());
-        })
-        
+        function view_ticketdetail(ticket_id){
+            location.href = "/client/titket/titket_detail/"+ticket_id
+        }
     </script>
 </body>
 

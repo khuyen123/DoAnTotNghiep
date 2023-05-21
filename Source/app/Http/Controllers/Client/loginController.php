@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\client\loginRequest;
 use App\Http\Requests\client\sigupRequest;
+use App\Http\Service\admin\bannerService;
 use App\Http\Service\client\userService;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,17 +15,22 @@ use Illuminate\Support\Facades\Session;
 
 class loginController extends Controller
 {
-    protected $userService;
-    public function __construct(userService $userService)
+    protected $userService,$bannerService;
+    public function __construct(userService $userService, bannerService $bannerService)
     {
         $this->userService = $userService;
+        $this->bannerService = $bannerService;
     }
     public function login(){
+        $banners = $this->bannerService->getAll();
         if (Auth::check()) {
             return redirect()->route('home');
         } else {
-        return view('client.user.login');
+        return view('client.user.login',[
+            'banners' => $banners
+        ]);
         }
+       
     }
     public function login_function(loginRequest $request){
         if ((Auth::attempt(['email'=>$request->input('email'),'password'=>$request->input('password')])) || 

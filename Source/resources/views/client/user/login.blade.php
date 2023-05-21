@@ -133,9 +133,9 @@
             </div>
         </div>
         <div class="hero-slider owl-carousel">
-            <div class="hs-item set-bg" data-setbg="Image/hero/hero-1.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="Image/hero/hero-2.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="Image/hero/hero-3.jpg"></div>
+            @foreach($banners as $banner)
+                <div class="hs-item set-bg" data-setbg="{{trim($banner->noidung,'client/')}}"></div>
+            @endforeach
         </div>
     </section>
     <!-- Hero Section End -->

@@ -35,8 +35,7 @@ class titketController extends Controller
     }
     public function checkin($titket_id,Request $request){
         $titket = $this->titketService->search($titket_id);
-        $data = $request->input();
-        return $this->titketService->update($titket,$data);
+        return $this->titketService->check_in($titket);
     }
     public function export_titket($titket_id){
         $titket = $this->titketService->search($titket_id);
