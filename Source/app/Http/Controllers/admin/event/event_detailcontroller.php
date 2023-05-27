@@ -90,7 +90,7 @@ class event_detailcontroller extends Controller
         $event_detail = $this->eventdetailService->find($eventdetail_id);
         return $this->eventdetailService->update($event_detail,$request->input());
     }
-    public function delete($eventdetail_id){
+    public function delete($id_sukien,$eventdetail_id){
         $result=$this->eventdetailService->delete($eventdetail_id);
         if ($result){
             return response()->json([

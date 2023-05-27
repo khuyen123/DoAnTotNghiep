@@ -220,6 +220,10 @@
                                         <td>{{$event_detail->email_lienhe}}</td>
                                     </tr>
                                     <tr>
+                                        <td class="r-o" style="color:#dfa974">Thời gian diễn ra:</td>
+                                        <td>{{$event_detail->ketthuc}}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="r-o" style="color:#dfa974">Số điện thoại :</td>
                                         <td>{{$event_detail->sdt_lienhe}}</td>
                                     </tr>
@@ -249,10 +253,14 @@
                                                 $today = date("y-m-d  G:i:s");
                                                 $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
                                                 if ($check_availble<= 25700){
+                                                    
                                                     $check = false;
                                                     echo '<span style="font-size:15px" class="badge badge-danger">Hết thời gian đặt vé</span>';
                                                 }
                                                 if ($veconlai <=0) {
+                                                    $check = false;
+                                                }
+                                                if (isset(Auth::user()->id) && (Auth::user()->quyentruycap == 3 || Auth::user()->quyentruycap == 2)) {
                                                     $check = false;
                                                 }
                                             ?>
@@ -260,12 +268,10 @@
                                     </tr>
                                     <tr >
                                         <td class="r-o" style="color:#dfa974; font-size:23px">Mô tả sự kiện:</td>
-                                        
                                     </tr>
                                 </tbody>
                             </table>
                             <p class="f-para">{{trim(trim($event_detail->mota,'<p>'),'</p>')}}</p>
-                            
                         </div>
                     </div>
                     <div class="rd-reviews">
@@ -305,6 +311,7 @@
                             </div>
                         </div>
                     </div>
+                    @if (Auth::user()->quyentruycap == 1)
                     <div class="review-add">
                         <h4>Đăng bình luận:</h4>
                         <form action="#" class="ra-form">
@@ -332,6 +339,7 @@
                             </div>
                         </form>
                     </div>
+                    @endif
                 </div>
                 <div class="col-lg-4">
                     <div class="room-booking">
@@ -364,6 +372,7 @@
                                 <input readonly  value="" style=" font-size:15px" type="text"  id="client_titket_prince" name="client_titket_prince"/>
                             </div>
                             @if($check)
+                            @if(Auth::check())
                             <div class="cnt_full">
                                 <div class="cnt_min">
                                 <input checked type="radio" id="tienmat" name="card"><img src="{{asset('client\Image\tienmat.png')}}" alt="Select payment method" class="selected_img" >
@@ -403,7 +412,8 @@
                                 @endfor
                             </table>
                             
-                            <button type="button" id="submit_booking_titket" class="primary-btn" style="justify-content:center">Đặt ngay</button>
+                            @if($check)  <button type="button" id="submit_booking_titket" class="primary-btn" style="justify-content:center">Đặt ngay</button> @endif
+                            @endif
                             @endif
                             @csrf
                         </form>
@@ -624,9 +634,10 @@
                     if (titket_type == 1){
                         seat = selected_seat.toString()
                     } 
+                    var id_ve = generate_string(6)
                     var data = {
                         'tinhtrang' : 1,
-                        'id_ve' : generate_string(6),
+                        'id_ve' : id_ve,
                         'soCho' : parseInt($('#client_titket_num').val()),
                         'soGhe' : seat,
                         'thanhtoan' : 0,
@@ -658,7 +669,7 @@
                                 }).then((result_2)=>{
                                     if (result_2.isConfirmed) {
                                         localStorage.removeItem('seat')
-                                        location.href = "/client/titket/titket_list/"+user_id
+                                        location.href = "/client/titket/titket_detail/"+id_ve
                                     }
                                 })
                                 localStorage.removeItem('seat')

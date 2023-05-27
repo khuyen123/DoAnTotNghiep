@@ -82,6 +82,7 @@ class titketController extends Controller
             $data = $request->input();
             $result_2 = $this->titketService->create($data);
             $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
+            $this->eventdetailService->update($eventdetail,$truve);
             if ($result_2){
                 $payment_url = $jsonResult['payUrl'];
                 //Just a example, please check more in there
@@ -120,9 +121,7 @@ class titketController extends Controller
         $this->titketService->payment_success($titket);
         $url = 'http://127.0.0.1:8000/client/event_detail/'.$titket->id_chitietsukien;
         $eventdetail = $this->eventdetailService->find($titket->id_chitietsukien);
-        $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
         if ($new_ticket = $titket){
-            $this->eventdetailService->update($eventdetail,$truve);
             Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
                 $email->subject('Thông tin đặt vé');
                 $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);

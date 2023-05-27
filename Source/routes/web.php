@@ -94,8 +94,11 @@ Route::middleware(['auth'])->group(function() {
         });
         Route::prefix('/event_image')->group(function(){
             Route::get('/index',[event_imagecontroller::class,'index']);
+        });
+        Route::prefix('event_image/{eventdetail_id}')->group(function(){
+            Route::get('/index',[event_imagecontroller::class,'list_image']);
             Route::get('/create',[event_imagecontroller::class,'create']);
-            Route::post('create',[event_imagecontroller::class,'store']);
+            Route::POST('/create',[event_imagecontroller::class,'store']);
             Route::delete('/delete/{image_id}',[event_imagecontroller::class,'delete']);
         });
         Route::prefix('user')->group(function(){

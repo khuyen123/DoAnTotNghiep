@@ -47,7 +47,7 @@
                             'Xoá thành công',
                             'success'
                         ).then(function(){
-                            location.href='/admin/event/index';
+                            location.href='index';
                         })
                     }
                 },

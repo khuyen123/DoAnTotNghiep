@@ -179,23 +179,17 @@ body, p, h1 {
 <!-- CSS Ticket inspired by -->
 <!-- https://dribbble.com/shots/2677752-Dribbble-invite-competition -->
 
-<div class="container">
-
+<div class="container" >
 	<div class="ticket basic">
 		<p>Admit One</p>
 	</div>
 
-	<div class="ticket airline">
+	<div class="ticket airline" style="border-style: groove;">
 		<div class="top">
-			<h1>boarding pass</h1>
+			<h1>Vé sự kiện</h1>
 			<div class="big">
-				<p class="from" style="color:#000">BWI</p>
-				<p class="to"><i class="fas fa-arrow-right"></i> SAN</p>
-			</div>
-			<div class="top--side">
-				<i class="fas fa-plane"></i>
-				<p>Baltimore</p>
-				<p>San Diego</p>
+				<p class="from" style="margin-left:30px; color:#000;font-size:23px; text-align:center">{{$new_ticket->event_detail->event->tenSukien}}</p>
+				<p class="to" style="margin-left:30px; font-size: 23px ; text-align:center">{{$new_ticket->event_detail->wards->district->province->tentinhthanh}}</p>
 			</div>
 		</div>
 		<div class="bottom">
@@ -212,10 +206,10 @@ body, p, h1 {
             </tr>
             <tr>
               <td>
-                <p style="font-weight:bold;font-size: 15px ; color:tomato">AA2005</p>
+                <p style="font-weight:bold;font-size: 15px ; color:tomato">{{$new_ticket->soCho}}</p>
               </td>
               <td>
-                <p style="margin-left:75px;font-weight:bold;font-size: 15px ; color:tomato">A3</p>
+                <p style="margin-left:75px;font-weight:bold;font-size: 15px ; color:tomato">{{$new_ticket->soGhe}}</p>
               </td>
             </tr>
           </table>
@@ -223,43 +217,33 @@ body, p, h1 {
 				<div class="row row-2">
         <table>
             <tr>
-              <td width:100px>
+              <td width:150px>
                 <p><span>Thời gian</span></p>
               </td>  
-              <td width:100px>
+              <td width:150px>
                 <p style="font-size:10px; margin-left:10px"><span>Khu vực</span></p>
-              </td>
-              <td width:100px>
-                <p style="font-size:10px;margin-left:10px"><span>Hình thức vé</span></p>
               </td>
             </tr>
             <tr>
               <td>
-                <p style="font-size: 10px ;">AA2005</p>
+                <p style="font-size: 10px ;">{{$new_ticket->event_detail->ketthuc}}</p>
               </td>
               <td>
-                <p style="margin-left:10px;font-weight:bold;font-size: 10px ;">A3</p>
-              </td>
-              <td>
-                <p style="margin-left:10px;font-weight:bold;font-size: 10px ;">A3</p>
+                <p style="margin-left:10px;font-weight:bold;font-size: 10px ;">{{$new_ticket->event_detail->khuvuc}}</p>
               </td>
             </tr>
           </table>
 				</div>
 				<div class="row row-3">
-					<p><span>Passenger</span>Jesus Ramirez</p>
-					<p class="row--center"><span>Seat</span>11E</p>
-					<p class="row--right"><span>Group</span>3</p>
+          <p  style="font-size: 10px ; text-align:center; font-weight:bold;">Địa chỉ</p>
+					<p style="font-size: 11px ; text-align:center; font-weight:bold; color:brown" >{{$new_ticket->event_detail->diachi}},&nbsp; {{$new_ticket->event_detail->wards->tenxaphuong}},&nbsp; {{$new_ticket->event_detail->wards->district->province->tentinhthanh}}</p>
 				</div>
 			</div>
-			<div class="bar--code"></div>
+			<div>
+        <p style="text-align:center; font-size:22px; color:tomato">#{{$new_ticket->id_ve}}</p>
+      </div>
 		</div>
 	</div>
-
-	<div class="info">
-		<p>Based on </p>
-	</div>
-
 </div>
 </body>
 </html>

@@ -305,7 +305,7 @@ if (Auth::check()) {
                                 <h4>Mã đặt vé: </h4>
                             </td>  
                             <td align="left"  style="border-radius: 5px;">
-                                <h3 style="color:red;font-weight:bold"> {{$new_titket->id_ve}} </h4>
+                                <h3 style="color:red;font-weight:bold"> #{{$new_titket->id_ve}} </h4>
                             </td>
                         </tr>
                         <tr>

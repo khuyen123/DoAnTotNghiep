@@ -34,7 +34,7 @@
 
         </tbody>
     </table>
-    {!! $images->links('pagination::bootstrap-4') !!}
+ 
     <script>
         function removeImage(id){
             Swal.fire({

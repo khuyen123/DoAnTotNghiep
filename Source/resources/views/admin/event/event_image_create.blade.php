@@ -4,15 +4,6 @@
     <form action="" method="POST" enctype="multipart/form-data">
         <div class="card-body">
             <div class="form-group">
-                <label for="category">Tên Sự kiệns</label>
-                <select class="form-control" name="id_chitietsukien">
-                    {{--                    <option value="0">Danh mục cha</option>--}}
-                    @foreach($event_details as $event_detail)
-                        <option value="{{$event_detail->id}}">{{$event_detail->event->tenSukien.'-'.$event_detail->wards->district->province->tentinhthanh}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="form-group">
                 <label for="event_image">Ảnh sự kiện</label>
                 <input onchange="choosefile(this)" type="file" class="form-control" accept="image/*" id="event_image" name="event_image">
                 <img height="200px" width="200px" src="" id="image">

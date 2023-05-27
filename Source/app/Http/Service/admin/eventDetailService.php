@@ -42,8 +42,10 @@ class eventDetailService {
         return $this->eventRepository->find($event_id);
     }
     public function create($data) {
-        Session::flash('success', 'Thêm mới chi tiết sự kiện thành công');
-        return $this->eventdetailRepository->create($data);
+        $model = $this->eventdetailRepository->create($data);
+        $mess = 'Thêm mới chi tiết sự kiện thành công. Hãy tiến hành thêm ảnh cho sự kiện';
+        Session::flash('success', $mess);
+        return $model;
         
     }
     

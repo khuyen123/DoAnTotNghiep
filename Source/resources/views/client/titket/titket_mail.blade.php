@@ -204,9 +204,7 @@
       <div class="left">
         <div class="image">
         <img style="margin:5px 5px 5px 5px;width:250px;height:250px"  src="{{asset('client/'.$image->noidung)}}" >
-          <p class="admit-one">
-              <span>{{$new_ticket->event_detail->id_hinhthucve == 1 ? 'Vé ghế ngồi':'Chỗ ngồi tự do'}}</span>
-          </p>
+        
           <div class="ticket-number">
             <p style="color:#d83565;font-weight:bold">
               #{{$new_ticket->id_ve}}

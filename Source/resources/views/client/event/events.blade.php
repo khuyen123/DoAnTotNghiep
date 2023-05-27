@@ -186,7 +186,7 @@ if (Auth::check()) {
                 foreach ($event_details as $key =>$event_detail) {
                     $html_detail .='<div class="col-lg-4 col-md-6">
                     <div class="room-item">
-                        <img style=" height:233px" src="'.$event_detail->noidung.'" alt="">
+                        <img style=" height:233px;border-style:groove" src="'.$event_detail->noidung.'" alt="">
                         <div class="ri-text">
                             <h4>'.$event_detail->tenSukien.'</h4>
                             <h3>'.$event_detail->giave.' VNĐ<span>/Vé</span></h3>

@@ -20,8 +20,13 @@ class event_imageService {
     public function getAll(){
         return $this->event_imageRepository->getAll();
     }
+    public function findImage($detail_id){
+        $images = event_image::query()
+        ->where('id_chitietsukien','=',$detail_id)
+        ->get();
+        return $images;
+    }
     public function delete($id) {
-        
         return $this->event_imageRepository->delete($id);
     }
     public function destroyMany($request){
