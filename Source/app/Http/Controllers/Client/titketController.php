@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\client\titketCreateRequest;
 use App\Http\Service\admin\eventDetailService;
+use App\Http\Service\client\eventDetailclientService;
 use App\Http\Service\client\titketService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -14,22 +15,26 @@ class titketController extends Controller
 {
     protected $titketService;
     protected $eventdetailService;
-    public function __construct(titketService $titketService,eventDetailService $eventDetailService)
+    protected $client_detaildetailService;
+    public function __construct(titketService $titketService,eventDetailService $eventDetailService, eventDetailclientService $eventDetailclientService)
     {
         $this->titketService = $titketService;
         $this->eventdetailService = $eventDetailService;
-    }
+        $this->client_detaildetailService = $eventDetailclientService;
+    }   
     
     public function titket_create(titketCreateRequest $request){
+        
         $eventdetail = $this->eventdetailService->find($request->id_chitietsukien);
         $data = $request->input();
+        $image = $this->client_detaildetailService->getOneimage($request->id_chitietsukien);
         $result = $this->titketService->create($data);
         $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
-        if ($new_titket = $result){
+        if ($new_ticket = $result){
             $this->eventdetailService->update($eventdetail,$truve);
-            Mail::send('client.titket.titket_mail',compact('new_titket'), function($email) use ($new_titket) {
+            Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
                 $email->subject('Thông tin đặt vé');
-                $email->to($new_titket->email_nguoidat,$new_titket->ten_nguoidat);
+                $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
             });
             return response()->json([
                 'status'=>200
@@ -46,7 +51,7 @@ class titketController extends Controller
         $partnerCode = 'MOMOBKUN20180529';
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
-        $orderInfo = "Thanh toán Vé". $request->id_ve;
+        $orderInfo = "Thanh toán Vé: ". $request->id_ve;
         $amount = $request->tongtien;
         $orderId = time() . "";
         $redirectUrl = "http://127.0.0.1:8000/client/titket/momo_payment_success/". $request->id_ve;
@@ -109,16 +114,18 @@ class titketController extends Controller
     }
     public function momo_payment_success($titket_id, Request $request)
     {
+        
         $titket = $this->titketService->search($titket_id);
+        $image = $this->client_detaildetailService->getOneimage($titket->id_chitietsukien);
         $this->titketService->payment_success($titket);
         $url = 'http://127.0.0.1:8000/client/event_detail/'.$titket->id_chitietsukien;
         $eventdetail = $this->eventdetailService->find($titket->id_chitietsukien);
         $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
-        if ($new_titket = $titket){
+        if ($new_ticket = $titket){
             $this->eventdetailService->update($eventdetail,$truve);
-            Mail::send('client.titket.titket_mail',compact('new_titket'), function($email) use ($new_titket) {
+            Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
                 $email->subject('Thông tin đặt vé');
-                $email->to($new_titket->email_nguoidat,$new_titket->ten_nguoidat);
+                $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
             });
             return redirect($url)->with('booking_success','1');
         }

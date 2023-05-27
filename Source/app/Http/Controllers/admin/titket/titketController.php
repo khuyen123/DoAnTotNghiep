@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin\titket;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\Event\titketsearchRequest;
+use App\Http\Service\client\eventDetailclientService;
 use App\Http\Service\client\titketService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,8 +13,10 @@ use PDF;
 class titketController extends Controller
 {
     protected $titketService;
-    public function __construct(titketService $titketService)
+    protected $client_eventdetailService;
+    public function __construct(titketService $titketService, eventDetailclientService $eventDetailclientService)
     {
+        $this->client_eventdetailService = $eventDetailclientService;
         $this->titketService = $titketService;
     }
     public function index(){
@@ -39,9 +42,11 @@ class titketController extends Controller
     }
     public function export_titket($titket_id){
         $titket = $this->titketService->search($titket_id);
+        $image = $this->client_eventdetailService->getOneimage($titket->id_chitietsukien);
         $data = [
             'title' => 'Chi Tiết Vé',
-            'new_titket' => $titket
+            'new_ticket' => $titket,
+            'image'=> $image
         ]; 
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadview('client.titket.titket_pdf',$data);

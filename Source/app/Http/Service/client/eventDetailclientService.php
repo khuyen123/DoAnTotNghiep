@@ -47,6 +47,12 @@ class eventDetailclientService {
         ->get();
         return $images;
     }
+    public function getOneimage($detail_id){
+        $image =  event_image::query()
+        ->where('id_chitietsukien','LIKE',$detail_id)
+        ->first();
+        return $image;
+    }
     public function gettitket($detail_id){
         $titkets = titket::query()
         ->where('id_chitietsukien','LIKE',$detail_id)

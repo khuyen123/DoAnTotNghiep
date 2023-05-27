@@ -1,311 +1,254 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Thông tin đặt vé</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style type="text/css">
-  /**
-   * Google webfonts. Recommended to include the .woff version for cross-client compatibility.
-   */
-  @media screen {
-    @font-face {
-      font-family: 'Source Sans Pro';
-      font-style: normal;
-      font-weight: 400;
-      src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/ODelI1aHBYDBqgeIAH2zlBM0YzuT7MdOe03otPbuUS0.woff) format('woff');
-    }
-    @font-face {
-      font-family: 'Source Sans Pro';
-      font-style: normal;
-      font-weight: 700;
-      src: local('Source Sans Pro Bold'), local('SourceSansPro-Bold'), url(https://fonts.gstatic.com/s/sourcesanspro/v10/toadOcfmlt9b38dHJxOBGFkQc6VGVFSmCnC_l7QZG60.woff) format('woff');
-    }
-  }
-  /**
-   * Avoid browser level font resizing.
-   * 1. Windows Mobile
-   * 2. iOS / OSX
-   */
-  body,
-  table,
-  td,
-  a {
-    -ms-text-size-adjust: 100%; /* 1 */
-    -webkit-text-size-adjust: 100%; /* 2 */
-  }
-  /**
-   * Remove extra space added to tables and cells in Outlook.
-   */
-  table,
-  td {
-    mso-table-rspace: 0pt;
-    mso-table-lspace: 0pt;
-  }
-  /**
-   * Better fluid images in Internet Explorer.
-   */
-  img {
-    -ms-interpolation-mode: bicubic;
-  }
-  /**
-   * Remove blue links for iOS devices.
-   */
-  a[x-apple-data-detectors] {
-    font-family: inherit !important;
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    line-height: inherit !important;
-    color: inherit !important;
-    text-decoration: none !important;
-  }
-  /**
-   * Fix centering issues in Android 4.4.
-   */
-  div[style*="margin: 16px 0;"] {
-    margin: 0 !important;
-  }
-  body {
-    width: 100% !important;
-    height: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  /**
-   * Collapse table borders to avoid space between cells.
-   */
-  table {
-    border-collapse: collapse !important;
-  }
-  a {
-    color: #1a82e2;
-  }
-  img {
-    height: auto;
-    line-height: 100%;
-    text-decoration: none;
-    border: 0;
-    outline: none;
-  }
-  </style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-</head>
-<body style="background-color: #e9ecef;">
+      body,
+      html {
+        height: 100vh;
+        display: grid;
+        font-family: "Times New Roman", cursive;
+        background: #d83565;
+        color: black;
+        font-size: 14px;
+        letter-spacing: 0.1em;
+      }
 
-  <!-- start preheader -->
-  <div class="preheader" style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
-    A preheader is the short summary text that follows the subject line when an email is viewed in the inbox.
-  </div>
-  <!-- end preheader -->
+      .ticket {
+        margin: auto;
+        display: flex;
+        background: white;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      }
 
-  <!-- start body -->
-  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      .left {
+        display: flex;
+      }
 
-    <!-- start logo -->
-    <tr>
-      <td align="center" bgcolor="#e9ecef">
-        <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-          <tr>
-            <td align="center" valign="top" style="padding: 36px 24px;">
-              <a href="https://www.blogdesire.com" target="_blank" style="display: inline-block;">
-              </a>
-            </td>
-          </tr>
-        </table>
-        <!--[if (gte mso 9)|(IE)]>
-        </td>
-        </tr>
-        </table>
-        <![endif]-->
-      </td>
-    </tr>
-    <!-- end logo -->
+      .image {
+        height: 250px;
+        width: 250px;
+        background-image: url("client/{{$image->noidung}}");
+        background-size: contain;
+        opacity: 0.85;
+      }
 
-    <!-- start hero -->
-    <tr>
-      <td align="center" bgcolor="#e9ecef">
-        <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
-          <tr>
-            <td align="left" bgcolor="#ffffff" style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;">
-              <h1 style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;">Thông tin đặt vé: {{$new_titket->event_detail->event->tenSukien.' '.$new_titket->event_detail->wards->district->province->tentinhthanh}}</h1>
-            </td>
-          </tr>
-        </table>
-        
-      </td>
-    </tr>
-    <!-- end hero -->
+      .admit-one {
+        position: absolute;
+        color: darkgray;
+        height: 250px;
+        padding: 0 10px;
+        letter-spacing: 0.15em;
+        display: flex;
+        text-align: center;
+        justify-content: space-around;
+        writing-mode: vertical-rl;
+        transform: rotate(-180deg);
+      }
 
-    <!-- start copy block -->
-    <tr>
-      <td align="center" bgcolor="#e9ecef">
-        <!--[if (gte mso 9)|(IE)]>
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
-        <tr>
-        <td align="center" valign="top" width="600">
-        <![endif]-->
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+      .admit-one span:nth-child(2) {
+        color: white;
+        font-weight: 700;
+      }
 
-          <!-- start copy -->
-          <tr>
-            <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-              <p style="margin: 0;">Xin chào {{$new_titket->ten_nguoidat}}, Cảm ơn bạn đã Đặt vé tại hệ thống Sự kiện số. Sau đây là thông tin đặt vé của bạn</p>
-            </td>
-          </tr>
-          <!-- end copy -->
+      .left .ticket-number {
+        height: 250px;
+        width: 250px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: 5px;
+      }
 
-          <!-- start button -->
-          <tr>
-            <td align="left" bgcolor="#ffffff">
-              <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                  <td align="center" bgcolor="#ffffff" style="padding: 12px;">
-                    <table border="0" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Mã đặt vé: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h3 style="color:red;font-weight:bold"> {{$new_titket->id_ve}} </h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Số điện thoại đặt: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->sdt_nguoidat}} </h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Tên sự kiện: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->event_detail->event->tenSukien.' '.$new_titket->event_detail->wards->district->province->tentinhthanh}} </h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Địa chỉ: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->event_detail->diachi.' '.$new_titket->event_detail->wards->tenxaphuong.' '.$new_titket->event_detail->wards->district->tenquanhuyen
-                                    .' '.$new_titket->event_detail->wards->district->province->tentinhthanh}} </h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Thời gian diễn ra: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->event_detail->ketthuc}} </h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Hình thức vé: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->event_detail->titkettype->tenhinhthuc}}</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Số chỗ ngồi: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->soCho}}</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Số ghế: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->soGhe}}</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Tổng tiền: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{number_format($new_titket->tongtien,0,',','.').' VNĐ'}}</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4>Thanh toán: </h4>
-                            </td>  
-                            <td align="center"  style="border-radius: 5px;">
-                                <h4> {{$new_titket->thanhtoan == 0 ? 'Chưa thanh toán':'Đã Thanh toán'}}</h4>
-                            </td>
-                        </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <!-- end button -->
+      .ticket-info {
+        padding: 10px 30px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-          <!-- start copy -->
-          <tr>
-            <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-              <p style="margin: 0;">Hãy đưa mã đặt vé cho nhân viên soát vé để Check-in hoặc in vé!</p>
-            </td>
-          </tr>
-          <!-- end copy -->
+      .date {
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        padding: 5px 0;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      }
 
-          <!-- start copy -->
-          <tr>
-            <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf">
-              <p style="margin: 0;">Trân Trọng,<br> Sự kiện số</p>
-            </td>
-          </tr>
-          <!-- end copy -->
+      .date span {
+        width: 100px;
+      }
 
-        </table>
-      </td>
-    </tr>
-    <!-- end copy block -->
+      .date span:first-child {
+        text-align: left;
+      }
 
-    <!-- start footer -->
-    <tr>
-      <td align="center" bgcolor="#e9ecef" style="padding: 24px;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+      .date span:last-child {
+        text-align: right;
+      }
 
-          <!-- start permission -->
-          <tr>
-            <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-            </td>
-          </tr>
-          <!-- end permission -->
+      .date .june-29 {
+        color: #d83565;
+        font-size: 20px;
+      }
 
-          <!-- start unsubscribe -->
-          <tr>
-            <td align="center" bgcolor="#e9ecef" style="padding: 12px 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px; color: #666;">
-              <p style="margin: 0;">Đà Nẵng, Việt Nam</p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <!-- end footer -->
-  </table>
-  <!-- end body -->
+      .show-name {
+        font-size: 32px;
+        font-family: "Times New Roman", cursive;
+        color: #d83565;
+      }
+
+      .show-name h1 {
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        color: #4a437e;
+      }
+
+      .time {
+        padding: 10px 0;
+        color: #4a437e;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-weight: 700;
+      }
+
+      .time span {
+        font-weight: 400;
+        color: gray;
+      }
+
+      .left .time {
+        font-size: 16px;
+      }
+
+
+      .location {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        padding-top: 8px;
+        border-top: 1px solid gray;
+      }
+
+      .location .separator {
+        font-size: 20px;
+      }
+
+      .right {
+        width: 180px;
+        border-left: 1px dashed #404040;
+      }
+
+      .right .admit-one {
+        color: darkgray;
+      }
+
+      .right .admit-one span:nth-child(2) {
+        color: gray;
+      }
+
+      .right .right-info-container {
+        height: 250px;
+        padding: 10px 10px 10px 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .right .show-name h1 {
+        font-size: 18px;
+      }
+
+      .barcode {
+        height: 100px;
+      }
+
+      .barcode img {
+        height: 100%;
+      }
+
+      .right .ticket-number {
+        color: gray;
+      }
+      .rotate_image {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    </style>
+  </head>
+<body>
+    <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    
+    <div class="ticket">
+      <div class="left">
+        <div class="image">
+        <img style="margin:5px 5px 5px 5px;width:250px;height:250px"  src="{{asset('client/'.$image->noidung)}}" >
+          <p class="admit-one">
+              <span>{{$new_ticket->event_detail->id_hinhthucve == 1 ? 'Vé ghế ngồi':'Chỗ ngồi tự do'}}</span>
+          </p>
+          <div class="ticket-number">
+            <p style="color:#d83565;font-weight:bold">
+              #{{$new_ticket->id_ve}}
+            </p>
+          </div>
+        </div>
+        <div class="ticket-info">
+          <p class="date">
+            <span>Thời gian đặt</span>
+            <span class="june-29" style="font-size: 14px ;">{{$new_ticket->created_at}}</span>
+          </p>
+          <div class="show-name">
+            <h1>{{$new_ticket->event_detail->wards->district->province->tentinhthanh}}</h1>
+            <h2>{{$new_ticket->event_detail->event->tenSukien}}</h2>
+          </div>
+          <div class="time">
+            <p>{{$new_ticket->event_detail->ketthuc}}</p>
+            <p>{{$new_ticket->soCho.' Chỗ'}} <span>@</span>{{$new_ticket->soGhe}}</p>
+          </div>
+          <p class="location"><span>{{$new_ticket->event_detail->khuvuc}}</span>
+            <span class="separator"><i class="far fa-smile"></i></span><span>{{$new_ticket->event_detail->diachi}}, {{$new_ticket->event_detail->wards->tenxaphuong}}, {{$new_ticket->event_detail->wards->district->province->tentinhthanh}}</span>
+          </p>
+        </div>
+      </div>
+      <div class="right">
+        <p class="admit-one">
+        <span>{{$new_ticket->event_detail->id_hinhthucve == 1 ? 'Vé ghế ngồi':'Chỗ ngồi tự do'}}</span>
+        </p>
+        <div class="right-info-container">
+          <div class="show-name">
+            <p style="font-size: 14px ; font-weight:bold">{{$new_ticket->event_detail->event->tenSukien}}</p>
+          </div>
+          <div class="time">
+            <p>{{$new_ticket->event_detail->ketthuc}}</p>
+            <p>{{$new_ticket->soCho.' Chỗ'}} <span>@</span>{{$new_ticket->soGhe}}</p>
+          </div>
+          <div class="barcode">
+              <h2 style="color:#d83565; margin-top:30px" >#{{$new_ticket->id_ve}}</h2>
+          </div>
+          
+        </div>
+      </div>
+    </div>
 </body>
 </html>
