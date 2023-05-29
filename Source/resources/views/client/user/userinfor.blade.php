@@ -55,7 +55,7 @@
             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
             $html_logined = '';
             if (isset(Auth::user()->id)){
-                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
             }
             if(isset(Auth::user()->hoten)) {
                 $html_logined .= Auth::user()->hoten;
@@ -106,7 +106,7 @@
                             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
                             if (isset(Auth::user()->id)){
-                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
                             }
                             if(isset(Auth::user()->hoten)) {
                                 $html_logined .= Auth::user()->hoten;
@@ -163,16 +163,16 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="{{asset(Auth::user()->anhdaidien)}}" class="rounded-circle">
+                    <img alt="Ảnh đại diện" src="{{asset(Auth::user()->anhdaidien)}}" class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div  class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
-                    <form enctype="multipart/form-data">
+                    <form enctype="multipart/form-data" method="POST" action="/client/infor/{{Auth::user()->id}}/changeavt">
                         <input type="file" class="form-control" onchange="choosefile(this)" accept="image/*" id="user_avt" name="user_avt">
-                        <img height="100px" width="100px" src="" id="image" style="margin-top:10px">
+                        <img height="100px" width="100px" src="" name="user_avt" id="image" style="margin-top:10px">
                         <script>
                             function choosefile(fileInput){
                                 if (fileInput.files && fileInput.files[0]){
@@ -251,6 +251,14 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Số điện thoại</label>
+                        <input style="width:285px" id="input-number" class="form-control form-control-alternative" placeholder="Số điện thoại" value="{{Auth::user()->sdt}}" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group focused">
                         <label class="form-control-label" for="input-address">Địa chỉ</label>
                         <input id="input-address" class="form-control form-control-alternative" placeholder="Địa chỉ (Số nhà/Đường, Thôn, Xóm...)" value="{{Auth::user()->diachi}}" type="text">
                       </div>
@@ -283,13 +291,13 @@
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-country">Hoạt động</label>
-                        <input type="text" id="input-status" class="form-control form-control-alternative" placeholder="Hoạt động" value="{{Auth::user()->trangthai== 1? 'Đang hoạt động':'Đang bị khoá'}}">
+                        <input readonly type="text" id="input-status" class="form-control form-control-alternative" placeholder="Hoạt động" value="{{Auth::user()->trangthai== 1? 'Đang hoạt động':'Đang bị khoá'}}">
                       </div>
                     </div>
                     <div class="col-lg-4">
                       <div class="form-group focused">
                         <label class="form-control-label" for="input-country">Kích hoạt</label>
-                        <input type="text" id="input-status" class="form-control form-control-alternative" placeholder="Kích hoạt" value="{{Auth::user()->kichhoat== 1? 'Đã kích hoạt':'Chưa kích hoạt'}}">
+                        <input readonly type="text" id="input-status" class="form-control form-control-alternative" placeholder="Kích hoạt" value="{{Auth::user()->kichhoat== 1? 'Đã kích hoạt':'Chưa kích hoạt'}}">
                       </div>
                     </div>
               </form>

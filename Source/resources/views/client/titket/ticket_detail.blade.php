@@ -139,7 +139,7 @@ $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
 $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
 $html_logined = '';
 if (isset(Auth::user()->id)){
-    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
 }
 
 if(isset(Auth::user()->hoten)) {
@@ -192,7 +192,7 @@ if (Auth::check()) {
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
                             $html_logined = '';
                             if (isset(Auth::user()->id)){
-                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
                             }
                             
                             if(isset(Auth::user()->hoten)) {
@@ -471,8 +471,9 @@ if (Auth::check()) {
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form method="POST" action="{{route('search')}}" class="search-model-form">
+                <input type="text" id="searchString" name="searchString" placeholder="Nhập tên sự kiện cần tìm..." value=""/>
+                @csrf
             </form>
         </div>
     </div>

@@ -55,7 +55,7 @@
             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
             $html_logined = '';
             if (isset(Auth::user()->id)){
-                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
             }
             if(isset(Auth::user()->hoten)) {
                 $html_logined .= Auth::user()->hoten;
@@ -106,7 +106,7 @@
                             $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
                             if (isset(Auth::user()->id)){
-                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
                             }
                             if(isset(Auth::user()->hoten)) {
                                 $html_logined .= Auth::user()->hoten;
@@ -238,7 +238,7 @@
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Tình trạng Vé:</td>
                                         <?php $veconlai = $event_detail->sovetoida - $event_detail->sovedaban ?>
-                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? 'Hết vé':'Còn Vé: '.$veconlai}}
+                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? 'Hết vé':'Còn chỗ: '.$veconlai}}
                                             <input type="hidden" value="{{$veconlai}}" id="veconlai">
                                         </td>
                                         
@@ -274,67 +274,56 @@
                             <p class="f-para">{{trim(trim($event_detail->mota,'<p>'),'</p>')}}</p>
                         </div>
                     </div>
-                    <div class="rd-reviews">
-                        <h4>Bình luận</h4>
+                    <h4 style="color:#dfa974;font-weight:bold">Bình luận:</h4>
+                    <div class="rd-reviews" style="height: 500px; overflow:scroll">
+                        @foreach($comments as $comment)
                         <div class="review-item">
                             <div class="ri-pic">
-                                <img src="{{asset('client/img/room/avatar/avatar-1.jpg')}}" alt="">
+                                <img src="{{asset($comment->user->anhdaidien)}}" alt="">
                             </div>
                             <div class="ri-text">
-                                <span>27/08/2022</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
+                                <span>{{$comment->created_at}}</span>
+                                <div class="rating" style="margin-right: 10px;">
+                                @if(Auth::user()->id == $comment->id_nguoidung) <button style="margin-right:25px;border-style:none;background-color:white;" type="button" onclick="delete_comment('{{$comment->id}}')"><i class="fa fa-trash" style="color:crimson" ></i></button> @endif
+                                    @for($i = 1;$i<=$comment->sosao;$i++)
+                                        <i class="fa fa-star"></i>
+                                    @endfor
+                                    @for($j=$comment->sosao;$j<5;$j++)
+                                        <i class="fa fa-star-o"></i>
+                                    @endfor
+                                    
                                 </div>
-                                <h5>Nguyễn Duyên</h5>
-                                <p>Mình rất thích sự kiện</p>
+                                
+                                <h5>{{$comment->user->hoten}}</h5>
+                                <p>{{$comment->noidung}}</p>
                             </div>
                         </div>
-                        <div class="review-item">
-                            <div class="ri-pic">
-                                <img src="{{asset('client/img/room/avatar/avatar-1.jpg')}}" alt="">
-                            </div>
-                            <div class="ri-text">
-                                <span>27/08/2022</span>
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <h5>Nguyễn Duyên</h5>
-                                <p>Mình rất thích sự kiện</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @if (Auth::user()->quyentruycap == 1)
+                    @if (Auth::check() && Auth::user()->quyentruycap == 1)
                     <div class="review-add">
                         <h4>Đăng bình luận:</h4>
                         <form action="#" class="ra-form">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Họ tên">
+                                    <input readonly type="text"  value="{{Auth::user()->hoten}}">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Email*">
+                                    <input type="text" readonly value="{{Auth::user()->email}}">
                                 </div>
                                 <div class="col-lg-12">
                                     <div>
                                         <h5>Đánh giá:</h5>
                                         <div class="rating">
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star"></i>
-                                            <i class="icon_star-half_alt"></i>
+                                            <i class="fa fa-star-o" id="star_1" style="color:#dfa974"></i>
+                                            <i class="fa fa-star-o" id="star_2" style="color:#dfa974"></i>
+                                            <i class="fa fa-star-o" id="star_3" style="color:#dfa974"></i>
+                                            <i class="fa fa-star-o" id="star_4" style="color:#dfa974"></i>
+                                            <i class="fa fa-star-o" id="star_5" style="color:#dfa974"></i>
                                         </div>
                                     </div>
-                                    <textarea placeholder="Bình luận"></textarea>
-                                    <button type="submit">Đăng</button>
+                                    <textarea id="noidung" name="noidung" placeholder="Bình luận"></textarea>
+                                    <button id="submit_comment" type="button">Đăng</button>
                                 </div>
                             </div>
                         </form>
@@ -384,7 +373,7 @@
                                 <label for="momo">Thanh toán bằng ví MOMO</label>
                             </div>
                             <div class="cnt_min">
-                                <input type="radio" id="airpay" name="card"><img src="{{asset('client\Image\air-pay.jpg')}}" alt="Select payment method"  class="selected_img">
+                                <input type="radio" id="airpay" name="card"><img src="{{asset('client\Image\VNPay.jpg')}}" alt="Select payment method"  class="selected_img">
                                 <label for="airpay">Thanh toán bằng ví Airpay</label>
                             </div>
                             </div>
@@ -411,7 +400,7 @@
                                     </tr>
                                 @endfor
                             </table>
-                            
+                            <a href="/client/titket/vnpay_payment" name="redirect" ></a>
                             @if($check)  <button type="button" id="submit_booking_titket" class="primary-btn" style="justify-content:center">Đặt ngay</button> @endif
                             @endif
                             @endif
@@ -441,10 +430,11 @@
                             <p>Chúng tôi tạo ra trang web để bạn được chill<br /> Đồ án tốt nghiệp</p>
                             <div class="fa-social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                <a href="#"><i  class="fa fa-twitter"></i></a>
+                                <a href="#"><i  class="fa fa-tripadvisor"></i></a>
                                 <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                                <a href="#"><i  class="fa fa-youtube-play"></i></a>
+                                
                             </div>
                         </div>
                     </div>
@@ -479,8 +469,9 @@
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form method="POST" action="{{route('search')}}" class="search-model-form">
+                <input type="text" id="searchString" name="searchString" placeholder="Nhập tên sự kiện cần tìm..." value=""/>
+                @csrf
             </form>
         </div>
     </div>
@@ -505,6 +496,7 @@
         });
     </script>
     <script>
+
         var selected_seat = []
         //selected seat lastLoad:
         var a = localStorage.getItem('seat');
@@ -698,7 +690,16 @@
                             })
                         } else {
                             if (document.getElementById('airpay').checked ) {
-                                console.log('airpay')
+                                $.ajax({
+                                url:'/client/titket/vnpay_payment',
+                                data: data,
+                                dataType:"JSON",
+                                type:"POST",
+                                success: function(response){
+                                    localStorage.removeItem('seat')
+                                    location.href = response.payment_url
+                                }
+                            })
                             }
                         }
                     }
@@ -715,6 +716,92 @@
         text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
     return text;
+    }
+    //Star-rating:
+    var star_rating = parseInt(-1)
+    for (let i = 1; i <= 5; i++) {
+        $(document).on('click','#star_'+i,function(){
+            star_rating = i;
+        for (let k = 1; k <= 5; k++) {
+            document.getElementById("star_"+k).className = "fa fa-star-o";
+            document.getElementById("star_"+k).style.color = "#dfa974";
+        }
+        for (let j = 1; j<= i; j++) {
+            document.getElementById("star_"+j).className = "fa fa-star";
+            document.getElementById("star_"+j).style.color = "#dfa974";
+        }
+    })
+    }
+    $(document).on('click','#submit_comment',function(){
+        var data_comment = {
+            'noidung' : $('#noidung').val(),
+            'sosao': parseInt(star_rating),
+            'id_nguoidung':user_id,
+            'id_chitietsukien':event_id
+        }
+        if ($('#noidung').val()=='')
+        {
+            document.getElementById("noidung").style.borderColor = "#c31b1f"
+        } 
+        if (star_rating == -1) {
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById("star_"+i).style.color = "#c31b1f";
+            }
+        }
+        if (star_rating != -1 && $('#noidung').val()!=''){
+            $.ajax({
+                type:"POST",
+                data: data_comment,
+                dataType: "JSON",
+                url: '/client/comment/create',
+                success: function(response){
+                    Swal.fire(
+                        'Thành công!',
+                        'Đăng bình luận thành công',
+                        'success'
+                    ).then(function(){
+                        location.reload()
+                    })
+                }
+            })
+        }
+    })
+    $(document).on('keyup','#noidung',function(){
+        document.getElementById("noidung").style.borderColor = "#e5e5e5"
+    })
+    function delete_comment(id){
+        Swal.fire({
+            title: 'Xoá bình luận',
+            text: "Bạn có muốn xoá bình luận?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Xác nhận!'
+        }).then((result)=>{
+            if (result.isConfirmed) {
+                $.ajax({
+                    type:"DELETE",
+                    url:'/client/comment/delete/'+parseInt(id),
+                    success: function(response) {
+                        Swal.fire(
+                            'Thành công',
+                            'Xoá bình luận thành công',
+                            'success'
+                        ).then(function(){
+                            location.reload()
+                        })
+                    },
+                    error: function(){
+                        Swal.fire(
+                            'Thất bại',
+                            'Xoá bình luận thất bại',
+                            'error'
+                        )
+                    }
+                })
+            }
+        })
     }
     </script>
 </body>

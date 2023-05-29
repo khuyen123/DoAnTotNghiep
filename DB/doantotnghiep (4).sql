@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 11, 2023 lúc 01:42 AM
+-- Thời gian đã tạo: Th5 29, 2023 lúc 10:06 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.0.12
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `doantotnghiep`
 --
+CREATE DATABASE IF NOT EXISTS `doantotnghiep` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `doantotnghiep`;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `banner`
+--
+
+CREATE TABLE `banner` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `noidung` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mota` varchar(10000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `banner`
@@ -30,34 +46,132 @@ INSERT INTO `banner` (`id`, `noidung`, `mota`, `created_at`, `updated_at`) VALUE
 (2, 'client/Image/hero/hero-2.jpg', 'Banner', NULL, NULL),
 (3, 'client/Image/hero/hero-3.jpg', 'Banner', NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `binhluan`
+--
+
+CREATE TABLE `binhluan` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `noidung` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_chitietsukien` bigint(20) UNSIGNED NOT NULL,
+  `id_nguoidung` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `binhluan`
+--
+
+INSERT INTO `binhluan` (`id`, `noidung`, `created_at`, `updated_at`, `id_chitietsukien`, `id_nguoidung`) VALUES
+(1, 'Mình rất thích sự kiện này', NULL, NULL, 4, 27),
+(2, 'Mình rất thích sự kiện này', NULL, NULL, 4, 25);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chitietsukien`
+--
+
+CREATE TABLE `chitietsukien` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `batdau` datetime NOT NULL,
+  `ketthuc` datetime NOT NULL,
+  `diachi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `khuvuc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sohangghe` int(11) DEFAULT NULL,
+  `soghemoihang` int(11) DEFAULT NULL,
+  `sovetoida` int(11) NOT NULL,
+  `sovedaban` int(11) NOT NULL,
+  `trangthai` int(11) NOT NULL,
+  `giave` bigint(20) NOT NULL,
+  `sdt_lienhe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_lienhe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ten_lienhe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `dotuoichophep` int(11) NOT NULL,
+  `mota` varchar(10000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_sukien` bigint(20) UNSIGNED NOT NULL,
+  `id_xaphuong` bigint(20) UNSIGNED NOT NULL,
+  `id_hinhthucve` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Đang đổ dữ liệu cho bảng `chitietsukien`
 --
 
-INSERT INTO `chitietsukien` (`id`, `batdau`, `ketthuc`, `diachi`, `khuvuc`, `sovetoida`, `sovedaban`, `trangthai`, `giave`, `sdt_lienhe`, `email_lienhe`, `ten_lienhe`, `dotuoichophep`, `mota`, `id_sukien`, `id_xaphuong`, `created_at`, `updated_at`) VALUES
-(2, '2023-04-25 00:00:00', '2023-04-25 00:00:00', 'Thôn Đức Bà', 'Sân vận động', 150, 150, 0, '150000', '0396603842', 'thuhaphan@gmail.com', 'Phan Thị Thu Hà', 15, 'Sự kiện âm nhạc Mây Lang Thang diễn ra hằng tuần tại các địa điểm không cố định. Với sự góp mặt của các giọng ca trẻ nổi tiếng như Bùi Anh Tuấn, Tăng Phúc, Hoài Lâm, Ngô Lan Hương,... Địa điểm tuần này là Sân Bóng thôn Sân vận động thôn Đức Bà, xã Nghi Sơ', 1, 5245, NULL, NULL),
-(3, '2023-04-25 00:00:00', '2023-04-27 00:00:00', 'Nhà Hát Trưng Vương, phường Vĩnh Ninh, quận Hải Châu, Thành Phố Đà Nẵng.', 'Nhà Hát lớn', 150, 0, 1, '150000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, 'Sự kiện âm nhạc Mây Lang Thang diễn ra hằng tuần tại các địa điểm không cố định. Với sự góp mặt của các giọng ca trẻ nổi tiếng như Bùi Anh Tuấn, Tăng Phúc, Hoài Lâm, Ngô Lan Hương,... Địa điểm tuần này là Nhà Hát Trưng Vương, phường Vĩnh Ninh, quận Hải Ch', 1, 6206, NULL, NULL),
-(4, '2023-04-25 00:00:00', '2023-04-28 00:00:00', 'Thôn HÀ úc 2, Xã Vinh An, huyện Phú Vang, tỉnh Thừa Thiên Huế', 'Sân vận động', 1500, 150, 1, '200000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, 'Buổi Offline Độ Tộc MixiGaming của tộc trưởng Phùng Thanh Độ diễn ra nhằm mục đích họp mặt giao lưu cùng các thành viên Độ Tộc. Song Song với thời gian sự kiện, giải Ao Làng FifaOnline4 cũng sẽ được tổ chức hứa hẹn sẽ đem tới cho mọi người những phút giây', 5, 6271, NULL, NULL),
-(5, '2023-05-05 00:00:00', '2023-05-05 00:00:00', 'Xã Hoà Liên', 'Ven Sông', 15, 7, 1, '150000', '0336482917', 'khuyenphamno0@gmail.com', 'Khuyen', 15, 'adâđa', 3, 6383, NULL, NULL),
-(6, '2023-05-11 00:20:00', '2023-05-12 00:20:00', 'Thôn Hà Úc 2', 'Sân Vận ĐỘng', 105, 0, 1, '150000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, '<p>aadad</p>', 1, 6307, '2023-05-05 03:21:57', '2023-05-05 03:21:57'),
-(7, '2023-05-01 00:27:00', '2023-05-27 00:27:00', 'Thôn Hà Úc 2', 'Sân Vận ĐỘng', 156, 0, 1, '1000000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, '<p>ada</p>', 2, 5576, '2023-05-05 03:28:34', '2023-05-05 03:28:34'),
-(8, '2023-05-01 00:27:00', '2023-05-27 00:27:00', 'Thôn Hà Úc 2', 'Sân Vận ĐỘng', 156, 0, 1, '1000000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, '<p>ada</p>', 2, 5576, '2023-05-05 03:28:46', '2023-05-05 03:28:46'),
-(9, '2023-05-26 00:30:00', '2023-05-31 00:30:00', 'Đường Chương Dương', 'Nhà Hát Trưng Vương', 14, 0, 1, '150000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 14, '<p>ađa</p>', 5, 5591, '2023-05-05 03:30:58', '2023-05-05 03:30:58'),
-(10, '2023-05-19 00:31:00', '2023-06-09 00:31:00', 'Đường Chương Dương', 'Nhà Hát Trưng Vương', 16, 0, 1, '150000', '0336482917', 'ad', 'Phạm Khuyến', 14, '<p>ađ&acirc;</p>', 5, 4618, '2023-05-05 03:31:52', '2023-05-05 03:31:52'),
-(11, '2023-05-05 00:50:00', '2023-06-14 00:50:00', 'Đường Chương Dương', 'Sân Vận ĐỘng', 150, 0, 1, '150000', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 18, '<p>Họp b&aacute;o trưng b&agrave;y sản phẩm mới HondaWinner X 2023 tại H&agrave; Tĩnh</p>', 13, 5849, '2023-05-05 03:51:40', '2023-05-05 03:51:40'),
-(12, '2023-05-06 08:42:00', '2023-05-07 08:42:00', '48 Cao Thắng', 'Khu A', 0, 0, 1, '0', '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 18, '<p>Hiến m&aacute;u</p>', 14, 6352, '2023-05-05 18:44:01', '2023-05-05 18:44:01');
+INSERT INTO `chitietsukien` (`id`, `batdau`, `ketthuc`, `diachi`, `khuvuc`, `sohangghe`, `soghemoihang`, `sovetoida`, `sovedaban`, `trangthai`, `giave`, `sdt_lienhe`, `email_lienhe`, `ten_lienhe`, `dotuoichophep`, `mota`, `id_sukien`, `id_xaphuong`, `id_hinhthucve`, `created_at`, `updated_at`) VALUES
+(3, '2023-04-25 00:00:00', '2023-04-27 00:00:00', 'Nhà Hát Trưng Vương', 'Nhà Hát lớn', 11, 14, 150, 0, 0, 150000, '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, 'Sự kiện âm nhạc Mây Lang Thang diễn ra hằng tuần tại các địa điểm không cố định. Với sự góp mặt của các giọng ca trẻ nổi tiếng như Bùi Anh Tuấn, Tăng Phúc, Hoài Lâm, Ngô Lan Hương,... Địa điểm tuần này là Nhà Hát Trưng Vương, phường Vĩnh Ninh, quận Hải Châu', 1, 6206, 1, NULL, NULL),
+(4, '2023-04-25 00:00:00', '2023-06-11 00:00:00', 'Thôn HÀ úc 2', 'Sân vận động', 7, 10, 60, 11, 1, 200000, '0336482917', 'khuyenphamno0@gmail.com', 'Phan Thị Thu Hà', 15, 'Buổi Offline của Bộ Tộc MixiGaming được tổ chức bởi tộc trưởng Phùng Thanh Độ. Có giải Ao làng Moi Rap', 5, 6271, 1, NULL, '2023-05-28 10:17:59'),
+(6, '2023-05-11 00:20:00', '2023-05-12 00:20:00', 'Thôn Hà Úc 2', 'Sân Vận ĐỘng', 11, 14, 105, 0, 1, 150000, '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, '<p>aadad</p>', 1, 6307, 1, '2023-05-04 13:21:57', '2023-05-04 13:21:57'),
+(7, '2023-06-08 02:27:00', '2023-06-10 00:27:00', 'Thôn Hà Úc 2', 'Sân Vận ĐỘng', 7, 10, 70, 6, 1, 100000, '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 15, '<p>ada</p>', 2, 5576, 1, '2023-05-04 13:28:34', '2023-05-27 06:09:21'),
+(9, '2023-05-26 00:30:00', '2023-05-31 00:30:00', 'Đường Chương Dương', 'Nhà Hát Trưng Vương', 16, 13, 14, 0, 1, 150000, '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 14, '<p>ađa</p>', 5, 5591, 1, '2023-05-04 13:30:58', '2023-05-04 13:30:58'),
+(10, '2023-05-19 00:31:00', '2023-06-09 00:31:00', 'Đường Chương Dương', 'Nhà Hát Trưng Vương', 16, 13, 16, 0, 1, 150000, '0336482917', 'ad', 'Phạm Khuyến', 14, '<p>ađ&acirc;</p>', 5, 4618, 1, '2023-05-04 13:31:52', '2023-05-04 13:31:52'),
+(12, '2023-05-06 08:42:00', '2023-05-28 08:42:00', '48 Cao Thắng', 'Khu A', NULL, NULL, 100, 10, 1, 0, '0336482917', 'khuyenphamno0@gmail.com', 'Nguyễn Văn Phát', 18, '<p>Hiến m&aacute;u</p>', 14, 6352, 2, '2023-05-05 04:44:01', '2023-05-27 06:19:41'),
+(20, '2023-05-28 15:49:00', '2023-06-04 15:49:00', '48 Cao Thắng', 'Sân Vận ĐỘng', 5, 9, 40, 0, 1, 150000, '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 18, 'Triển lãm Honda', 3, 3748, 1, '2023-05-27 01:49:57', '2023-05-27 01:49:57'),
+(21, '2023-05-28 15:54:00', '2023-06-04 15:54:00', 'Thôn Điền Hương 2', 'Sân Vận Động', NULL, NULL, 60, 0, 1, 200000, '0336482917', 'khuyenphamno0@gmail.com', 'Phạm Khuyến', 16, 'Triển lãm Honda', 13, 6234, 2, '2023-05-27 01:55:15', '2023-05-27 01:55:15'),
+(24, '2023-05-29 14:51:00', '2023-06-10 00:51:00', '48 Cao Thắng', 'Sân Vận Động', 6, 7, 40, 2, 1, 150000, '0399001748', 'cuongnguyen@denvau.music.vn', 'Nguyễn Tấn Cường', 16, 'Show Ca nhạc của Đen Vâu được tổ chức hằng tháng nay đã về đến Đà Nẵng', 17, 6352, 1, '2023-05-29 00:53:42', '2023-05-29 00:55:18');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `danhmucsukien`
+--
+
+CREATE TABLE `danhmucsukien` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tenDanhmuc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mota` varchar(10000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `danhmucsukien`
 --
 
 INSERT INTO `danhmucsukien` (`id`, `tenDanhmuc`, `mota`, `created_at`, `updated_at`) VALUES
-(1, 'Lễ ra mắt', 'Lễ ra mắt các sản phẩm mới như Âm nhạc, Điện thoại, xe... Nhằm quảng bá hình ảnh cũng như sản phẩm của mình đến công chúng. Nhu lờ đòn', NULL, '2023-05-02 03:56:27'),
+(1, 'Lễ ra mắt', 'Lễ ra mắt các sản phẩm mới như Âm nhạc, Điện thoại, xe... Nhằm quảng bá hình ảnh cũng như sản phẩm của mình đến công chúng. Nhu lờ đòn', NULL, '2023-05-01 13:56:27'),
 (2, 'Cắm Trại', 'Hoạt động cắm trại dã ngoại hướng đến các đối tượng khách hàng có đam mê muốn hoà mình vào thiên nhiên.', NULL, NULL),
 (4, 'Họp báo', 'Buổi họp báo để trình bày một sự việc hoặc giải thích một số sự việc liên quan đến một vấn đề cụ thể nào đó trước công chúng và báo chí.', NULL, NULL),
-(6, 'Họp Mặt Giao Lưu', 'Buổi họp mặt giao lưu của một nhóm người hoặc câu lạc bộ', NULL, '2023-05-02 03:56:36'),
-(7, 'Triển Lãm', 'Triễn Lãm tổ chức trưng bày vật phẩm, tranh ảnh, hàng hoá trong một thời gian nhất định', '2023-05-02 05:19:54', '2023-05-02 05:20:32'),
-(8, 'Hiến máu', 'Hiến máu nhân đạo', '2023-05-05 18:41:10', '2023-05-05 18:41:10');
+(6, 'Họp Mặt Giao Lưu', 'Buổi họp mặt giao lưu của một nhóm người hoặc câu lạc bộ', NULL, '2023-05-01 13:56:36'),
+(7, 'Triển Lãm', 'Triễn Lãm tổ chức trưng bày vật phẩm, tranh ảnh, hàng hoá trong một thời gian nhất định', '2023-05-01 15:19:54', '2023-05-01 15:20:32'),
+(8, 'Hiến máu', 'Hiến máu nhân đạo', '2023-05-05 04:41:10', '2023-05-05 04:41:10'),
+(10, 'Show Âm Nhạc', 'Show Ca Nhạc', '2023-05-29 00:49:35', '2023-05-29 00:49:35');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hinhanh`
+--
+
+CREATE TABLE `hinhanh` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `noidung` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mota` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_chitietsukien` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `hinhanh`
@@ -65,11 +179,55 @@ INSERT INTO `danhmucsukien` (`id`, `tenDanhmuc`, `mota`, `created_at`, `updated_
 
 INSERT INTO `hinhanh` (`id`, `noidung`, `mota`, `id_chitietsukien`, `created_at`, `updated_at`) VALUES
 (2, 'Image\\domixi.jpg', 'adc', 4, NULL, NULL),
-(4, 'Image\\may-lang-thang5.jpg', 'ad', 3, NULL, NULL),
-(5, 'Image\\may-lang-thang-11.jpg', 'adc', 2, NULL, NULL),
-(8, 'Image\\maylangthang.png', 'ad', 2, NULL, NULL),
-(9, 'Image\\may-lang-thang5.jpg', 'ađa', 7, NULL, NULL),
-(10, 'Image\\may-lang-thang-11.jpg', 'ađa', 9, NULL, NULL);
+(14, 'Image/1683872498-event_detail-12.jpg', 'Hiến máu', 12, '2023-05-11 23:21:38', '2023-05-11 23:21:38'),
+(15, 'Image/1683872947-event_detail-4.jpg', NULL, 4, '2023-05-11 23:29:07', '2023-05-11 23:29:07'),
+(16, 'Image/1683872968-event_detail-4.jpg', NULL, 4, '2023-05-11 23:29:28', '2023-05-11 23:29:28'),
+(21, 'Image/1683873851-event_detail-12.jpg', NULL, 12, '2023-05-11 23:44:11', '2023-05-11 23:44:11'),
+(35, 'Image/1685178095-event_detail-7.jpg', NULL, 7, '2023-05-27 02:01:35', '2023-05-27 02:01:35'),
+(36, 'Image/1685178099-event_detail-7.jpg', NULL, 7, '2023-05-27 02:01:39', '2023-05-27 02:01:39'),
+(37, 'Image/1685346391-event_detail-3.jpg', NULL, 3, '2023-05-29 00:46:31', '2023-05-29 00:46:31'),
+(38, 'Image/1685346401-event_detail-3.jpg', NULL, 3, '2023-05-29 00:46:41', '2023-05-29 00:46:41'),
+(39, 'Image/1685346472-event_detail-20.jpg', NULL, 20, '2023-05-29 00:47:52', '2023-05-29 00:47:52'),
+(40, 'Image/1685346476-event_detail-20.jpg', NULL, 20, '2023-05-29 00:47:56', '2023-05-29 00:47:56'),
+(41, 'Image/1685346511-event_detail-21.jpg', NULL, 21, '2023-05-29 00:48:31', '2023-05-29 00:48:31'),
+(42, 'Image/1685346515-event_detail-21.jpg', NULL, 21, '2023-05-29 00:48:35', '2023-05-29 00:48:35'),
+(43, 'Image/1685346518-event_detail-21.jpg', NULL, 21, '2023-05-29 00:48:38', '2023-05-29 00:48:38'),
+(44, 'Image/1685346871-event_detail-24.webp', NULL, 24, '2023-05-29 00:54:31', '2023-05-29 00:54:31'),
+(45, 'Image/1685346875-event_detail-24.webp', NULL, 24, '2023-05-29 00:54:35', '2023-05-29 00:54:35'),
+(46, 'Image/1685346879-event_detail-24.webp', NULL, 24, '2023-05-29 00:54:39', '2023-05-29 00:54:39');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hinhthucve`
+--
+
+CREATE TABLE `hinhthucve` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tenhinhthuc` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `hinhthucve`
+--
+
+INSERT INTO `hinhthucve` (`id`, `tenhinhthuc`, `created_at`, `updated_at`) VALUES
+(1, 'Chỗ ngồi theo ghế', NULL, NULL),
+(2, 'Chỗ ngồi tự do', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `migrations`
@@ -77,38 +235,68 @@ INSERT INTO `hinhanh` (`id`, `noidung`, `mota`, `id_chitietsukien`, `created_at`
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_roles_table', 1),
-(2, '2014_10_12_000001_create_tinhthanh_table', 1),
-(3, '2014_10_12_000002_create_quanhuyen_table', 1),
-(4, '2014_10_12_000003_create_xaphuong_table', 1),
-(5, '2014_10_12_000004_create_nguoidung_table', 1),
-(6, '2014_10_12_000007_create_tieude_table', 1),
-(7, '2014_10_12_000008_create_banner_table', 1),
-(8, '2014_10_12_000010_create_danhmucsukien_table', 1),
-(9, '2014_10_12_000011_create_sukien_table', 1),
-(10, '2014_10_12_000012_create_chitietsukien_table', 1),
-(11, '2014_10_12_000015_create_ve_table', 1),
-(12, '2014_10_12_000016_create_hinhanh_table', 1),
-(13, '2014_10_12_000017_create_binhluan_table', 1),
-(14, '2014_10_12_000018_create_danhgia_table ', 1),
-(15, '2014_10_12_100000_create_password_resets_table', 1),
-(16, '2019_08_19_000000_create_failed_jobs_table', 1),
-(17, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(49, '2014_10_12_000001_create_tinhthanh_table', 1),
-(50, '2014_10_12_000002_create_quanhuyen_table', 1),
-(51, '2014_10_12_000003_create_xaphuong_table', 1),
-(52, '2014_10_12_000004_create_nguoidung_table', 1),
-(53, '2014_10_12_000007_create_tieude_table', 1),
-(54, '2014_10_12_000008_create_banner_table', 1),
-(55, '2014_10_12_000010_create_danhmucsukien_table', 1),
-(56, '2014_10_12_000011_create_sukien_table', 1),
-(57, '2014_10_12_000012_create_chitietsukien_table', 1),
-(58, '2014_10_12_000015_create_ve_table', 1),
-(59, '2014_10_12_000016_create_hinhanh_table', 1),
-(60, '2014_10_12_000017_create_binhluan_table', 1),
-(61, '2014_10_12_000018_create_danhgia_table ', 1),
-(62, '2014_10_12_100000_create_password_resets_table', 1),
-(63, '2019_08_19_000000_create_failed_jobs_table', 1),
-(64, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(2, '2014_10_12_000001_create_hinhthucve_table', 1),
+(3, '2014_10_12_000001_create_tinhthanh_table', 1),
+(4, '2014_10_12_000002_create_quanhuyen_table', 1),
+(5, '2014_10_12_000003_create_xaphuong_table', 1),
+(6, '2014_10_12_000004_create_nguoidung_table', 1),
+(7, '2014_10_12_000007_create_tieude_table', 1),
+(8, '2014_10_12_000008_create_banner_table', 1),
+(9, '2014_10_12_000010_create_danhmucsukien_table', 1),
+(10, '2014_10_12_000011_create_sukien_table', 1),
+(11, '2014_10_12_000012_create_chitietsukien_table', 1),
+(12, '2014_10_12_000015_create_ve_table', 1),
+(13, '2014_10_12_000016_create_hinhanh_table', 1),
+(14, '2014_10_12_000017_create_binhluan_table', 1),
+(15, '2014_10_12_000018_create_danhgia_table ', 1),
+(16, '2014_10_12_100000_create_password_resets_table', 1),
+(17, '2019_08_19_000000_create_failed_jobs_table', 1),
+(18, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `quanhuyen`
+--
+
+CREATE TABLE `quanhuyen` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tenquanhuyen` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_tinhthanh` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `quanhuyen`
@@ -821,6 +1009,19 @@ INSERT INTO `quanhuyen` (`id`, `tenquanhuyen`, `created_at`, `updated_at`, `id_t
 (704, 'Huyện Phú Tân', NULL, NULL, 63),
 (705, 'Huyện Ngọc Hiển', NULL, NULL, 63);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `quyentruycap`
+--
+
+CREATE TABLE `quyentruycap` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tenquyentruycap` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Đang đổ dữ liệu cho bảng `quyentruycap`
 --
@@ -830,18 +1031,63 @@ INSERT INTO `quyentruycap` (`id`, `tenquyentruycap`, `created_at`, `updated_at`)
 (2, 'Ban Tổ Chức', NULL, NULL),
 (3, 'Quản trị viên', NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `sukien`
+--
+
+CREATE TABLE `sukien` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tenSukien` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `motaSuKien` varchar(10000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_danhmucsukien` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Đang đổ dữ liệu cho bảng `sukien`
 --
 
 INSERT INTO `sukien` (`id`, `tenSukien`, `motaSuKien`, `id_danhmucsukien`, `created_at`, `updated_at`) VALUES
-(1, 'Triễn lãm Yamaha Town', 'Triễn Lãm Trưng bày các sản phẩm đến từ Yamaha', 7, NULL, '2023-05-03 07:02:21'),
-(2, 'Họp Báo Về Nờ Ô Nô', 'Buổi họp báo được tổ chức bởi hot Tiktoker Nờ Ô Nô sau những phát ngôn gây tranh cãi mạnh mẽ cho cộng đồng của mình. Buổi họp báo nhằm mục đích xin lỗi đến bà cụ và bán vé gây quỹ để lấy tiền ủng hộ bà cụ.', 2, NULL, '2023-05-03 06:54:58'),
-(3, 'Cắm Trại dã ngoại', 'Buổi cắm trại dã ngoại tổ chức bởi Khuyến. Có thu vé nhằm mục đích gây quỹ để ủng hộ cho các bạn nhỏ ở Huyện Hoà Vang Đà Nẵng,', 2, NULL, '2023-05-03 06:53:50'),
+(1, 'Triễn lãm Yamaha Town', 'Triễn Lãm Trưng bày các sản phẩm đến từ Yamaha', 7, NULL, '2023-05-02 17:02:21'),
+(2, 'Họp Báo Về Nờ Ô Nô', 'Buổi họp báo được tổ chức bởi hot Tiktoker Nờ Ô Nô sau những phát ngôn gây tranh cãi mạnh mẽ cho cộng đồng của mình. Buổi họp báo nhằm mục đích xin lỗi đến bà cụ và bán vé gây quỹ để lấy tiền ủng hộ bà cụ.', 4, NULL, '2023-05-27 01:59:45'),
+(3, 'Cắm Trại dã ngoại', 'Buổi cắm trại dã ngoại tổ chức bởi Khuyến. Có thu vé nhằm mục đích gây quỹ để ủng hộ cho các bạn nhỏ ở Huyện Hoà Vang Đà Nẵng,', 2, NULL, '2023-05-02 16:53:50'),
 (5, 'Offline Độ Tộc', 'Buổi Offline cho các thành viên Độ Tộc MixiGaming  giao lưu và gặp gỡ Độ Mixi. Buổi OFFline có sự tham gia của Đen Vâu và Hoà Minzy. Tiền bán vé sẽ được dùng vào mục đích từ thiện cùng với số tiền Donate có được trong tháng 12/2022.', 6, NULL, NULL),
-(12, 'Họp Báo Về Vấn Đề Bà Nguyễn Phương Hằng', 'Họp báo thông báo với công chúng toàn bộ sự việc về lùm xùm gần đây của bà Nguyễn Phương Hằng', 4, '2023-05-03 07:23:23', '2023-05-05 10:49:04'),
-(13, 'Triễn Lãm Honda', 'Triển lãm trưng bày các sản phẩm mới đến từ Honda', 7, '2023-05-05 10:49:32', '2023-05-05 10:49:32'),
-(14, 'Hiến máu nhân đạo', 'Hiến máu nhân đạo', 1, '2023-05-05 18:42:31', '2023-05-05 18:42:31');
+(13, 'Triễn Lãm Honda', 'Triển lãm trưng bày các sản phẩm mới đến từ Honda', 7, '2023-05-04 20:49:32', '2023-05-04 20:49:32'),
+(14, 'Hiến máu nhân đạo', 'Hiến máu nhân đạo', 1, '2023-05-05 04:42:31', '2023-05-05 04:42:31'),
+(17, 'Show của Đen', 'Show Ca nhạc của Đen', 10, '2023-05-29 00:50:39', '2023-05-29 00:50:39');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `thongtintrangchu`
+--
+
+CREATE TABLE `thongtintrangchu` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tieude_vechungtoi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `noidung_vechungtoi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_trangchu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sdt_trangchu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `diachi_trangchu` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tinhthanh`
+--
+
+CREATE TABLE `tinhthanh` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tentinhthanh` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `tinhthanh`
@@ -912,15 +1158,95 @@ INSERT INTO `tinhthanh` (`id`, `tentinhthanh`, `created_at`, `updated_at`) VALUE
 (62, ' Bạc Liêu', NULL, NULL),
 (63, ' Cà Mau', NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anhdaidien` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `makichhoat` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trangthai` int(11) DEFAULT NULL,
+  `kichhoat` int(11) DEFAULT NULL,
+  `hoten` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ngaySinh` date DEFAULT NULL,
+  `sdt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gioiTinh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `diachi` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_xaphuong` bigint(20) UNSIGNED NOT NULL,
+  `quyentruycap` bigint(20) UNSIGNED NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `makichhoat`, `trangthai`, `kichhoat`, `hoten`, `ngaySinh`, `sdt`, `gioiTinh`, `diachi`, `token`, `id_xaphuong`, `quyentruycap`, `remember_token`, `created_at`, `updated_at`) VALUES
-(24, 'admin', '$2y$10$Okaz3UpgYaqSwINxdKgmbO/s0XOO8lfpvzza.K3xDMscpO81SvOXq', 'admin@gmail.com', NULL, 1, 1, 'Phạm Khuyến', '1997-06-15', '0336482917', 'Nam', 'Thôn Hà Úc ', NULL, 6271, 3, NULL, NULL, NULL),
-(25, 'nvphat', '$2y$10$Dt133FD25024vKQU4m6qX.dDOADSK7JiGegNIxtHBa54bwmLa63fG', 'khuyenphamno0@gmail.com', NULL, 1, 1, 'Nguyễn Văn Phát', '2001-05-01', '0399001748', 'Nam', 'Xã Tân Phú', NULL, 6368, 1, NULL, NULL, NULL),
-(26, 'nthung', '$2y$10$gYjCLAnXeL25acmGFFkgw.sSPpLlqAz17ii.1rB5Ss2wAYMfSYw3O', 'nguyentronghung@gmail.com', NULL, 1, 1, 'Nguyễn Trọng Hưng', '2001-04-05', '0336482918', 'Nam', 'Xã Nghi Sơn', NULL, 5245, 1, NULL, NULL, '2023-05-05 12:37:17'),
-(27, 'thuhaphan', '$2y$10$gx11AXoecZ1Z5/SfsXJZlOEv304dloEytQiMxH7sHhwEewLV0eWnK', 'phanthuhalop92@gmail.com', NULL, 1, 1, 'Phan Thị Thu Hà', '2001-04-07', '0399001748', 'Nữ', 'Thôn Lương Viện', NULL, 6313, 2, NULL, NULL, '2023-05-08 01:56:35');
+INSERT INTO `users` (`id`, `username`, `password`, `anhdaidien`, `email`, `makichhoat`, `trangthai`, `kichhoat`, `hoten`, `ngaySinh`, `sdt`, `gioiTinh`, `diachi`, `token`, `id_xaphuong`, `quyentruycap`, `remember_token`, `created_at`, `updated_at`) VALUES
+(24, 'admin', '$2y$10$Okaz3UpgYaqSwINxdKgmbO/s0XOO8lfpvzza.K3xDMscpO81SvOXq', 'client/Image/anhthe.jpg', 'admin@gmail.com', NULL, 1, 1, 'Phạm Khuyến', '1997-06-15', '0336482917', 'Nam', 'Thôn Hà Úc ', NULL, 6271, 3, NULL, NULL, NULL),
+(25, 'nvphat', '$2y$10$Dt133FD25024vKQU4m6qX.dDOADSK7JiGegNIxtHBa54bwmLa63fG', 'client/Image/anhthe.jpg', 'khuyenphamno0@gmail.com', NULL, 1, 1, 'Nguyễn Văn Phát', '2001-05-01', '0399001748', 'Nam', 'Xã Tân Phú', NULL, 6368, 1, NULL, NULL, '2023-05-14 08:15:05'),
+(26, 'nthung', '$2y$10$gYjCLAnXeL25acmGFFkgw.sSPpLlqAz17ii.1rB5Ss2wAYMfSYw3O', 'client/Image/anhthe.jpg', 'nguyentronghung@gmail.com', NULL, 1, 1, 'Nguyễn Trọng Hưng', '2001-04-05', '0336482918', 'Nam', 'Xã Nghi Sơn', NULL, 5245, 1, NULL, NULL, '2023-05-04 22:37:17'),
+(27, 'thuhaphan1', '$2y$10$c7UuVsTLX5Tr.XYcfDA7GulrsAyHAPDw9lwpBABlYPFXyJm8w95Ka', 'client/Image/anhthe.jpg', 'phanthuhalop92@gmail.com', NULL, 1, 1, 'Phan Thị Thu Hà', '2001-04-07', '0399001748', 'Nữ', 'Thôn Lương Viện', NULL, 6313, 2, NULL, NULL, '2023-05-07 11:56:35'),
+(28, 'thuhaphan', '$2y$10$8kXlkK8OEjoMuBREx52g9eLBZJV1xYNGINH1EZ4SyexQL0FmtWv0O', 'client/Image/anhthe.jpg', 'khuyenphamno0@gmail.com', '', 1, 1, 'Phan Thị Thu Hà', NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2023-05-18 21:19:35', '2023-05-27 01:59:13');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `ve`
+--
+
+CREATE TABLE `ve` (
+  `id_ve` varchar(6) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tinhtrang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `soCho` int(255) DEFAULT NULL,
+  `soGhe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tongtien` int(100) DEFAULT NULL,
+  `thanhtoan` int(11) NOT NULL,
+  `kiemtra` int(11) NOT NULL,
+  `id_nguoidung` bigint(20) UNSIGNED NOT NULL,
+  `id_chitietsukien` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `ten_nguoidat` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sdt_nguoidat` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_nguoidat` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `ve`
+--
+
+INSERT INTO `ve` (`id_ve`, `tinhtrang`, `soCho`, `soGhe`, `tongtien`, `thanhtoan`, `kiemtra`, `id_nguoidung`, `id_chitietsukien`, `created_at`, `updated_at`, `ten_nguoidat`, `sdt_nguoidat`, `email_nguoidat`) VALUES
+('01QK54', '1', 1, 'A5', 200000, 0, 0, 25, 4, '2023-05-28 10:14:22', '2023-05-28 10:14:22', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('3E87VV', '1', 1, 'A7', 200000, 0, 0, 25, 4, '2023-05-28 10:17:59', '2023-05-28 10:17:59', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('8MIN8O', '1', 2, 'A1,A2', 300000, 0, 0, 25, 24, '2023-05-29 00:55:18', '2023-05-29 00:55:18', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('9YCFHN', '1', 1, 'A6', 200000, 1, 0, 25, 4, '2023-05-28 10:15:13', '2023-05-28 10:15:13', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('JZDU28', '1', 2, 'A3,A4', 400000, 0, 0, 25, 4, '2023-05-28 10:13:33', '2023-05-28 10:13:33', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('MPBTMT', '1', 2, 'A3,A4', 400000, 0, 0, 25, 4, '2023-05-28 10:12:53', '2023-05-28 10:12:53', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('NLADK6', '1', 2, 'A3,A4', 400000, 0, 0, 25, 4, '2023-05-28 10:13:41', '2023-05-28 10:13:41', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com'),
+('RRS3B6', '1', 2, 'A1,A2', 400000, 0, 0, 25, 4, '2023-05-27 18:32:55', '2023-05-27 18:32:55', 'Nguyễn Văn Phát', '0399001748', 'khuyenphamno0@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `xaphuong`
+--
+
+CREATE TABLE `xaphuong` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tenxaphuong` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `id_quanhuyen` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `xaphuong`
@@ -11519,6 +11845,291 @@ INSERT INTO `xaphuong` (`id`, `tenxaphuong`, `created_at`, `updated_at`, `id_qua
 (10582, 'Thị trấn Rạch Gốc', NULL, NULL, 705),
 (10583, 'Xã Tân Ân', NULL, NULL, 705),
 (10584, 'Xã Đất Mũi', NULL, NULL, 705);
+
+--
+-- Chỉ mục cho các bảng đã đổ
+--
+
+--
+-- Chỉ mục cho bảng `banner`
+--
+ALTER TABLE `banner`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `binhluan`
+--
+ALTER TABLE `binhluan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `binhluan_id_chitietsukien_foreign` (`id_chitietsukien`),
+  ADD KEY `binhluan_id_nguoidung_foreign` (`id_nguoidung`);
+
+--
+-- Chỉ mục cho bảng `chitietsukien`
+--
+ALTER TABLE `chitietsukien`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chitietsukien_id_xaphuong_foreign` (`id_xaphuong`),
+  ADD KEY `chitietsukien_id_hinhthucve_foreign` (`id_hinhthucve`),
+  ADD KEY `chitietsukien_id_sukien_foreign` (`id_sukien`);
+
+--
+-- Chỉ mục cho bảng `danhmucsukien`
+--
+ALTER TABLE `danhmucsukien`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Chỉ mục cho bảng `hinhanh`
+--
+ALTER TABLE `hinhanh`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `hinhanh_id_chitietsukien_foreign` (`id_chitietsukien`);
+
+--
+-- Chỉ mục cho bảng `hinhthucve`
+--
+ALTER TABLE `hinhthucve`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Chỉ mục cho bảng `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Chỉ mục cho bảng `quanhuyen`
+--
+ALTER TABLE `quanhuyen`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `quanhuyen_id_tinhthanh_foreign` (`id_tinhthanh`);
+
+--
+-- Chỉ mục cho bảng `quyentruycap`
+--
+ALTER TABLE `quyentruycap`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `sukien`
+--
+ALTER TABLE `sukien`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sukien_id_danhmucsukien_foreign` (`id_danhmucsukien`);
+
+--
+-- Chỉ mục cho bảng `thongtintrangchu`
+--
+ALTER TABLE `thongtintrangchu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `tinhthanh`
+--
+ALTER TABLE `tinhthanh`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_id_xaphuong_foreign` (`id_xaphuong`),
+  ADD KEY `users_quyentruycap_foreign` (`quyentruycap`);
+
+--
+-- Chỉ mục cho bảng `ve`
+--
+ALTER TABLE `ve`
+  ADD PRIMARY KEY (`id_ve`),
+  ADD KEY `ve_id_nguoidung_foreign` (`id_nguoidung`),
+  ADD KEY `ve_id_chitietsukien_foreign` (`id_chitietsukien`);
+
+--
+-- Chỉ mục cho bảng `xaphuong`
+--
+ALTER TABLE `xaphuong`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `xaphuong_id_quanhuyen_foreign` (`id_quanhuyen`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `banner`
+--
+ALTER TABLE `banner`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT cho bảng `binhluan`
+--
+ALTER TABLE `binhluan`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT cho bảng `chitietsukien`
+--
+ALTER TABLE `chitietsukien`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT cho bảng `danhmucsukien`
+--
+ALTER TABLE `danhmucsukien`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT cho bảng `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `hinhanh`
+--
+ALTER TABLE `hinhanh`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT cho bảng `hinhthucve`
+--
+ALTER TABLE `hinhthucve`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT cho bảng `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `quanhuyen`
+--
+ALTER TABLE `quanhuyen`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=706;
+
+--
+-- AUTO_INCREMENT cho bảng `quyentruycap`
+--
+ALTER TABLE `quyentruycap`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `sukien`
+--
+ALTER TABLE `sukien`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT cho bảng `thongtintrangchu`
+--
+ALTER TABLE `thongtintrangchu`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `tinhthanh`
+--
+ALTER TABLE `tinhthanh`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT cho bảng `xaphuong`
+--
+ALTER TABLE `xaphuong`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10585;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `binhluan`
+--
+ALTER TABLE `binhluan`
+  ADD CONSTRAINT `binhluan_id_chitietsukien_foreign` FOREIGN KEY (`id_chitietsukien`) REFERENCES `chitietsukien` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `binhluan_id_nguoidung_foreign` FOREIGN KEY (`id_nguoidung`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `chitietsukien`
+--
+ALTER TABLE `chitietsukien`
+  ADD CONSTRAINT `chitietsukien_id_hinhthucve_foreign` FOREIGN KEY (`id_hinhthucve`) REFERENCES `hinhthucve` (`id`),
+  ADD CONSTRAINT `chitietsukien_id_sukien_foreign` FOREIGN KEY (`id_sukien`) REFERENCES `sukien` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `chitietsukien_id_xaphuong_foreign` FOREIGN KEY (`id_xaphuong`) REFERENCES `xaphuong` (`id`);
+
+--
+-- Các ràng buộc cho bảng `hinhanh`
+--
+ALTER TABLE `hinhanh`
+  ADD CONSTRAINT `hinhanh_id_chitietsukien_foreign` FOREIGN KEY (`id_chitietsukien`) REFERENCES `chitietsukien` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `quanhuyen`
+--
+ALTER TABLE `quanhuyen`
+  ADD CONSTRAINT `quanhuyen_id_tinhthanh_foreign` FOREIGN KEY (`id_tinhthanh`) REFERENCES `tinhthanh` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `sukien`
+--
+ALTER TABLE `sukien`
+  ADD CONSTRAINT `sukien_id_danhmucsukien_foreign` FOREIGN KEY (`id_danhmucsukien`) REFERENCES `danhmucsukien` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_id_xaphuong_foreign` FOREIGN KEY (`id_xaphuong`) REFERENCES `xaphuong` (`id`),
+  ADD CONSTRAINT `users_quyentruycap_foreign` FOREIGN KEY (`quyentruycap`) REFERENCES `quyentruycap` (`id`);
+
+--
+-- Các ràng buộc cho bảng `ve`
+--
+ALTER TABLE `ve`
+  ADD CONSTRAINT `ve_id_chitietsukien_foreign` FOREIGN KEY (`id_chitietsukien`) REFERENCES `chitietsukien` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ve_id_nguoidung_foreign` FOREIGN KEY (`id_nguoidung`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `xaphuong`
+--
+ALTER TABLE `xaphuong`
+  ADD CONSTRAINT `xaphuong_id_quanhuyen_foreign` FOREIGN KEY (`id_quanhuyen`) REFERENCES `quanhuyen` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

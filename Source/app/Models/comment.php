@@ -11,11 +11,15 @@ class comment extends Model
 
     protected $fillable=[
         'noidung',
-        'id_sukien',
-        'id_nguoidung'
+        'id_chitietsukien',
+        'id_nguoidung',
+        'sosao'
     ];
     public function event_detail(){
         return $this->hasOne(event_detail::class,'id','id_sukien');
+    }
+    public function user(){
+        return $this->hasOne(user::class,'id','id_nguoidung');
     }
     protected $table= 'binhluan';
 }

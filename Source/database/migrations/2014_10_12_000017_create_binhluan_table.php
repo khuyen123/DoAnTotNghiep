@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('binhluan', function (Blueprint $table) {
             $table->id();
             $table->string('noidung');
+            $table->integer('sosao')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('id_chitietsukien');
             $table->unsignedBigInteger('id_nguoidung');

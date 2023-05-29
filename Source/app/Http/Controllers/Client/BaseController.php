@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\client\commentRequest;
 use App\Http\Service\admin\bannerService;
 use App\Http\Service\client\eventDetailclientService;
+use App\Http\Service\client\userService;
 use App\Models\district;
 use App\Models\province;
 use App\Models\TinhThanh;
@@ -15,17 +17,24 @@ use Illuminate\Support\Facades\Auth;
 
 class baseController extends Controller
 {
-    protected $eventdetailService,$bannerService;
-    public function __construct(eventDetailclientService $eventDetailService, bannerService $bannerService )
+    protected $eventdetailService,$bannerService,$userService;
+    public function __construct(eventDetailclientService $eventDetailService, bannerService $bannerService, userService $userService )
     {
         $this->bannerService = $bannerService;
         $this->eventdetailService = $eventDetailService;
+        $this->userService = $userService;
     }
     public function index(){
         $banners = $this->bannerService->getAll();
        return view('client.index',[
             'banners' => $banners
        ]);
+    }
+    public function search_event(Request $request){
+        $events = $this->eventdetailService->search_event($request->searchString);
+        return view('client.event.events',[
+            'event_details' => $events
+        ]);
     }
     public function events() {
         $events = $this->eventdetailService->getevent();
@@ -67,5 +76,25 @@ class baseController extends Controller
         return view('client.user.userinfor',[
             'provinces'=>province::all()
         ]);
+    }
+    public function create_comment(commentRequest $request){
+        // dd($request->all());
+        return $this->eventdetailService->create_comment($request->all());
+    }
+    public function delete_comment($comment_id){
+        return $this->eventdetailService->delete_comment($comment_id);
+    }
+    public function change_avt($user_id,Request $request){
+        $user = $this->userService->find($user_id);
+        if($request->has('user_avt')){
+            $file = $request->file('user_avt');
+            $ext = $request->file('user_avt')->extension();
+            $file_name = time().'-user_avt-'.$user_id.'.'.$ext;
+            $file->move(public_path('client/Image'),$file_name);
+        }
+        $request->merge(['anhdaidien'=>'client/Image/'.$file_name]);
+        $data['anhdaidien'] = $request->anhdaidien;
+        $this->userService->update($user,$data);
+        return redirect()->back();
     }
 }

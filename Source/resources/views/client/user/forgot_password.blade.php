@@ -98,8 +98,8 @@
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Trang đang nhập</h3>
-                        <form action="{{route('login_function')}}" method="post">
+                        <h3>Quên mật khẩu</h3>
+                        <form action="/client/forgot_password" method="post">
                             @if (Session::has('error'))
                                 <div class="alert alert-danger">
                                     {{Session::get('error')}}
@@ -111,20 +111,16 @@
                                 </div>
                             @endif
                             <div class="check-date">
-                                <label for="email" style="font-size:20px ;">Tên đăng nhập:</label>
+                                <label for="email" style="font-size:20px ;">Tên đăng nhập hoặc Email:</label>
                                 <input style="border-radius: 10px; font-size:15px" type="text"  id="email" name="email"/>
                                 <p style="color:#CB4154">{{ $errors->first('email') }}</p>
                             </div>
-                            <div class="check-date">
-                                <label for="password_login" style="font-size:20px ;">Mật khẩu:</label>
-                                <input style="border-radius: 10px;" type="password"  id="password" name="password" />
-                                <p style="color:#CB4154">{{ $errors->first('password') }}</p>
-                            </div>   
-                            <button type="submit">Đăng nhập</button>
+                             
+                            <button type="submit">Tiếp tục</button>
                             @csrf
                            
                         </form>
-                         <a href="/client/forgot_password" style="margin-top:10px; text-align:right" ><p style="color:#CB4154; font-size:15px; margin-left:80px;"><i> <i class="fa fa-lock" ></i> Quên mật khẩu?</i></p></a>
+                         
                     </div>
                 </div>
             </div>

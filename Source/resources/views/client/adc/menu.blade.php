@@ -59,7 +59,7 @@
                                 $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
                                 $html_logined = '';
                                 if (isset(Auth::user()->id)){
-                                    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                                    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
                                 }
                                 
                                 if(isset(Auth::user()->hoten)) {

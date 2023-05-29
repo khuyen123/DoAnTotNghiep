@@ -40,22 +40,36 @@ Route::get('/client/events',[baseController::class,'events'])->name('client_even
 Route::get('/getdistrict/{province_id}',[baseController::class,'getdistrict']);
 Route::get('/getwards/{district_id}',[baseController::class,'getwards']);
 Route::get('/finddistrict/{ward_id}',[baseController::class,'findprovince']);
-
+Route::post('/client/events',[baseController::class,'search_event'])->name('search');
+Route::get('/register/active/{user_id}',[loginController::class,'active_account'])->name('active_account');
+//Forgotten Password Route:
+Route::get('/client/forgot_password',[loginController::class,'forgot_password']);
+Route::post('/client/forgot_password',[loginController::class,'forgot_password_find']);
 //Route with auth:
 Route::middleware(['auth'])->group(function() {
     Route::get('client/logout',[loginController::class,'sigout'])->name('logout');
     //Client Route
     Route::prefix('client')->group( function() {
-        Route::get('/infor/{user_id}',[baseController::class,'client_infor']);
-        Route::get('/register/active/{user}/{token}',[loginController::class,'active_account'])->name('active_account');
+        
+        
         ROute::post('/event_detail/{detail_id}/titket/index',[titketController::class,'index']);
+        //User-infor Route::
+        Route::prefix('/infor/{user_id}') ->group(function(){
+            Route::get('/index',[baseController::class,'client_infor']);
+            Route::post('/changeavt',[baseController::class,'change_avt']);
+        });
         // Booking Route:
         Route::prefix('titket')->group(function(){
             Route::post('/create',[titketController::class,'titket_create']);
             Route::post('/momo_payment',[titketController::class,'momo_payment']);
+            Route::post('/vnpay_payment',[titketController::class,'vnpay_payment']);
             Route::get('/momo_payment_success/{titket_id}',[titketController::class,'momo_payment_success']);
             Route::get('/titket_list/{user_id}',[titketController::class,'ticket_list']);
             Route::get('/titket_detail/{ticket_id}',[titketController::class,'ticket_detail']);
+        });
+        Route::prefix('comment')->group(function() {
+            Route::post('/create',[baseController::class,'create_comment']);
+            Route::delete('/delete/{comment_id}',[baseController::class,'delete_comment']);
         });
     });
     

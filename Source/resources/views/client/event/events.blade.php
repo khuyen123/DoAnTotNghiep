@@ -54,7 +54,7 @@ $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
 $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
 $html_logined = '';
 if (isset(Auth::user()->id)){
-    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+    $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
 }
 
 if(isset(Auth::user()->hoten)) {
@@ -107,7 +107,7 @@ if (Auth::check()) {
                             $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
                             $html_logined = '';
                             if (isset(Auth::user()->id)){
-                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'" class="bk-btn">';
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
                             }
                             
                             if(isset(Auth::user()->hoten)) {
@@ -197,9 +197,10 @@ if (Auth::check()) {
                                             <td style="height:160px">'.$event_detail->diachi.'</td>
                                         </tr>
                                         <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
+                                            <td class="r-o">Hình thức vé:</td>';
+                                            ($event_detail->id_hinhthucve == 1) ? $html_detail .='<td>Vé ghế ngồi</td>': $html_detail .='<td>Vé tự do</td>';
+                                            $html_detail .=
+                                        '</tr>
                                         <tr>
                                             <td class="r-o">Độ tuổi:</td>
                                             <td>Lớn hơn '.$event_detail->dotuoichophep.'</td>
@@ -212,7 +213,7 @@ if (Auth::check()) {
                                         <tr>
                                             <td class="r-o">Hoạt động:</td>
                                             <td>';
-                                            $event_detail->trangthai == 1?$html_detail.='Còn hoạt động' : $html_detail.='Ngưng hoạt động';
+                                            $event_detail->trangthai == 1?$html_detail.='Còn hoạt động' : $html_detail.='Kết thúc';
                                             $html_detail .='</td>
                                         </tr>
                                 </tbody>
@@ -287,8 +288,9 @@ if (Auth::check()) {
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form method="POST" action="{{route('search')}}" class="search-model-form">
+                <input type="text" id="searchString" name="searchString" placeholder="Nhập tên sự kiện cần tìm..." value=""/>
+                @csrf
             </form>
         </div>
     </div>

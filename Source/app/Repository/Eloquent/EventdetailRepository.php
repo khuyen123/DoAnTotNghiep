@@ -21,7 +21,7 @@ class EventDetailRepository extends BaseRepository implements EventDetailReposit
    }
    public function getAll()
    {
-        return event_detail::orderby('id')->paginate(6);
+        return event_detail::all();
    }
    
    public function destroyMany($request)

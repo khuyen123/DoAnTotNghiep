@@ -19,7 +19,7 @@ class userService {
         
         return $this->userRepository->delete($id);
     }
-    public function     update($user,$data){
+    public function update($user,$data){
         $this->userRepository->update($user,$data);
         return true;
     }

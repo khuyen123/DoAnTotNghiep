@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\client\forgotpasswordRequest;
 use App\Http\Requests\client\loginRequest;
 use App\Http\Requests\client\sigupRequest;
 use App\Http\Service\admin\bannerService;
@@ -31,6 +32,21 @@ class loginController extends Controller
         ]);
         }
        
+    }
+    public function forgot_password(){
+        $banners = $this->bannerService->getAll();
+        return view('client.user.forgot_password',['banners'=> $banners]);
+    }
+    public function forgot_password_find(forgotpasswordRequest $request){
+        $user = $this->userService->search_forgot($request->email);
+        if ($user == null) {
+            Session::flash('error','Không tìm thấy người dùng');
+            return redirect()->back();
+        }
+        $token = $this->userService->rand_string(6);
+        $data['makichhoat'] = $token;
+        $this->userService->update($user,$data);
+        dd($user);
     }
     public function login_function(loginRequest $request){
         if ((Auth::attempt(['email'=>$request->input('email'),'password'=>$request->input('password')])) || 
@@ -83,11 +99,12 @@ class loginController extends Controller
         return redirect()->back();
        
     }
-    public function active_account(User $user,$token){
+    public function active_account($user_id){
+        $user = $this->userService->find($user_id);
         $data['trangthai'] = 1;
         $data['kichhoat'] = 1;
         $data['makichhoat'] = '';
-        if ($token == $user->makichhoat) {
+        if ($user){
             $this->userService->update($user,$data);
             Session::flash('success','Kích hoạt thành công! Bạn có thể đăng nhập!');
             return redirect()->route('login');

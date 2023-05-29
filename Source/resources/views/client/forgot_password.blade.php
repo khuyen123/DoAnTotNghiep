@@ -161,7 +161,7 @@
           <!-- start copy -->
           <tr>
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-              <p style="margin: 0;">Xin chào {{$new_user->hoten}}, Cảm ơn bạn đã đăng ký tài khoản trên hệ thống Sự Kiện Số! Mời bạn bấm vào nút dưới đây để tiến hành xác thực Email đăng ký và kích hoạt tài khoản.</p>
+              <p style="margin: 0;">Xin chào {{$new_user->hoten}}, Bạn đang thực hiện chức năng Quên mật khẩu trên hệ thống Sự kiện số. Sau đây là mã xác nhận của bạn! Đừng chia sẽ mã này cho ai</p>
             </td>
           </tr>
           <!-- end copy -->
@@ -175,7 +175,7 @@
                     <table border="0" cellpadding="0" cellspacing="0">
                       <tr>
                         <td align="center" bgcolor="#1a82e2" style="border-radius: 6px;">
-                          <a href="{{route('active_account',['user_id'=>$new_user->id])}}" target="_blank" style="display: inline-block; padding: 16px 36px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; color: #ffffff; text-decoration: none; border-radius: 6px;">Kích hoạt tài khoản</a>
+                        <h2 style="color:tomato;" >#{{forgot_token}}</h2>
                         </td>
                       </tr>
                     </table>
@@ -187,11 +187,7 @@
           <!-- end button -->
 
           <!-- start copy -->
-          <tr>
-            <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
-              <p style="margin: 0;">Bạn phải xác thực để tiến hành đăng nhập tài khoản!</p>
-            </td>
-          </tr>
+        
           <!-- end copy -->
 
           <!-- start copy -->

@@ -22,13 +22,8 @@ class userService {
         $password=Hash::make($request->password);
         $data['password'] = $password;
         $data['quyentruycap'] = 1;
-        mt_srand(6);
-        $token='';
-        $count = 0;
-        while($count < 6) {
-             $token .=mt_rand(0, 9);
-            $count++;
-        }
+        
+        $token=$this->rand_string(6);
         $data['makichhoat'] = $token;
         try {
             return $this->userRepository->create($data);
@@ -40,5 +35,24 @@ class userService {
     public function update($user,$data){
         $this->userRepository->update($user,$data);
         return true;
+    }
+    public function find($user_id){
+        return $this->userRepository->find($user_id);
+    }
+    public function search_forgot($email){
+        $user = User::query()
+        ->where('email','=',$email)
+        ->orWhere('username','=',$email)
+        ->first();
+        return $user;
+    }
+    function rand_string( $length ) {
+        $str = '';
+        $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $size = strlen( $chars );
+        for( $i = 0; $i < $length; $i++ ) {
+        $str .= $chars[ rand( 0, $size - 1 ) ];
+         }
+        return $str;
     }
 }
