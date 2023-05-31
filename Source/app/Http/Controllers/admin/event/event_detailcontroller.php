@@ -17,8 +17,9 @@ class event_detailcontroller extends Controller
         $this->eventdetailService = $eventdetailService;
     }
     public function index($id_sukien){
+        $event = $this->eventdetailService->getEvent($id_sukien);
         return view('admin.event.event_detail',[
-            'title'=> 'Chi tiết sự kiện ',
+            'title'=> 'Chi tiết sự kiện: '. $event->tenSukien,
             'event_details'=>$this->eventdetailService->getAll($id_sukien)
         ]);
     }

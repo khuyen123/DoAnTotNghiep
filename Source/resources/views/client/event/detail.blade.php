@@ -374,7 +374,7 @@
                             </div>
                             <div class="cnt_min">
                                 <input type="radio" id="airpay" name="card"><img src="{{asset('client\Image\VNPay.jpg')}}" alt="Select payment method"  class="selected_img">
-                                <label for="airpay">Thanh toán bằng ví Airpay</label>
+                                <label for="airpay">Thanh toán bằng ví VNpay</label>
                             </div>
                             </div>
                             @endif

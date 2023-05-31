@@ -8,6 +8,7 @@ use App\Http\Service\admin\eventDetailService;
 use App\Http\Service\client\eventDetailclientService;
 use App\Http\Service\client\titketService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -138,11 +139,17 @@ class titketController extends Controller
     }
     public function ticket_list($user_id){
         $tickets = $this->titketService->findticket_byuser($user_id);
+        if (Auth::user()->quyentruycap != 1){
+            return redirect()->back();
+        }
         return view('client.titket.ticket_list',[
             'tickets'=>$tickets
         ]);
     }
     public function ticket_detail($ticket_id){
+        if (Auth::user()->quyentruycap != 1){
+            return redirect()->back();
+        }
         $new_titket = $this->titketService->search($ticket_id);
         return view('client.titket.ticket_detail',[
             'new_titket'=>$new_titket

@@ -34,6 +34,7 @@ class eventDetailclientService {
             'chitietsukien.sovedaban',
             'chitietsukien.trangthai',
             'chitietsukien.mota',
+            'chitietsukien.id_hinhthucve',
             'chitietsukien.dotuoichophep'
         ));
         return $sukien;
@@ -53,6 +54,7 @@ class eventDetailclientService {
             'hinhanh.noidung',
             'chitietsukien.giave',
             'chitietsukien.sovetoida',
+            'chitietsukien.id_hinhthucve',
             'chitietsukien.sovedaban',
             'chitietsukien.trangthai',
             'chitietsukien.mota',
