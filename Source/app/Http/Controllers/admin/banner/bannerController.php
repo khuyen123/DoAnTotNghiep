@@ -16,6 +16,9 @@ class bannerController extends Controller
         $this->bannerService = $bannerService;
     }
     public function index(){
+        if (Auth::user()->quyentruycap !=3) {
+            return redirect()->back();
+        }
         $banners = $this->bannerService->getAll();
         return view('admin.banner.index',[
             'images'=> $banners,
@@ -23,11 +26,17 @@ class bannerController extends Controller
         ]);
     }
     public function create(){
+        if (Auth::user()->quyentruycap !=3) {
+            return redirect()->back();
+        }
         return view('admin.banner.create',[
             'title'=>'Thêm mới Banner'
         ]);
     }
     public function store(Request $request){
+        if (Auth::user()->quyentruycap !=3) {
+            return redirect()->back();
+        }
         if($request->has('banner_noidung')){
             $file = $request->file('banner_noidung');
             $ext = $request->file('banner_noidung')->extension();
@@ -41,6 +50,9 @@ class bannerController extends Controller
         return redirect()->back();
     }
     public function delete($banner_id){
+        if (Auth::user()->quyentruycap !=3) {
+            return redirect()->back();
+        }
         return $this->bannerService->delete($banner_id);
     }
 }
