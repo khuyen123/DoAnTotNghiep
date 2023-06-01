@@ -45,6 +45,8 @@ Route::get('/register/active/{user_id}',[loginController::class,'active_account'
 //Forgotten Password Route:
 Route::get('/client/forgot_password',[loginController::class,'forgot_password']);
 Route::post('/client/forgot_password',[loginController::class,'forgot_password_find']);
+Route::get('/client/password_newpass/{user_id}',[loginController::class,'newPass']);
+Route::post('/client/password_newpass/{user_id}',[loginController::class,'newPass_store']);
 //Route with auth:
 Route::middleware(['auth'])->group(function() {
     Route::get('client/logout',[loginController::class,'sigout'])->name('logout');
