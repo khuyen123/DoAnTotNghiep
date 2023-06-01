@@ -12,6 +12,7 @@ use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
 use App\Http\Controllers\admin\user\usercontroller;
 use App\Http\Controllers\client\baseController;
 use App\Http\Controllers\client\loginController;
+use App\Http\Controllers\client\seatController;
 use App\Http\Controllers\client\titketController;
 use App\Models\event_image;
 use Illuminate\Auth\Events\Login;
@@ -72,6 +73,11 @@ Route::middleware(['auth'])->group(function() {
         Route::prefix('comment')->group(function() {
             Route::post('/create',[baseController::class,'create_comment']);
             Route::delete('/delete/{comment_id}',[baseController::class,'delete_comment']);
+        });
+        //Check seat Route:
+        Route::prefix('seat')->group(function(){
+            Route::post('/check',[seatController::class,'check_seat']);
+            Route::delete('/delete',[seatController::class,'delete']);
         });
     });
     

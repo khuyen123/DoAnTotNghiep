@@ -397,58 +397,6 @@
             $("#detail_district").empty();
             district(id);
         }
-        function district(province_id){
-            var data = [];
-            $.ajax({
-                type: "GET",
-                dataType: "JSON",
-                url: '/getdistrict/'+province_id,
-                success: function(response){
-                    data = response.districts;
-                    
-                    data.forEach(key =>{
-                        var x = document.getElementById("detail_district");
-                        var option = document.createElement("option");
-                        option.text = key.tenquanhuyen;
-                        option.value = key.id;
-                        x.add(option);
-            });
-                
-                },
-                error: function(){
-                    console.log(23);
-                }
-            })
-            
-        }
-        function findward(){
-            var id= '';
-            id = $('#detail_district').val();
-            $("#detail_wards").empty();
-            wards(id);
-        }
-        function wards(district_id){
-            var data = [];
-            $.ajax({
-                type: "GET",
-                dataType: "JSON",
-                url: '/getwards/'+district_id,
-                success: function(response){
-                    data = response.wards;
-                    data.forEach(key =>{
-                        var x = document.getElementById("detail_wards");
-                        var option = document.createElement("option");
-                        option.text = key.tenxaphuong;
-                        option.value = key.id;
-                        x.add(option);
-            });
-                
-                },
-                error: function(){
-                    console.log(23);
-                }
-            })
-        }
     </script>
 </body>
 

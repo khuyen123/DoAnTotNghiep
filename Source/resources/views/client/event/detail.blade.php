@@ -506,6 +506,8 @@
             selected_seat.push(item);
         })
         }
+        var event_id = $('#id_chitietsukien').val()
+        var titket_type = parseInt($('#titket_type').val())
         var user_id = $('#client_id').val()
         $(document).ready(function(){
             selected_seat.forEach(key => {
@@ -537,11 +539,52 @@
                 
             }
         })
+        function check_seat(seat,event_id,user_id){
+            var data = {
+                'soGhe': seat,
+                'id_nguoidung':user_id,
+                'id_chitietsukien':event_id
+            }
+            $.ajax({
+                type: "POST",
+                data:data,
+                url: '/client/seat/check',
+                success: function(response){
+                    if (response.message == 'success') {
+                        
+                    } else {
+                        Swal.fire(
+                            'Thất bại',
+                            'Ghế đang có người chọn',
+                            'error'
+                        ).then(function(){
+                            document.getElementById(seat).checked = false
+                            selected_seat.splice(selected_seat.indexOf(seat),1);
+                            localStorage.setItem('seat',selected_seat)
+                        })
+                        
+                    }
+                }
+            })
+        }
+        function delete_seat(seat,event_id,user_id){
+            var data = {
+                'soGhe': seat,
+                'id_nguoidung':user_id,
+                'id_chitietsukien':event_id
+            }
+            $.ajax({
+                type:"DELETE",
+                url:'/client/seat/delete',
+                data:data
+            })
+        }
         const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
         function selectseat(seat_row,seat_number,max_titket){
             var seat_id = alphabet[seat_row]+seat_number
             var check = document.getElementById(seat_id).checked
             if(check){
+                check_seat(seat_id,event_id,user_id)
                 selected_seat.push(seat_id)
                 localStorage.setItem('seat',selected_seat)
                 document.getElementById('client_titket_seat').value = selected_seat.toString()
@@ -559,6 +602,7 @@
                     document.getElementById('submit_booking_titket').disabled = false
                 }
             } else {
+                delete_seat(seat_id,event_id,user_id)
                 selected_seat.splice(selected_seat.indexOf(seat_id),1);
                 localStorage.setItem('seat',selected_seat)
                 document.getElementById('client_titket_seat').value = selected_seat.toString()
@@ -608,10 +652,8 @@
                 }
             }
         }
-        var event_id = $('#id_chitietsukien').val()
-        var titket_type = parseInt($('#titket_type').val())
+        
         var seat = "" 
-
         $(document).on('click','#submit_booking_titket',function(){
             Swal.fire({
                 title: 'Thông tin chính xác?',

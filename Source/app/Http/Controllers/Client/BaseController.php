@@ -70,7 +70,6 @@ class baseController extends Controller
             'status'=> 200,
             'province' =>$province
         ]);
-
     }
     public function client_infor($user_id){
         return view('client.user.userinfor',[
