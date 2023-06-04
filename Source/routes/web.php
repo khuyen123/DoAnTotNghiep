@@ -37,6 +37,7 @@ Route::post('/client/register/store',[loginController::class,'sigup_function'])-
 Route::get('/client/aboutus',[baseController::class,'aboutus'])->name('aboutus');
 Route::get('/client/event_detail/{detail_id}',[clienteventcontroller::class,'eventdetail'])->name('event_detail');
 Route::get('/',[baseController::class,'index'])->name('home');
+Route::get('/search_province',[baseController::class,'searchprovince']);
 Route::get('/client/events',[baseController::class,'events'])->name('client_events');
 Route::get('/getdistrict/{province_id}',[baseController::class,'getdistrict']);
 Route::get('/getwards/{district_id}',[baseController::class,'getwards']);
@@ -142,6 +143,10 @@ Route::middleware(['auth'])->group(function() {
             Route::post('/index',[admintitketController::class,'search']);
             Route::post('/checkin/{titket_id}',[admintitketController::class,'checkin']);
             Route::get('/print_titket/{titket_id}',[admintitketController::class,'export_titket']);
+        });
+        //Thong ke
+        Route::prefix('statistical')->group(function(){
+            Route::get('/event_statistical',[AdminBasecontroller::class,'event_statistical']);
         });
     });
 });

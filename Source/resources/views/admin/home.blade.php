@@ -53,12 +53,12 @@
               <div class="inner">
                 <h3>{{$count_events}}</h3>
 
-                <p>Sự kiện đang diễn ra</p>
+                <p>Sự kiện</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>
               </div>
-              <a href="#" class="small-box-footer">Xem chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/statistical/event_statistical" class="small-box-footer">Xem chi tiết<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

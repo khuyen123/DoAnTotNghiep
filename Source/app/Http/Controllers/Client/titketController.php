@@ -7,8 +7,10 @@ use App\Http\Requests\client\titketCreateRequest;
 use App\Http\Service\admin\eventDetailService;
 use App\Http\Service\client\eventDetailclientService;
 use App\Http\Service\client\titketService;
+use App\Models\checkseat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -26,7 +28,7 @@ class titketController extends Controller
     }   
     
     public function titket_create(titketCreateRequest $request){
-        
+        // dd($request->all());
         $eventdetail = $this->eventdetailService->find($request->id_chitietsukien);
         $data = $request->input();
         $image = $this->client_detaildetailService->getOneimage($request->id_chitietsukien);
@@ -34,10 +36,19 @@ class titketController extends Controller
         $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
         if ($new_ticket = $result){
             $this->eventdetailService->update($eventdetail,$truve);
-            Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
-                $email->subject('Thông tin đặt vé');
-                $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
-            });
+            // Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
+            //     $email->subject('Thông tin đặt vé');
+            //     $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
+            // });
+            $seat = explode(",",$new_ticket->soGhe);
+            foreach($seat as $key){
+                DB::table('checkghe')
+                ->where('soGhe','=',$key)
+                ->where('id_nguoidung','=',$new_ticket->id_nguoidung)
+                ->where('id_chitietsukien','=',$new_ticket->id_chitietsukien)
+                ->limit(1)
+                ->update(array('trangthai'=>1));
+            }
             return response()->json([
                 'status'=>200
             ]);
@@ -87,7 +98,17 @@ class titketController extends Controller
             $result_2 = $this->titketService->create($data);
             $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
             $this->eventdetailService->update($eventdetail,$truve);
+            
             if ($result_2){
+                $seat = explode(",",$result_2->soGhe);
+                foreach($seat as $key){
+                    DB::table('checkghe')
+                    ->where('soGhe','=',$key)
+                    ->where('id_nguoidung','=',$result_2->id_nguoidung)
+                    ->where('id_chitietsukien','=',$result_2->id_chitietsukien)
+                    ->limit(1)
+                    ->update(array('trangthai'=>1));
+                }
                 $payment_url = $jsonResult['payUrl'];
                 //Just a example, please check more in there
                 return response()->json([
@@ -219,6 +240,15 @@ class titketController extends Controller
             $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
+        $seat = explode(",",$result_2->soGhe);
+                foreach($seat as $key){
+                    DB::table('checkghe')
+                    ->where('soGhe','=',$key)
+                    ->where('id_nguoidung','=',$result_2->id_nguoidung)
+                    ->where('id_chitietsukien','=',$result_2->id_chitietsukien)
+                    ->limit(1)
+                    ->update(array('trangthai'=>1));
+                }
             $returnData = array('code' => '00'
             , 'message' => 'success'
             , 'data' => $vnp_Url);

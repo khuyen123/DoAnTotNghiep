@@ -35,9 +35,7 @@ class basecontroller extends Controller
             $amount += $ticket->tongtien;
         }
         foreach($events as $event){
-            if ($event->trangthai == 1){
                 $count_event += 1;
-            }
         }
         if (Auth::check()) {
             if (Auth::user()->quyentruycap == 2 || Auth::user()->quyentruycap == 3) {
@@ -53,5 +51,12 @@ class basecontroller extends Controller
             } 
         } 
         return redirect()->route('login');
+    }
+    public function event_statistical(){
+        $event = $this->eventDetailService->getAllforclient();
+        return view('admin.event_statistical.event_event_statistical',[
+            'title'=>'Thống kê Sự kiện',
+            'events'=>$event
+        ]);
     }
 }

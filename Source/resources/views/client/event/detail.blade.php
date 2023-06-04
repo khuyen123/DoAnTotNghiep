@@ -236,6 +236,10 @@
                                         <td>Lớn hơn {{$event_detail->dotuoichophep}}</td>
                                     </tr>
                                     <tr>
+                                        <td class="r-o" style="color:#dfa974">Số chỗ tối đa:</td>
+                                        <td>{{$event_detail->sovetoida}}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="r-o" style="color:#dfa974">Tình trạng Vé:</td>
                                         <?php $veconlai = $event_detail->sovetoida - $event_detail->sovedaban ?>
                                         <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? 'Hết vé':'Còn chỗ: '.$veconlai}}
@@ -284,7 +288,7 @@
                             <div class="ri-text">
                                 <span>{{$comment->created_at}}</span>
                                 <div class="rating" style="margin-right: 10px;">
-                                @if(Auth::user()->id == $comment->id_nguoidung) <button style="margin-right:25px;border-style:none;background-color:white;" type="button" onclick="delete_comment('{{$comment->id}}')"><i class="fa fa-trash" style="color:crimson" ></i></button> @endif
+                                @if(isset(Auth::user()->id) && Auth::user()->id == $comment->id_nguoidung) <button style="margin-right:25px;border-style:none;background-color:white;" type="button" onclick="delete_comment('{{$comment->id}}')"><i class="fa fa-trash" style="color:crimson" ></i></button> @endif
                                     @for($i = 1;$i<=$comment->sosao;$i++)
                                         <i class="fa fa-star"></i>
                                     @endfor
@@ -349,16 +353,16 @@
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_num">Số vé muốn đặt</label>
-                                <input onchange="check_num()" @if($event_detail->id_hinhthucve == 1) readonly @endif type="number" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                                <input value="{{$numberofseat}}" onchange="check_num()" @if($event_detail->id_hinhthucve == 1) readonly @endif type="number" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
                                 <p class="text-danger" id="alert_seat" ></p>
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_seat">Ghế đã chọn</label>
-                                <input readonly  value="" style=" font-size:15px" type="text"  id="client_titket_seat" name="client_titket_seat"/>
+                                <input readonly  value="<?php echo implode(",",$seats_selected) ?>" style=" font-size:15px" type="text"  id="client_titket_seat" name="client_titket_seat"/>
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_seat">Tổng tiền: </label>
-                                <input readonly  value="" style=" font-size:15px" type="text"  id="client_titket_prince" name="client_titket_prince"/>
+                                <input readonly  value="{{$numberofseat*$event_detail->giave}}" style=" font-size:15px" type="text"  id="client_titket_prince" name="client_titket_prince"/>
                             </div>
                             @if($check)
                             @if(Auth::check())
@@ -496,7 +500,11 @@
         });
     </script>
     <script>
-
+        var seat = $('#client_titket_seat').val()
+        if(seat.length > 0){
+            localStorage.setItem('seat',seat)
+        }
+      
         var selected_seat = []
         //selected seat lastLoad:
         var a = localStorage.getItem('seat');
@@ -504,18 +512,14 @@
         var current=a.split(',');
         $.each(current, function(key,item){
             selected_seat.push(item);
+            document.getElementById(item).checked = true
         })
         }
         var event_id = $('#id_chitietsukien').val()
         var titket_type = parseInt($('#titket_type').val())
         var user_id = $('#client_id').val()
         $(document).ready(function(){
-            selected_seat.forEach(key => {
-                document.getElementById(key).checked = true
-            })
-            document.getElementById('client_titket_num').value = selected_seat.length
-            document.getElementById('client_titket_seat').value = selected_seat.toString()
-            document.getElementById('client_titket_prince').value = selected_seat.length*parseInt($('#giave').val())+ " VNĐ"
+            
             if (selected_seat.length == 0) {
                 document.getElementById('submit_booking_titket').disabled = true
             }
@@ -561,8 +565,15 @@
                             document.getElementById(seat).checked = false
                             selected_seat.splice(selected_seat.indexOf(seat),1);
                             localStorage.setItem('seat',selected_seat)
+                            document.getElementById('client_titket_seat').value = selected_seat.toString()
+                            document.getElementById('client_titket_num').value = selected_seat.length
+                            document.getElementById('client_titket_prince').value = selected_seat.length*parseInt($('#giave').val())+ "VNĐ"
+                            if (selected_seat.length == 0){
+                                localStorage.removeItem('seat')
+                                document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
+                                document.getElementById('submit_booking_titket').disabled = true
+                            }
                         })
-                        
                     }
                 }
             })
@@ -579,7 +590,7 @@
                 data:data
             })
         }
-        const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",];
+        const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",]
         function selectseat(seat_row,seat_number,max_titket){
             var seat_id = alphabet[seat_row]+seat_number
             var check = document.getElementById(seat_id).checked

@@ -96,4 +96,10 @@ class baseController extends Controller
         $this->userService->update($user,$data);
         return redirect()->back();
     }
+    public function searchprovince(){
+        $provinces = province::all();
+        return response()->json([
+            'tinhthanh' =>$provinces
+        ]);
+    }
 }
