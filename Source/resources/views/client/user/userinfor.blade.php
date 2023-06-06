@@ -171,8 +171,11 @@
             <div  class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                     <form enctype="multipart/form-data" method="POST" action="/client/infor/{{Auth::user()->id}}/changeavt">
-                        <input type="file" class="form-control" onchange="choosefile(this)" accept="image/*" id="user_avt" name="user_avt">
+                        
+                    <input type="file" class="form-control" onchange="choosefile(this)" accept="image/*" id="user_avt" name="user_avt">
+                    <p style="color:#CB4154">{{ $errors->first('user_avt') }}</p>
                         <img height="100px" width="100px" src="" name="user_avt" id="image" style="margin-top:10px">
+                        
                         <script>
                             function choosefile(fileInput){
                                 if (fileInput.files && fileInput.files[0]){

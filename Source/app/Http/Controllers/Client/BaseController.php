@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\client\changeAVTRequest;
 use App\Http\Requests\client\commentRequest;
 use App\Http\Service\admin\bannerService;
 use App\Http\Service\client\eventDetailclientService;
@@ -83,7 +84,7 @@ class baseController extends Controller
     public function delete_comment($comment_id){
         return $this->eventdetailService->delete_comment($comment_id);
     }
-    public function change_avt($user_id,Request $request){
+    public function change_avt($user_id,changeAVTRequest $request){
         $user = $this->userService->find($user_id);
         if($request->has('user_avt')){
             $file = $request->file('user_avt');

@@ -40,6 +40,9 @@ class User extends Authenticatable
     public function roles(){
         return $this->hasOne(roles::class,'id','quyentruycap');
     }
+    public function ticket(){
+        return $this->hasMany(titket::class,'id','id_nguoidung');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

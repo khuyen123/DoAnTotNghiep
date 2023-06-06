@@ -213,7 +213,7 @@ if (Auth::check()) {
                                         <tr>
                                             <td class="r-o">Hoạt động:</td>
                                             <td>';
-                                            $event_detail->trangthai == 1?$html_detail.='Còn hoạt động' : $html_detail.='Kết thúc';
+                                            $event_detail->trangthai == 1?$html_detail.='<p class="badge badge-success" style="font-size:15px">Còn hoạt động</p>' : $html_detail.='<p class="badge badge-danger" style="font-size:15px">Kết thúc</p>';
                                             $html_detail .='</td>
                                         </tr>
                                 </tbody>

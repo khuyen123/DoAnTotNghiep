@@ -592,11 +592,13 @@
         }
         const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",]
         function selectseat(seat_row,seat_number,max_titket){
+            max_titket = parseInt(max_titket)
             var seat_id = alphabet[seat_row]+seat_number
             var check = document.getElementById(seat_id).checked
             if(check){
                 check_seat(seat_id,event_id,user_id)
                 selected_seat.push(seat_id)
+                console.log(selected_seat.length)
                 localStorage.setItem('seat',selected_seat)
                 document.getElementById('client_titket_seat').value = selected_seat.toString()
                 document.getElementById('client_titket_num').value = selected_seat.length
@@ -604,7 +606,7 @@
                 if (selected_seat.length>max_titket) {
                     document.getElementById('alert_seat').innerText = "Số vé muốn đặt đã vượt quá số vé còn lại"
                     document.getElementById('submit_booking_titket').disabled = true
-                }
+                } else {
                 if (selected_seat.length<=0){
                     document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
                     document.getElementById('submit_booking_titket').disabled = true
@@ -612,6 +614,7 @@
                     document.getElementById('alert_seat').innerText = ""
                     document.getElementById('submit_booking_titket').disabled = false
                 }
+            }
             } else {
                 delete_seat(seat_id,event_id,user_id)
                 selected_seat.splice(selected_seat.indexOf(seat_id),1);

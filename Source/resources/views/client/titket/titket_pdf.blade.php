@@ -232,7 +232,9 @@ body, p, h1 {
                 <p style="margin-left:10px;font-weight:bold;font-size: 10px ;">{{$new_ticket->event_detail->khuvuc}}</p>
               </td>
             </tr>
+            
           </table>
+          
 				</div>
 				<div class="row row-3">
           <p  style="font-size: 10px ; text-align:center; font-weight:bold;">Địa chỉ</p>

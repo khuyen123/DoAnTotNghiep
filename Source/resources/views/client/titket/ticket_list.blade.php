@@ -188,7 +188,7 @@ if (Auth::check()) {
             <th>Số Ghế</th>
             <th>Trạng Thái</th>
             <th style="width: 150px">Thao tác</th>
-            <th style="width: 100px">&nbsp;</th>
+            
         </tr>
         </thead>
         <tbody>

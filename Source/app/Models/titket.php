@@ -25,5 +25,8 @@ class titket extends Model
     public function event_detail(){
         return $this->hasOne(event_detail::class,'id','id_chitietsukien');
     }
+    public function user(){
+        return $this->hasOne(User::class,'id','id_nguoidung');
+    }
     protected $table= 've';
 }

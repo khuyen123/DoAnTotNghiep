@@ -147,6 +147,9 @@ Route::middleware(['auth'])->group(function() {
         //Thong ke
         Route::prefix('statistical')->group(function(){
             Route::get('/event_statistical',[AdminBasecontroller::class,'event_statistical']);
+            Route::get('/event_statistical/{detail_id}',[AdminBasecontroller::class,'eventDetail_statistical']);
+            Route::post('/event_statistical/date',[AdminBasecontroller::class,'event_statisticalDate']);
+            
         });
     });
 });

@@ -5,8 +5,11 @@ namespace App\Http\Service\admin;
 use App\Models\event_detail;
 use App\Repository\Eloquent\EventDetailRepository;
 use App\Repository\Eloquent\EventRepository;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Svg\Tag\Rect;
 
 class eventDetailService {
     protected $eventdetailRepository;
@@ -18,6 +21,18 @@ class eventDetailService {
     }
     public function getAllforclient(){
         return $this->eventdetailRepository->getAll();
+    }
+    public function getAllorder(){
+        $events = event_detail::orderbyDesc('sovedaban')->get();
+        return $events;
+    }
+    public function getallstatisticalDate(Request $request){
+        $event = event_detail::query()
+        ->where('batdau','>',$request->statistical_from)
+        ->where('ketthuc','<',$request->statistical_to)
+        ->orderByDesc('sovedaban')
+        ->get();
+        return $event;
     }
     public function getAll($id_sukien){
         return $this->eventdetailRepository->searchEvent($id_sukien);
