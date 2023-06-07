@@ -22,11 +22,13 @@
             </div>
             <div class="form-group">
                 <label for="name">Thời gian bắt đầu</label>
-                <input @if($event_detail->sovedaban >0) readonly @endif style="width:300px"  class="form-control" type="datetime-local" value="{{$event_detail->batdau}}" id="start_time_detail" name="start_time_detail">
+                <input onchange="checkDate()" @if($event_detail->sovedaban >0) readonly @endif style="width:300px"  class="form-control" type="datetime-local" value="{{$event_detail->batdau}}" id="start_time_detail" name="start_time_detail">
+                <p class="text-danger" id="alert_start" ></p>
             </div>
             <div class="form-group">
                 <label for="name">Thời gian kết thúc</label>
-                <input @if($event_detail->sovedaban >0) readonly @endif style="width:300px"  class="form-control" type="datetime-local" value="{{$event_detail->ketthuc}}" id="end_time_detail" name="end_time_detail">
+                <input onchange="checkDate()" @if($event_detail->sovedaban >0) readonly @endif style="width:300px"  class="form-control" type="datetime-local" value="{{$event_detail->ketthuc}}" id="end_time_detail" name="end_time_detail">
+                <p class="text-danger" id="alert_end" ></p>
             </div>
             <div class="form-group" style="display:flex">
                 <label for="name" style="width:100px">Địa điểm:</label>
@@ -67,9 +69,9 @@
                     <option value = "1">Chỗ ngồi theo ghế</option>
                     <option value = "2">Chỗ ngồi tự do</option>
                 </select>
-                <input @if($event_detail->sovedaban >0) readonly @endif placeholder="Nhập số hàng ghế" value="{{$event_detail->sohangghe}}" class="form-control" type="number" style="margin-top:10px; width:200px" id="totalrow_creat" name="totalrow_creat">
+                <input @if($event_detail->id_hinhthucve == 2) readonly @endif @if($event_detail->sovedaban >0) readonly @endif placeholder="Nhập số hàng ghế" value="{{$event_detail->sohangghe}}" class="form-control" type="number" style="margin-top:10px; width:200px" id="totalrow_creat" name="totalrow_creat">
                 <p class="text-danger" id="alert_seat" ></p>
-                <input @if($event_detail->sovedaban >0) readonly @endif placeholder="Nhập số ghế mỗi hàng" value="{{$event_detail->soghemoihang}}" class="form-control" type="number" style="margin-top:10px;width:200px" id="totalseat_row_create" name="totalseat_row_create">
+                <input @if($event_detail->id_hinhthucve == 2) readonly @endif @if($event_detail->sovedaban >0) readonly @endif placeholder="Nhập số ghế mỗi hàng" value="{{$event_detail->soghemoihang}}" class="form-control" type="number" style="margin-top:10px;width:200px" id="totalseat_row_create" name="totalseat_row_create">
                 <p class="text-danger" id="alert_seat_2" ></p>
             </div>
             <div class="form-group">
@@ -112,8 +114,9 @@
 @section('footer')
     
     <script>
+       
                 //check total seat:
-                var total_seat
+        var total_seat
         var row_seat
         var total_row
         $(document).on('keyup',"#totalrow_creat",function(){
@@ -155,9 +158,9 @@
                     document.getElementById("alert_seat_2").innerText = "";
                     document.getElementById("submit_edit_detail").disabled = false;
                 } else {
-                    if(seat>total_seat+10){
-                        document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
-                        document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 10)";
+                    if(seat>total_seat+5){
+                        document.getElementById("alert_seat").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 5)";
+                        document.getElementById("alert_seat_2").innerText = "Số ghế nhập vào đang lớn hơn số vé tối đa (Số ghế dự bị tối đa là 5)";
                         document.getElementById("submit_edit_detail").disabled = true;
                     }
                 }
@@ -165,17 +168,19 @@
         })
         function seat_control(){
             var seat_type = $("#hinhthucve").val()
-            
             if (seat_type == 2) {
                 document.getElementById("totalrow_creat").readOnly = true;
                 document.getElementById("totalseat_row_create").readOnly = true;
+                document.getElementById("submit_edit_detail").disabled = false;
                 document.getElementById("totalrow_creat").value = "";
                 document.getElementById("totalseat_row_create").value = "";
             } else {
                 document.getElementById("totalrow_creat").readOnly = false;
                 document.getElementById("totalseat_row_create").readOnly = false;
                 document.getElementById("totalrow_creat").value = "";
+                document.getElementById("submit_edit_detail").disabled = true;
                 document.getElementById("totalseat_row_create").value = "";
+                
             } 
         }
         var detail_id = $('#detail_id').val()
@@ -264,6 +269,30 @@
                     console.log(23);
                 }
             })
+        }
+        function checkDate(){
+            var todate = new Date()
+            if (Date.parse($('#end_time_detail').val())<Date.parse($('#start_time_detail').val())) {
+                document.getElementById("submit_edit_detail").disabled = true;
+                document.getElementById('alert_start').innerText="Bạn đang chọn sai ngày tháng"
+                document.getElementById('alert_end').innerText="Bạn đang chọn sai ngày tháng"
+            } else {
+                if (Date.parse($('#start_time_detail').val())<=Date.parse(todate)) {
+                document.getElementById("submit_edit_detail").disabled = true;
+                document.getElementById('alert_start').innerText="Bạn đang chọn sai ngày tháng"
+                document.getElementById('alert_end').innerText="Bạn đang chọn sai ngày tháng"
+                } else {
+                    if (Date.parse($('#end_time_detail').val())<=Date.parse(todate)) {
+                    document.getElementById("submit_edit_detail").disabled = true;
+                    document.getElementById('alert_start').innerText="Bạn đang chọn sai ngày tháng"
+                    document.getElementById('alert_end').innerText="Bạn đang chọn sai ngày tháng"
+                } else {
+                    document.getElementById("submit_edit_detail").disabled = false;
+                    document.getElementById('alert_start').innerText=""
+                    document.getElementById('alert_end').innerText=""
+                }
+                } 
+            }  
         }
     </script>
 @endsection

@@ -10324,13 +10324,43 @@
 											"top": 437,
 											"width": 165.8818359375,
 											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGIldBLBj3UzBQ=",
+											"_parent": {
+												"$ref": "AAAAAAGHJh2cqhWLdE0="
+											},
+											"model": {
+												"$ref": "AAAAAAGIldBK9T3ROTw="
+											},
+											"font": "Arial;13;0",
+											"left": 45,
+											"top": 452,
+											"width": 165.8818359375,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAGIldBcYT3bCXE=",
+											"_parent": {
+												"$ref": "AAAAAAGHJh2cqhWLdE0="
+											},
+											"model": {
+												"$ref": "AAAAAAGIldBcVj3YCXc="
+											},
+											"font": "Arial;13;0",
+											"left": 45,
+											"top": 467,
+											"width": 165.8818359375,
+											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 327,
 									"width": 175.8818359375,
-									"height": 128
+									"height": 158
 								}
 							],
 							"font": "Arial;13;0",
@@ -14282,6 +14312,24 @@
 								"$ref": "AAAAAAGHJh2cqhWHBjc="
 							},
 							"name": "updated_at",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGIldBK9T3ROTw=",
+							"_parent": {
+								"$ref": "AAAAAAGHJh2cqhWHBjc="
+							},
+							"name": "tieude_trangchu",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAGIldBcVj3YCXc=",
+							"_parent": {
+								"$ref": "AAAAAAGHJh2cqhWHBjc="
+							},
+							"name": "noidung_trangchu",
 							"length": 0
 						}
 					]
@@ -60316,9 +60364,9 @@
 												"$ref": "AAAAAAGIcaFeZoPPiUM="
 											},
 											"font": "Arial;13;0",
-											"left": 24.72998046875,
+											"left": 22.55908203125,
 											"top": 13,
-											"width": 97.12255859375,
+											"width": 85.10009765625,
 											"height": 13,
 											"text": "Sequence Datve"
 										},
@@ -60331,7 +60379,7 @@
 											"font": "Arial;13;1",
 											"left": 5,
 											"top": 13,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -61276,9 +61324,9 @@
 											},
 											"font": "Arial;13;0",
 											"left": 817,
-											"top": 281,
+											"top": 288,
 											"width": 611.33642578125,
-											"height": 26,
+											"height": 13,
 											"alpha": 1.2998489606972377,
 											"distance": 18.681541692269406,
 											"hostEdge": {
@@ -65271,9 +65319,9 @@
 												"$ref": "AAAAAAGIcdT9t45xXtI="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 13,
-											"width": 165.08056640625,
+											"width": 147.94189453125,
 											"height": 13,
 											"text": "Sequence Quanlynguoidung"
 										},
@@ -65286,7 +65334,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 13,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}

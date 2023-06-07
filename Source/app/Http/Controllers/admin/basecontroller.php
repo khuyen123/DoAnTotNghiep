@@ -64,7 +64,21 @@ class basecontroller extends Controller
     }
     public function event_statisticalDate(Request $request){
         
-        $event = $this->eventDetailService->getallstatisticalDate($request);
+        $event = [];
+        if (isset($request->statistical_from) && isset($request->statistical_to)){
+            $events = $this->eventDetailService->getallstatisticalDate($request);
+        } else {
+            $events = $this->eventDetailService->getAllorder();
+        }
+        if ($request->tinhtrang == 2) {
+            $event = $events;
+        } else {
+            foreach ($events as $key) {
+                if ($key->trangthai == $request->tinhtrang) {
+                    array_push($event,$key);
+                }
+            }
+        }
         return view('admin.event_statistical.event_event_statistical',[
             'title'=>'Thống kê Sự kiện',
             'from'=>$request->statistical_from,

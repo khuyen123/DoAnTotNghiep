@@ -167,8 +167,8 @@ if (Auth::check()) {
             
         </div>
         <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+        <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+            <li><i class="fa fa-email"></i>{{$page_infor->email_trangchu}}</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
@@ -180,8 +180,8 @@ if (Auth::check()) {
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tn-left">
-                        <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+                        <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+            <li><i class="fa fa-email"></i>{{$page_infor->email_trangchu}}</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -444,9 +444,9 @@ if (Auth::check()) {
                         <div class="ft-contact">
                             <h6>Liên hệ chúng tôi</h6>
                             <ul>
-                                <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-                                <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
-                                <li><i class="fa fa-location-arrow"></i> 3/75 Nguyễn Khuyến</li>
+                            <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+                                <li><i class="fa fa-envelope"></i>{{$page_infor->email_trangchu}}</li>
+                                <li><i class="fa fa-location-arrow"></i>{{$page_infor->diachi_trangchu}}</li>
                             </ul>
                         </div>
                     </div>

@@ -82,8 +82,8 @@
             
         </div>
         <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+            <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+            <li><i class="fa fa-envelope"></i>{{$page_infor->email_trangchu}}</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
@@ -95,8 +95,8 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tn-left">
-                        <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+                        <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+            <li><i class="fa fa-envelope"></i>{{$page_infor->email_trangchu}}</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -242,7 +242,7 @@
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Tình trạng Vé:</td>
                                         <?php $veconlai = $event_detail->sovetoida - $event_detail->sovedaban ?>
-                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? 'Hết vé':'Còn chỗ: '.$veconlai}}
+                                        <td>{{$event_detail->sovedaban >= $event_detail->sovetoida ? 'Hết Chỗ':'Còn chỗ: '.$veconlai}}
                                             <input type="hidden" value="{{$veconlai}}" id="veconlai">
                                         </td>
                                         
@@ -257,12 +257,16 @@
                                                 $today = date("y-m-d  G:i:s");
                                                 $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
                                                 if ($check_availble<= 25700){
-                                                    
                                                     $check = false;
                                                     echo '<span style="font-size:15px" class="badge badge-danger">Hết thời gian đặt vé</span>';
                                                 }
                                                 if ($veconlai <=0) {
                                                     $check = false;
+                                                }
+                                                $check_batdau = strtotime($event_detail->batdau)-strtotime($today);
+                                                if ($check_batdau >=0) {
+                                                    $check = false;
+                                                    echo '<span style="font-size:15px" class="badge badge-danger">Chưa tới thời gian đặt vé</span>';
                                                 }
                                                 if (isset(Auth::user()->id) && (Auth::user()->quyentruycap == 3 || Auth::user()->quyentruycap == 2)) {
                                                     $check = false;
@@ -288,7 +292,7 @@
                             <div class="ri-text">
                                 <span>{{$comment->created_at}}</span>
                                 <div class="rating" style="margin-right: 10px;">
-                                @if(isset(Auth::user()->id) && Auth::user()->id == $comment->id_nguoidung) <button style="margin-right:25px;border-style:none;background-color:white;" type="button" onclick="delete_comment('{{$comment->id}}')"><i class="fa fa-trash" style="color:crimson" ></i></button> @endif
+                                @if((isset(Auth::user()->id) && Auth::user()->id == $comment->id_nguoidung)|(isset(Auth::user()->quyentruycap)&&Auth::user()->quyentruycap == 3)) <button style="margin-right:25px;border-style:none;background-color:white;" type="button" onclick="delete_comment('{{$comment->id}}')"><i class="fa fa-trash" style="color:crimson" ></i></button> @endif
                                     @for($i = 1;$i<=$comment->sosao;$i++)
                                         <i class="fa fa-star"></i>
                                     @endfor
@@ -353,7 +357,7 @@
                             </div>
                             <div class="check-date">
                                 <label for="client_titket_num">Số vé muốn đặt</label>
-                                <input value="{{$numberofseat}}" onchange="check_num()" @if($event_detail->id_hinhthucve == 1) readonly @endif type="number" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
+                                <input @if(!$check) readonly @endif value="{{$numberofseat}}" onchange="check_num()" @if($event_detail->id_hinhthucve == 1) readonly @endif type="number" style=" font-size:15px" type="text"  id="client_titket_num" name="client_titket_num"/>
                                 <p class="text-danger" id="alert_seat" ></p>
                             </div>
                             <div class="check-date">
@@ -446,9 +450,9 @@
                         <div class="ft-contact">
                             <h6>Liên hệ chúng tôi</h6>
                             <ul>
-                                <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-                                <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
-                                <li><i class="fa fa-location-arrow"></i> 3/75 Nguyễn Khuyến</li>
+                                <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+                                <li><i class="fa fa-envelope"></i>{{$page_infor->email_trangchu}}</li>
+                                <li><i class="fa fa-location-arrow"></i>{{$page_infor->diachi_trangchu}}</li>
                             </ul>
                         </div>
                     </div>
@@ -654,6 +658,8 @@
         function check_num(){
             if (parseInt($('#client_titket_num').val())<=0){
                 document.getElementById('alert_seat').innerText = "Số vé đặt phải lớn hơn 0"
+                $('#client_titket_prince').val() = 0
+                $('#client_titket_num').val() = 0
                 document.getElementById('submit_booking_titket').disabled = true
             } else {
                 if (parseInt($('#client_titket_num').val())>parseInt($('#veconlai').val())){

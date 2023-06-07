@@ -14,9 +14,9 @@
             <div class="form-group">
                 <label for="name" style="margin-left:10px;font-size:20px ; color:burlywood">Tình trạng</label>
                 <select class="form-control" style="width:200px; margin-left:10px" name="tinhtrang">
-                    <option value="0">Tất cả</option>
+                    <option value="2">Tất cả</option>
                     <option value="1">Đang hoạt động</option>
-                    <option value="2">Đã kết thúc</option>
+                    <option value="0">Đã kết thúc</option>
                 </select>
             </div>
             <button class="btn btn-success btn-sm" style="height:40px ;width:100px;margin-top:36px;margin-left:10px" >Xem</button>

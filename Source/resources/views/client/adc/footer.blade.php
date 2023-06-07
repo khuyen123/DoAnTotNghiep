@@ -23,9 +23,9 @@
                         <div class="ft-contact">
                             <h6>Liên hệ chúng tôi</h6>
                             <ul>
-                                <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-                                <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
-                                <li><i class="fa fa-location-arrow"></i> 3/75 Nguyễn Khuyến</li>
+                                <li><i class="fa fa-phone"></i>&nbsp;{{$pageinfor->sdt_trangchu}}</li>
+                                <li><i class="fa fa-envelope"></i>&nbsp;{{$pageinfor->email_trangchu}}</li>
+                                <li><i class="fa fa-location-arrow"></i>&nbsp;{{$pageinfor->diachi_trangchu}}</li>
                             </ul>
                         </div>
                     </div>

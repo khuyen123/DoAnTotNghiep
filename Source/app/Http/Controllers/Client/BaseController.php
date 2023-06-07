@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\client\changeAVTRequest;
 use App\Http\Requests\client\commentRequest;
 use App\Http\Service\admin\bannerService;
+use App\Http\Service\admin\pageInforService;
 use App\Http\Service\client\eventDetailclientService;
 use App\Http\Service\client\userService;
+use App\Models\banner;
 use App\Models\district;
 use App\Models\province;
 use App\Models\TinhThanh;
@@ -18,18 +20,23 @@ use Illuminate\Support\Facades\Auth;
 
 class baseController extends Controller
 {
-    protected $eventdetailService,$bannerService,$userService;
-    public function __construct(eventDetailclientService $eventDetailService, bannerService $bannerService, userService $userService )
+    protected $eventdetailService,$bannerService,$userService,$pageInforService;
+    public function __construct(eventDetailclientService $eventDetailService, bannerService $bannerService, userService $userService, pageInforService $pageInforService )
     {
         $this->bannerService = $bannerService;
         $this->eventdetailService = $eventDetailService;
         $this->userService = $userService;
+        $this->pageInforService = $pageInforService;
     }
     public function index(){
         $banners = $this->bannerService->getAll();
-       return view('client.index',[
-            'banners' => $banners
-       ]);
+        $banners_2 = banner::orderBy('id')->limit(2)->get();
+        $page_infor = $this->pageInforService->getAll();
+        return view('client.index',[
+                'banners_2'=>$banners_2,
+                'banners' => $banners,
+                'pageinfor' => $page_infor
+        ]);
     }
     public function search_event(Request $request){
         $events = $this->eventdetailService->search_event($request->searchString);
@@ -38,8 +45,10 @@ class baseController extends Controller
         ]);
     }
     public function events() {
+        $page_infor = $this->pageInforService->getAll();
         $events = $this->eventdetailService->getevent();
         return view('client.event.events',[
+            'page_infor' => $page_infor,
             'event_details' => $events
         ]);
     }
@@ -47,7 +56,17 @@ class baseController extends Controller
         echo "Trang quản trị";
     }
     public function aboutus(){
-        return view('client.aboutus.aboutus');
+        $banners = banner::orderBy('id')->limit(3)->get();
+        $banner = [];
+        foreach($banners as $key) {
+            array_push($banner,$key->noidung);
+        }
+       
+        $page_infor = $this->pageInforService->getAll();
+        return view('client.aboutus.aboutus',[
+            'banners'=> $banner,
+            'page_infor'=>$page_infor
+        ]);
     }
     public function getdistrict($province_id){
         $districts = district::query() -> where('id_tinhthanh','like',$province_id)->get();
@@ -73,8 +92,10 @@ class baseController extends Controller
         ]);
     }
     public function client_infor($user_id){
+        $page_infor = $this->pageInforService->getAll();
         return view('client.user.userinfor',[
-            'provinces'=>province::all()
+            'provinces'=>province::all(),
+            'page_infor'=>$page_infor
         ]);
     }
     public function create_comment(commentRequest $request){

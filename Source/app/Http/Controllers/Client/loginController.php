@@ -8,6 +8,7 @@ use App\Http\Requests\client\forgotpasswordRequest;
 use App\Http\Requests\client\loginRequest;
 use App\Http\Requests\client\sigupRequest;
 use App\Http\Service\admin\bannerService;
+use App\Http\Service\admin\pageInforService;
 use App\Http\Service\client\userService;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,29 +19,33 @@ use Illuminate\Support\Facades\Session;
 
 class loginController extends Controller
 {
-    protected $userService,$bannerService;
-    public function __construct(userService $userService, bannerService $bannerService)
+    protected $userService,$bannerService,$pageInforService;
+    public function __construct(userService $userService, bannerService $bannerService,pageInforService $pageInforService)
     {
         $this->userService = $userService;
         $this->bannerService = $bannerService;
+        $this->pageInforService = $pageInforService;
     }
     public function login(){
+        $page_infor = $this->pageInforService->getAll();
         $banners = $this->bannerService->getAll();
         if (Auth::check()) {
             return redirect()->route('home');
         } else {
         return view('client.user.login',[
+            'page_infor' => $page_infor,
             'banners' => $banners
         ]);
         }
        
     }
     public function forgot_password(){
+        $page_infor = $this->pageInforService->getAll();
         if (Auth::check()) {
             return redirect()->back();
         }
         $banners = $this->bannerService->getAll();
-        return view('client.user.forgot_password',['banners'=> $banners]);
+        return view('client.user.forgot_password',['banners'=> $banners,'page_infor'=>$page_infor]);
     }
     public function forgot_password_find(forgotpasswordRequest $request){
         if (Auth::check()) {
@@ -63,11 +68,12 @@ class loginController extends Controller
         return redirect()->to('/client/password_newpass/'.$new_user->id);
     }
     public function newPass($user_id){
+        $page_infor = $this->pageInforService->getAll();
         $banners = $this->bannerService->getAll();
         if (Auth::check()) {
             return redirect()->back();
         }
-        return view('client.user.forgot_password_newpassword',['banners'=>$banners]);
+        return view('client.user.forgot_password_newpassword',['banners'=>$banners,'page_infor'=>$page_infor]);
     }
     public function newPass_store($user_id,changePassRequest $request){
        $user = $this->userService->find($user_id);
@@ -113,10 +119,13 @@ class loginController extends Controller
         }
     }
     public function sigup() {
+        $page_infor = $this->pageInforService->getAll();
         if (Auth::check()) {
             return redirect()->route('home');
         }
-        return view('client.user.register');
+        return view('client.user.register',[
+            'page_infor' => $page_infor
+        ]);
     } 
     public function sigup_function(sigupRequest $request){
         $result = $this->userService->register($request);

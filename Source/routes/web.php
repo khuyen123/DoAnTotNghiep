@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\event\event_detailcontroller;
 use App\Http\Controllers\admin\event\event_imagecontroller;
 use App\Http\Controllers\admin\event\eventcontroller;
 use App\Http\Controllers\admin\banner\bannerController;
+use App\Http\Controllers\admin\page_infor\pageInforController;
 use App\Http\Controllers\admin\titket\titketController as admintitketController;
 use App\Http\Controllers\client\eventcontroller as clienteventcontroller;
 use App\Http\Controllers\admin\user\usercontroller;
@@ -132,6 +133,16 @@ Route::middleware(['auth'])->group(function() {
             Route::POST('/edit/changerole/{user_id}',[usercontroller::class,'edit_store']);
             Route::delete('/delete/{user_id}',[usercontroller::class,'deleteuser']);
         });
+        //Page_infor Route::
+        Route::prefix('page_infor')->group(function(){
+            Route::get('/index',[pageInforController::class,'index']);
+            Route::get('/create',[pageInforController::class,'create']);
+            Route::post('/create',[pageInforController::class,'store']);
+            Route::delete('/delete/{id}',[pageInforController::class,'delete']);
+            Route::post('/unlock/{id}',[pageInforController::class,'unlock']);
+            Route::get('/edit/{id}',[pageInforController::class,'edit']);
+        });
+        //Banner Route:
         Route::prefix('banner')->group(function(){
             Route::get('/index',[bannerController::class,'index']);
             Route::get('/create',[bannerController::class,'create']);
@@ -140,9 +151,12 @@ Route::middleware(['auth'])->group(function() {
         });
         Route::prefix('titket')->group(function(){
             Route::get('/index',[admintitketController::class,'index']);
-            Route::post('/index',[admintitketController::class,'search']);
-            Route::post('/checkin/{titket_id}',[admintitketController::class,'checkin']);
-            Route::get('/print_titket/{titket_id}',[admintitketController::class,'export_titket']);
+            Route::post('/find',[admintitketController::class,'search']);
+            Route::get('/detail/{ticket_id}',[admintitketController::class,'ticket_detail']);
+            Route::post('/detail/checkin/{titket_id}',[admintitketController::class,'checkin']);
+            Route::delete('/detail/delete/{titket_id}',[admintitketController::class,'delete']);
+            Route::get('/detail/print_titket/{titket_id}',[admintitketController::class,'export_titket']);
+            Route::get('/event_ticket/{event_id}',[admintitketController::class,'event_ticket']);
         });
         //Thong ke
         Route::prefix('statistical')->group(function(){

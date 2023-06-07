@@ -82,8 +82,8 @@ if (Auth::check()) {
             
         </div>
         <ul class="top-widget">
-            <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+            <li><i class="fa fa-phone"></i> {{$page_infor->sdt_trangchu}}</li>
+            <li><i class="fa fa-envelope"></i> {{$page_infor->email_trangchu}}</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
@@ -95,8 +95,8 @@ if (Auth::check()) {
                 <div class="row">
                     <div class="col-lg-6">
                         <ul class="tn-left">
-                        <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-            <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
+                        <li><i class="fa fa-phone"></i> {{$page_infor->sdt_trangchu}}</li>
+            <li><i class="fa fa-envelope"></i> {{$page_infor->email_trangchu}}</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -183,10 +183,8 @@ if (Auth::check()) {
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="ap-title">
-                            <h2>Chào mừng đến với Sự Kiện Số.</h2>
-                            <p>Được tạo ra vào năm 2023 với sứ mệnh giúp cho nhà tổ chức sự kiện có thể dể dàng quản lý 
-                                cũng như tổ chức sự kiện của mình một cách thuận tiện. Bên cạnh đó còn giúp cho khán giả có thể thực hiện
-                            việc xem sự kiện và tiến hành mua vé một cách thuận tiện. Sản phẩm thực hiện bởi Khuyến.</p>
+                            <h2>{{$page_infor->tieude_vechungtoi}}</h2>
+                            <p>{{$page_infor->noidung_vechungtoi}}</p>
 
                         </div>
                     </div>
@@ -203,21 +201,21 @@ if (Auth::check()) {
             <div class="about-page-services">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="ap-service-item set-bg" data-setbg="img/about/about-p1.jpg">
+                        <div class="ap-service-item set-bg" data-setbg="{{asset($banners[0])}}">
                             <div class="api-text">
                                 <h3>Quản lý sự kiện</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="ap-service-item set-bg" data-setbg="img/about/about-p2.jpg">
+                        <div class="ap-service-item set-bg" data-setbg="{{asset($banners[1])}}">
                             <div class="api-text">
                                 <h3>Đặt vé Online</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="ap-service-item set-bg" data-setbg="img/about/about-p3.jpg">
+                        <div class="ap-service-item set-bg" data-setbg="{{asset($banners[2])}}">
                             <div class="api-text">
                                 <h3>Thanh toán dễ dàng</h3>
                             </div>
@@ -272,9 +270,9 @@ if (Auth::check()) {
                         <div class="ft-contact">
                             <h6>Liên hệ chúng tôi</h6>
                             <ul>
-                                <li><i class="fa fa-phone"></i> (+84) 336 482 917</li>
-                                <li><i class="fa fa-envelope"></i> khuyenphamno0@gmail.com</li>
-                                <li><i class="fa fa-location-arrow"></i> 3/75 Nguyễn Khuyến</li>
+                                <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
+                                <li><i class="fa fa-envelope"></i>{{$page_infor->email_trangchu}}</li>
+                                <li><i class="fa fa-location-arrow"></i>{{$page_infor->diachi_trangchu}}</li>
                             </ul>
                         </div>
                     </div>
@@ -299,8 +297,9 @@ if (Auth::check()) {
     <div class="search-model">
         <div class="h-100 d-flex align-items-center justify-content-center">
             <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
+            <form method="POST" action="{{route('search')}}" class="search-model-form">
+                <input type="text" id="searchString" name="searchString" placeholder="Nhập tên sự kiện cần tìm..." value=""/>
+                @csrf
             </form>
         </div>
     </div>

@@ -1,6 +1,7 @@
 <?php 
 namespace App\Http\Service\client;
 
+use App\Models\checkseat;
 use App\Models\titket;
 use App\Repository\Eloquent\TitketRepository;
 use App\Repository\Eloquent\UserRepository;
@@ -25,6 +26,12 @@ class titketService {
         ->first();
         return $titket;
     }
+    public function findticket_byEvent($event_id) {
+        $tickets = titket::query()
+        ->where('id_chitietsukien','=',$event_id)
+        ->get();
+        return $tickets;
+    }
     public function findticket_byuser($user_id){
         $tickets = titket::query()
         ->where('id_nguoidung','=',$user_id)
@@ -40,6 +47,20 @@ class titketService {
         ->limit(1)
         ->update(array('kiemtra'=>1));
         return true;
+    }
+    public function delete($ticket_id) {
+        $result = DB::table('ve')
+        ->where('id_ve','=',$ticket_id)
+        ->delete();
+        return $result;
+    }
+    public function delete_seat($data){
+        $seat = checkseat::query()
+        ->where('soGhe','=',$data->soGhe)
+        ->where('id_chitietsukien','=',$data->id_chitietsukien)
+        ->first();
+        return checkseat::destroy($seat);
+
     }
     public function payment_success($titket){
         DB::table('ve')

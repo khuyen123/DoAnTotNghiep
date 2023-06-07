@@ -201,7 +201,10 @@ body, p, h1 {
                 <p>Số chỗ</p>
               </td>  
               <td width:100px>
-                <p style="margin-left:75px">Số Ghế</p>
+                <p style="margin-left:50px">Số Ghế</p>
+              </td>
+              <td width:100px>
+                <p style="margin-left:55px">Độ tuổi</p>
               </td>
             </tr>
             <tr>
@@ -209,7 +212,10 @@ body, p, h1 {
                 <p style="font-weight:bold;font-size: 15px ; color:tomato">{{$new_ticket->soCho}}</p>
               </td>
               <td>
-                <p style="margin-left:75px;font-weight:bold;font-size: 15px ; color:tomato">{{$new_ticket->soGhe}}</p>
+                <p style="margin-left:50px;font-weight:bold;font-size: 15px ; color:tomato">{{$new_ticket->soGhe}}</p>
+              </td>
+              <td>
+                <p style="margin-left:55px; font-weight:bold;font-size: 15px ; color:tomato">C{{$new_ticket->event_detail->dotuoichophep}}</p>
               </td>
             </tr>
           </table>
@@ -232,18 +238,18 @@ body, p, h1 {
                 <p style="margin-left:10px;font-weight:bold;font-size: 10px ;">{{$new_ticket->event_detail->khuvuc}}</p>
               </td>
             </tr>
-            
+            <tr>
+              <td colspan="2">
+              <p style="text-align:center; font-size:22px; color:tomato">#{{$new_ticket->id_ve}}</p>
+              </td>
+            </tr>
           </table>
-          
 				</div>
 				<div class="row row-3">
           <p  style="font-size: 10px ; text-align:center; font-weight:bold;">Địa chỉ</p>
 					<p style="font-size: 11px ; text-align:center; font-weight:bold; color:brown" >{{$new_ticket->event_detail->diachi}},&nbsp; {{$new_ticket->event_detail->wards->tenxaphuong}},&nbsp; {{$new_ticket->event_detail->wards->district->province->tentinhthanh}}</p>
 				</div>
 			</div>
-			<div>
-        <p style="text-align:center; font-size:22px; color:tomato">#{{$new_ticket->id_ve}}</p>
-      </div>
 		</div>
 	</div>
 </div>

@@ -60,29 +60,19 @@
                     <div class="about-text">
                         <div class="section-title">
                             <span>Về chúng tôi</span>
-                            <h2>Sự kiện số <br />Nơi tạo ra những ký ức tươi đẹp</h2>
+                            <h2>Sự kiện số <br />{{$pageinfor->tieude_trangchu}}</h2>
                         </div>
-                        <p class="f-para">Sự Kiện Số là trang web được tạo ra
-                                    với hy vọng là nơi có thể giúp các Nhà tổ chức 
-                                    có thể quản lý và phát triển sự kiện của mình 
-                                    một cách dễ dàng và có khoa học hơn. </p>
-                        <p class="s-para">Mỗi ngày, chúng ta đều có rất nhiều sự kiện diễn ra như 
-Show ca nhạc, cắm trại, dã ngoại, từ thiện,... 
-mà việc mua vé và đăng ký tham gia vẫn chủ yếu 
-được thực hiện bằng giấy tờ. 
-Vì vậy, trang web này được tạo ra để việc đó trở nên dễ dàng hơn.</p>
-                        
+                        <p class="f-para">{{$pageinfor->noidung_trangchu}} </p>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="about-pic">
                         <div class="row">
+                            @foreach($banners_2 as $key)
                             <div class="col-sm-6">
-                                <img src="client/img/about/about-1.jpg" alt="">
+                                <img style="height:350px;" src="{{asset($key->noidung)}}" alt="">
                             </div>
-                            <div class="col-sm-6">
-                                <img src="client/img/about/about-1.jpg" alt="">
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

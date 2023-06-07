@@ -14,7 +14,10 @@ class page_infor extends Model
         'email_trangchu',
         'noidung_vechungtoi',
         'sdt_trangchu',
-        'diachi_trangchu'
+        'diachi_trangchu',
+        'tieude_trangchu',
+        'noidung_trangchu',
+        'trangthai'
         
     ];
     protected $table= 'thongtintrangchu';

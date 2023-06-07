@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\client\titketCreateRequest;
 use App\Http\Service\admin\eventDetailService;
+use App\Http\Service\admin\pageInforService;
 use App\Http\Service\client\eventDetailclientService;
 use App\Http\Service\client\titketService;
 use App\Models\checkseat;
@@ -19,12 +20,13 @@ class titketController extends Controller
 {
     protected $titketService;
     protected $eventdetailService;
-    protected $client_detaildetailService;
-    public function __construct(titketService $titketService,eventDetailService $eventDetailService, eventDetailclientService $eventDetailclientService)
+    protected $client_detaildetailService,$pageInforService;
+    public function __construct(pageInforService $pageInforService, titketService $titketService,eventDetailService $eventDetailService, eventDetailclientService $eventDetailclientService)
     {
         $this->titketService = $titketService;
         $this->eventdetailService = $eventDetailService;
         $this->client_detaildetailService = $eventDetailclientService;
+        $this->pageInforService = $pageInforService;
     }   
     
     public function titket_create(titketCreateRequest $request){
@@ -36,10 +38,10 @@ class titketController extends Controller
         $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
         if ($new_ticket = $result){
             $this->eventdetailService->update($eventdetail,$truve);
-            Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
-                $email->subject('Thông tin đặt vé');
-                $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
-            });
+            // Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
+            //     $email->subject('Thông tin đặt vé');
+            //     $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
+            // });
             $seat = explode(",",$new_ticket->soGhe);
             foreach($seat as $key){
                 DB::table('checkghe')
@@ -159,21 +161,26 @@ class titketController extends Controller
         ]);
     }
     public function ticket_list($user_id){
+        $page_infor = $this->pageInforService->getAll();
+
         $tickets = $this->titketService->findticket_byuser($user_id);
         if (Auth::user()->quyentruycap != 1){
             return redirect()->back();
         }
         return view('client.titket.ticket_list',[
-            'tickets'=>$tickets
+            'tickets'=>$tickets,
+            'page_infor'=>$page_infor
         ]);
     }
     public function ticket_detail($ticket_id){
+        $page_infor = $this->pageInforService->getAll();
         if (Auth::user()->quyentruycap != 1){
             return redirect()->back();
         }
         $new_titket = $this->titketService->search($ticket_id);
         return view('client.titket.ticket_detail',[
-            'new_titket'=>$new_titket
+            'new_titket'=>$new_titket,
+            'page_infor'=>$page_infor
         ]);
     }
     public function vnpay_payment(titketCreateRequest $request){
