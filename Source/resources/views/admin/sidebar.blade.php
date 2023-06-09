@@ -68,7 +68,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/admin/titket/index" class="nav-link">
-                        <i class="nav-icon fas fa-user-alt"></i>
+                        <i class="nav-icon fas fa-ticket-alt"></i>
                         <p>
                             Vé
                             
@@ -88,7 +88,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="/admin/page_infor/index" class="nav-link">
-                        <i class="nav-icon fas fa-id-card"></i>
+                        <i class="nav-icon fas fa-info-circle"></i>
                         <p>
                             Thông Tin Trang Chủ
                             

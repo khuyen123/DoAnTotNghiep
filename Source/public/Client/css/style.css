@@ -602,6 +602,8 @@ ul, ol {
 .booking-form form .select-option .nice-select .list {
 	margin-top: 0;
 	width: 100%;
+	max-height: 300px;
+	overflow: scroll;
 }
 .booking-form form button {
 	display: block;

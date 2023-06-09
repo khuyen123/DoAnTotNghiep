@@ -36,6 +36,17 @@
                                     <option value="">Lễ hội âm nhạc</option>
                                     <option value="">Đấu giá từ thiện</option>
                                     <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    <option value="">Cắm trại dã ngoại</option>
+                                    
                                 </select>
                             </div>
                             
@@ -88,7 +99,7 @@
                 <div class="col-lg-12">
                     <div class="section-title">
                         <span>Sự kiện nổibật</span>
-                        <h2>Sự kiện nổi bật đang diễn ra</h2>
+                        <h2>Sự kiện nổi bật đang mở đặt vé</h2>
                     </div>
                 </div>
             </div>
@@ -102,138 +113,43 @@
         <div class="container-fluid">
             <div class="hp-room-items">
                 <div class="row">
+                    @foreach($topevents as $topevent)
                     <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="client/img/room/room-b1.jpg">
+                        <div class="hp-room-item set-bg" data-setbg="{{asset('client/'.$topevent->noidung)}}">
                             <div class="hr-text">
-                                <h3>Cắm trại</h3>
-                                <h2>150.000 VNĐ<span>/Vé</span></h2>
+                                <h3>{{$topevent->tenSukien}}</h3>
+                                <h2>{{number_format($topevent->giave,0,',','.')}} VNĐ<span>/Vé</span></h2>
                                 <table>
                                     <tbody>
                                         <tr>
                                             <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Nẵng</td>
+                                            <td>{{$topevent->diachi}}</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé vào cổng</td>
+                                            <td>
+                                                @if($topevent->id_hinhthucve == 1) Chỗ ngồi theo ghế @endif
+                                                @if($topevent->id_hinhthucve == 2) Chỗ ngồi tự do @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 15</td>
+                                            <td>Lớn hơn {{$topevent->dotuoichophep}}</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
+                                            <td>
+                                                @if($topevent->sovetoida>$topevent->sovedaban) Còn vé: {{$topevent->sovetoida-$topevent->sovedaban}} @endif
+                                            </td>
                                         </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
+                                    
                                     </tbody>
                                 </table>
-                                <a href="#" class="primary-btn">Đặt vé ngay</a>
+                                <a href="/client/event_detail/{{$topevent->id_chitietsukien}}" class="primary-btn">Xem chi tiết</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="client/img/room/room-b2.jpg">
-                            <div class="hr-text">
-                                <h3>Đêm nhạc hội</h3>
-                                <h2>170.000 VNĐ<span>/Vé</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">Đặt vé ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="client/img/room/room-b1.jpg">
-                            <div class="hr-text">
-                                <h3>Cắm trại</h3>
-                                <h2>150.000 VNĐ<span>/Vé</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Nẵng</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé vào cổng</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 15</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">Đặt vé ngay</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="client/img/room/room-b2.jpg">
-                            <div class="hr-text">
-                                <h3>Đêm nhạc hội</h3>
-                                <h2>170.000 VNĐ<span>/Vé</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Địa điểm:</td>
-                                            <td>Đà Lạt</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hình thức vé:</td>
-                                            <td>Vé ghế ngồi</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Độ tuổi:</td>
-                                            <td>Lớn hơn 7</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Tình trạng:</td>
-                                            <td>Còn vé</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Hoạt động:</td>
-                                            <td>Còn hoạt động</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">Đặt vé ngay</a>
-                            </div>
-                        </div>
-                    </div>
+                @endforeach
                 </div>
             </div>
         </div>

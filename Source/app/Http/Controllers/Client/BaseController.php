@@ -36,7 +36,8 @@ class baseController extends Controller
         return view('client.index',[
                 'banners_2'=>$banners_2,
                 'banners' => $banners,
-                'pageinfor' => $page_infor
+                'pageinfor' => $page_infor,
+                'topevents' =>$topevents
         ]);
     }
     public function search_event(Request $request){

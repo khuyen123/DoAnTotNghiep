@@ -82,7 +82,10 @@
                     $check_availble =  strtotime($event_detail->ketthuc)-strtotime($today); 
                     if ($check_availble<= 0){
                         echo '<span style="font-size:15px" class="badge badge-danger">Sự kiện đã kết thúc</span>';
-                        echo '<span id="close_event_button" style="font-size:15px; margin-left:10px" class="btn btn-success" >Đóng sự kiện</span>';
+                        if ($event_detail->trangthai!=0){
+                            echo '<span id="close_event_button" style="font-size:15px; margin-left:10px" class="btn btn-success" >Đóng sự kiện</span>';
+                        }
+                        
                     } else echo '<span style="font-size:15px" class="badge badge-success">Đang hoạt động</span>';
                 ?>
             </div>
@@ -206,7 +209,9 @@
                                 'Thành công!',
                                 'Đóng sự kiện thành công',
                                 'success'
-                            )
+                            ).then(function(){
+                                location.reload()
+                            })
                         }
                     })
                 }

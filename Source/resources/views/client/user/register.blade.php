@@ -100,6 +100,16 @@
                     <div class="booking-form">
                         <h3>Trang đang ký</h3>
                         <form action="{{route('sigup_function')}}" method="POST">
+                        @if (Session::has('error'))
+                                <div class="alert alert-danger">
+                                    {{Session::get('error')}}
+                                </div>
+                            @endif
+                            @if (Session::has('success'))
+                                <div class="alert alert-success">
+                                    {{Session::get('success')}}
+                                </div>
+                            @endif
                         <div class="check-date">
                                 <label for="hoten" style="font-size:20px ;">Họ tên:</label>
                                 <input value="{{old('hoten')}}" style="border-radius: 10px; font-size:15px" type="text" name="hoten" id="hoten"/>
@@ -117,12 +127,12 @@
                             </div>
                             <div class="check-date">
                                 <label for="passWord" style="font-size:20px ;">Mật khẩu:</label>
-                                <input value="{{old('password')}}" style="border-radius: 10px;" type="password" name="password" id="password" />  
+                                <input  style="border-radius: 10px;" type="password" name="password" id="password" />  
                                 <p style="color:#CB4154">{{ $errors->first('password') }}</p>
                             </div>
                             <div class="check-date">
                                 <label for="repeat_password" style="font-size:20px ;">Nhập lại mật khẩu:</label>
-                                <input value="{{old('repeat_password')}}" style="border-radius: 10px;" type="password"  id="repeat_password" name="repeat_password" />  
+                                <input  style="border-radius: 10px;" type="password"  id="repeat_password" name="repeat_password" />  
                                 <p style="color:#CB4154">{{ $errors->first('repeat_password') }}</p>
                             </div>
                             <button id="submit_registerform" type="submit">Đăng Ký</button>

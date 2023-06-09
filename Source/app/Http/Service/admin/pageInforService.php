@@ -20,7 +20,7 @@ class pageInforService {
     public function find($id){
         return page_infor::query()
         ->where('id','=',$id)
-        ->get();
+        ->first();
     }
     public function delete($infor){
         $result = page_infor::destroy($infor);
@@ -29,6 +29,10 @@ class pageInforService {
     public function lock($infor,$data){
         $result = page_infor::where('id','=',$infor->id)
         ->update(['trangthai'=>$data]);
+        return $result;
+    }
+    public function update($infor,$data){
+        $result = $infor->update($data);
         return $result;
     }
 }

@@ -129,7 +129,7 @@ class loginController extends Controller
     } 
     public function sigup_function(sigupRequest $request){
         $result = $this->userService->register($request);
-        if ( $new_user =  $result) {
+        if ( ($new_user =  $result) && $result!=false) {
             Mail::send('client.active_account',compact('new_user'), function($email) use ($new_user){
                 $email->subject('Xác nhận tài khoản đăng ký');
                 $email->to($new_user->email, $new_user->hoten);
@@ -137,7 +137,6 @@ class loginController extends Controller
             Session::flash('success','Đăng ký thành công! Bạn hãy kiểm tra Email để kích hoạt tài khoản');
             return redirect()->route('login');
         } 
-        Session::flash('error','Đăng ký thất bại');
         return redirect()->back();
        
     }

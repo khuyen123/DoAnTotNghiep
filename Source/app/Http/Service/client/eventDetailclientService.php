@@ -44,8 +44,9 @@ class eventDetailclientService {
         ->join('hinhanh','hinhanh.id_chitietsukien','=','chitietsukien.id')
         ->join('sukien','sukien.id','=','chitietsukien.id_sukien')
         ->join('xaphuong','xaphuong.id','=','chitietsukien.id_xaphuong')
+        ->where('chitietsukien.trangthai','=',1)
         ->groupBy('chitietsukien.id')
-        ->orderBy('chitietsukien.sovedaban')
+        ->orderByDesc('chitietsukien.sovedaban')
         ->limit(4)
         ->get(array(
             'chitietsukien.id as id_chitietsukien',

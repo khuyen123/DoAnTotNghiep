@@ -141,6 +141,7 @@ Route::middleware(['auth'])->group(function() {
             Route::delete('/delete/{id}',[pageInforController::class,'delete']);
             Route::post('/unlock/{id}',[pageInforController::class,'unlock']);
             Route::get('/edit/{id}',[pageInforController::class,'edit']);
+            Route::post('/edit/{id}',[pageInforController::class,'edit_store']);
         });
         //Banner Route:
         Route::prefix('banner')->group(function(){
