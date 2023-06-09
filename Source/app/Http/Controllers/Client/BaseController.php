@@ -29,6 +29,7 @@ class baseController extends Controller
         $this->pageInforService = $pageInforService;
     }
     public function index(){
+        $topevents = $this->eventdetailService->gettopevent();
         $banners = $this->bannerService->getAll();
         $banners_2 = banner::orderBy('id')->limit(2)->get();
         $page_infor = $this->pageInforService->getAll();

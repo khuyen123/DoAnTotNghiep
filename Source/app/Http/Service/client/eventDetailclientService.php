@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 class eventDetailclientService {
-    const LIMIT=20;
+    const LIMIT=30;
     protected $eventdetailrepository;
     public function __construct(EventDetailRepository $eventdetailrepository)
     {
@@ -24,6 +24,29 @@ class eventDetailclientService {
         ->join('xaphuong','xaphuong.id','=','chitietsukien.id_xaphuong')
         ->groupBy('chitietsukien.id')
         ->take(self::LIMIT)
+        ->get(array(
+            'chitietsukien.id as id_chitietsukien',
+            'sukien.tenSukien',
+            'chitietsukien.diachi',
+            'hinhanh.noidung',
+            'chitietsukien.giave',
+            'chitietsukien.sovetoida',
+            'chitietsukien.sovedaban',
+            'chitietsukien.trangthai',
+            'chitietsukien.mota',
+            'chitietsukien.id_hinhthucve',
+            'chitietsukien.dotuoichophep'
+        ));
+        return $sukien;
+    }
+    public function gettopevent(){
+        $sukien =  DB::table('chitietsukien')
+        ->join('hinhanh','hinhanh.id_chitietsukien','=','chitietsukien.id')
+        ->join('sukien','sukien.id','=','chitietsukien.id_sukien')
+        ->join('xaphuong','xaphuong.id','=','chitietsukien.id_xaphuong')
+        ->groupBy('chitietsukien.id')
+        ->orderBy('chitietsukien.sovedaban')
+        ->limit(4)
         ->get(array(
             'chitietsukien.id as id_chitietsukien',
             'sukien.tenSukien',
