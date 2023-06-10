@@ -41,7 +41,7 @@ class User extends Authenticatable
         return $this->hasOne(roles::class,'id','quyentruycap');
     }
     public function ticket(){
-        return $this->hasMany(titket::class,'id','id_nguoidung');
+        return $this->hasMany(titket::class,'id_nguoidung','id');
     }
     /**
      * The attributes that should be hidden for serialization.

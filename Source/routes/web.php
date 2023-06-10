@@ -55,12 +55,12 @@ Route::middleware(['auth'])->group(function() {
     Route::get('client/logout',[loginController::class,'sigout'])->name('logout');
     //Client Route
     Route::prefix('client')->group( function() {
-        
-        
         ROute::post('/event_detail/{detail_id}/titket/index',[titketController::class,'index']);
         //User-infor Route::
         Route::prefix('/infor/{user_id}') ->group(function(){
             Route::get('/index',[baseController::class,'client_infor']);
+            Route::get('/changepass',[loginController::class,'changepass_index']);
+            Route::post('/changepass',[loginController::class,'changepass_store']);
             Route::post('/changeavt',[baseController::class,'change_avt']);
         });
         // Booking Route:
@@ -128,10 +128,12 @@ Route::middleware(['auth'])->group(function() {
         Route::prefix('user')->group(function(){
             Route::get('/index',[usercontroller::class,'index']);
             Route::get('/edit/{user_id}',[usercontroller::class,'edit']);
+            Route::post('/edit/{user_id}',[usercontroller::class,'edit_user_store']);
             Route::POST('/edit/lock_user/{user_id}',[usercontroller::class,'edit_store']);
             Route::POST('/edit/unlock_user/{user_id}',[usercontroller::class,'edit_store']);
             Route::POST('/edit/changerole/{user_id}',[usercontroller::class,'edit_store']);
             Route::delete('/delete/{user_id}',[usercontroller::class,'deleteuser']);
+            
         });
         //Page_infor Route::
         Route::prefix('page_infor')->group(function(){
@@ -164,7 +166,8 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/event_statistical',[AdminBasecontroller::class,'event_statistical']);
             Route::get('/event_statistical/{detail_id}',[AdminBasecontroller::class,'eventDetail_statistical']);
             Route::post('/event_statistical/date',[AdminBasecontroller::class,'event_statisticalDate']);
-            
+            Route::get('/viewer_statistical',[AdminBasecontroller::class,'viewer_statistical']);
+            Route::get('/viewer_statistical/{user_id}',[AdminBasecontroller::class,'viewer_statistical_detail']);
         });
     });
 });

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html >
+<html lang="zxx">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="Sona Template">
     <meta name="keywords" content="Sona, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sự kiện số | Quên mật khẩu</title>
-
+    <title>Sự kiện số | Thông tin tài khoản</title>
+    
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
@@ -41,17 +42,45 @@
         <div class="canvas-close">
             <i class="icon_close"></i>
         </div>
-        <div class="search-icon  search-switch">
+        <div class="search-icon search-switch">
             <i class="icon_search"></i>
         </div>
         <div class="header-configure-area">
-          
-            
-                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
+           
+        <?php
+
+            use Illuminate\Support\Facades\Auth;
+
+            $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
+            $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
+            $html_logined = '';
+            if (isset(Auth::user()->id)){
+                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
+            }
+            if(isset(Auth::user()->hoten)) {
+                $html_logined .= Auth::user()->hoten;
+            }
+            $html_logined .= '</a>';
+            $html_logined .='<a href="/client/logout" class="bkj-btn">Đăng xuất</a>';
+            if (Auth::check()) {
+                echo $html_logined;
+            } else {
+                echo $html;
+            }
+            ?>
         </div>
-       
+        <nav class="mainmenu mobile-menu">
+            <ul>
+                <li><a href="/">Trang chủ</a></li>
+                    <li class="active"><a href="{{route('client_events')}}">Sự kiện</a></li>
+                    <li><a href="{{route('admin_index')}}">Ban tổ chức</a></li>
+                    <li><a href="{{route('aboutus')}}">Về chúng tôi</a>
+            </ul>
+        </nav>
         <div id="mobile-menu-wrap"></div>
-       
+        <div class="top-social">
+            
+        </div>
         <ul class="top-widget">
         <li><i class="fa fa-phone"></i>{{$page_infor->sdt_trangchu}}</li>
             <li><i class="fa fa-email"></i>{{$page_infor->email_trangchu}}</li>
@@ -60,7 +89,7 @@
     <!-- Offcanvas Menu Section End -->
 
     <!-- Header Section Begin -->
-    <header class="header-section">
+    <header class="header-section header-normal">
         <div class="top-nav">
             <div class="container">
                 <div class="row">
@@ -72,21 +101,56 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="tn-right">
-                        <a href="{{route('home')}}"><img style="width:90px;height:50px" src="{{asset('client/img/logo.png')}}" alt=""></a>
-                            <a href="{{Route('sigup')}}" class="bkj-btn">Đăng ký</a>
-                            
-                            </div>
+                           
+                        <?php   
+                            $html = '<a href="/client/login" class="bk-btn">Đăng nhập</a>';
+                            $html .='<a href="/client/register" class="bkj-btn">Đăng ký</a>';
+                            if (isset(Auth::user()->id)){
+                                $html_logined = '<a href="/client/infor/'.Auth::user()->id.'/index" class="bk-btn">';
+                            }
+                            if(isset(Auth::user()->hoten)) {
+                                $html_logined .= Auth::user()->hoten;
+                            }
+                            $html_logined .= '</a>';
+                            $html_logined .='<a href="/client/logout" class="bkj-btn">Đăng xuất</a>';
+                            if (Auth::check()) {
+                                echo $html_logined;
+                            } else {
+                                echo $html;
+                            }
+                        ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      
+        <div class="menu-item">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                    <div class="logo">
+                            <a href="/">
+                                <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="nav-menu">
+                            <nav class="mainmenu">
+                              <h3 style="color:darkgoldenrod">Xin Chào!</h3>
+                              <h3 style="color:darkgoldenrod"><?php echo Auth::user()->hoten; ?></h3>
+                              <input type="hidden" value="{{Auth::user()->id}}" id="user_id" />
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
     <!-- Header End -->
 
     <!-- Hero Section Begin -->
-    <section class="hero-section">
+    <section class="hero-section" style="height:700px">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6">
@@ -98,8 +162,13 @@
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Quên mật khẩu</h3>
-                        <form  method="post">
+                        <h3>Thay đổi mật khẩu</h3>
+                        <form action="" method="post">
+                            @if (Session::has('error'))
+                                <div class="alert alert-danger">
+                                    {{Session::get('error')}}
+                                </div>
+                            @endif
                             @if (Session::has('success'))
                                 <div class="alert alert-success">
                                     {{Session::get('success')}}
@@ -120,7 +189,8 @@
                                 <input style="border-radius: 10px; font-size:15px" type="password"  id="newpass_repeat" name="newpass_repeat"/>
                                 <p style="color:#CB4154">{{ $errors->first('newpass_repeat') }}</p>
                             </div>
-                            <button type="submit">Lấy lại mật khẩu</button>
+                             
+                            <button type="submit">Tiếp tục</button>
                             @csrf
                            
                         </form>
@@ -154,7 +224,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
+                                <img style="width:90px;height:90px" src="{{asset('client/img/logo.png')}}" alt="">
                                 </a>
                             </div>
                             <p>Chúng tôi tạo ra trang web để bạn được chill<br /> Đồ án tốt nghiệp</p>
@@ -214,7 +284,6 @@
     <script src="{{asset('client/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('client/js/main.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

@@ -37,13 +37,12 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <h3>{{$count_users}} </h3>
-
                 <p>Khán giả mới</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="" class="small-box-footer">Xem chi tiết<i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/admin/statistical/viewer_statistical" class="small-box-footer">Xem chi tiết<i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

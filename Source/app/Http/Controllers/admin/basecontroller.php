@@ -96,6 +96,30 @@ class basecontroller extends Controller
             .'. Tổng tiền vé đã bán được: '.number_format($event->sovedaban*$event->giave,0,',','.') .' VNĐ',
             'tickets' => $tickets
         ]);
-
+    }
+    public function viewer_statistical(){
+        $user = $this->userService->getAll();
+        $users = [];
+        foreach($user as $key) {
+            if ($key->quyentruycap == 1) {
+                array_push($users,$key);
+            }
+        }
+        return view('admin.event_statistical.viewer_statistical',[
+            'title'=>'Danh sách khán giả',
+            'users' => $users
+        ]);
+    }
+    public function viewer_statistical_detail($user_id) {
+        $user = $this->userService->find($user_id);
+        $tickets = $this->ticketService->findticket_byuser($user_id);
+        $amount = 0;
+        foreach($tickets as $key) {
+            $amount += $key->tongtien;
+        }
+        return view('admin.event_statistical.viewer_statistical_detail',[
+            'title'=>'Danh sách vé khán giả: '.$user->hoten. '- Tổng tiền vé đã mua: '.number_format($amount,0,',','.').' VNĐ',
+            'tickets'=>$tickets
+        ]);
     }
 }

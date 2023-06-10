@@ -41,9 +41,11 @@ class baseController extends Controller
         ]);
     }
     public function search_event(Request $request){
+        $page_infor = $this->pageInforService->getAll();
         $events = $this->eventdetailService->search_event($request->searchString);
         return view('client.event.events',[
-            'event_details' => $events
+            'event_details' => $events,
+            'page_infor' => $page_infor
         ]);
     }
     public function events() {
@@ -100,6 +102,7 @@ class baseController extends Controller
             'page_infor'=>$page_infor
         ]);
     }
+   
     public function create_comment(commentRequest $request){
         // dd($request->all());
         return $this->eventdetailService->create_comment($request->all());

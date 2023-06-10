@@ -20,6 +20,13 @@ class eventcontroller extends Controller
     }
     public function eventdetail($detail_id){
         $comments = $this->eventdetailservice->getComment($detail_id);
+        $sosao = 0;
+        $socommemt = 0;
+        foreach($comments as $key){
+            $sosao+=$key->sosao;
+            $socommemt++;
+        }
+        if ($socommemt!=0){$sosao = $sosao/$socommemt;}
         $event_detail = $this->eventdetailservice->geteventdetail($detail_id);
         $images = $this->eventdetailservice->getimage($detail_id);
         $titkets = $this->eventdetailservice->gettitket($detail_id);
@@ -45,7 +52,9 @@ class eventcontroller extends Controller
             'comments'=>$comments,
             'seats_selected' =>$seat_selected,
             'page_infor'=> $page_infor,
-            'numberofseat'=>count($seat_selected)
+            'numberofseat'=>count($seat_selected),
+            'sosao' => $sosao,
+            'socomment'=>$socommemt
         ]); 
     }
     

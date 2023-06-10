@@ -19,7 +19,6 @@ class userService {
         $check_username = true;
         $check_email = true;
         $users = $this->getALL();
-        
         foreach($users as $user) {
             if ($request->username == $user->username) {
                 $check_username = false;

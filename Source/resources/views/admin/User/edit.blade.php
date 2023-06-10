@@ -9,20 +9,39 @@
         <div class="card-body">
             <div class="form-group">
                 <label for="name">Họ tên</label>
-                <input readonly type="text" value="{{$user->hoten}}" class="form-control" name="user_name" id="user_name" >
+                <input readonly type="text" value="{{$user->hoten}}" class="form-control" name="hoten" id="hoten" >
             </div>
             <div class="form-group">
                 <label for="name">Ngày sinh</label>
-                <input readonly type="date" value="{{$user->ngaySinh}}" class="form-control" name="NgaySinh" id="NgaySinh" >
+                <input style="width:200px" type="date" value="{{$user->ngaySinh}}" class="form-control" name="ngaySinh" id="NgaySinh" >
+            </div>
+            <label>Địa chỉ:</label>
+            <div class="form-group" style="display:flex">
+                
+                <label for="name" style="width:100px">Tỉnh thành:</label>
+                
+                <select onchange="finddistrict()" class="form-control" style="width:200px" id="user_province" name="user_province">
+                    <option value="{{$user->wards->district->id_tinhthanh}}" selected >{{$user->wards->district->province->tentinhthanh}}</option>
+                    @foreach($provinces as $province)
+                        <option  value="{{$province->id}}" >{{$province->tentinhthanh}}</option>
+                    @endforeach
+                </select>
+                <label for="name" style="width:100px; margin-left:10px">Quận huyện:</label>
+                <select onchange="findward()" class="form-control" style="width:200px" id="user_district" name="user_district">   
+                    <option value="{{$user->wards->id_quanhuyen}}">{{$user->wards->district->tenquanhuyen}}</option>
+                </select>
+                <label for="name" style="width:100px;margin-left:10px" >Xã phường:</label>
+                <select class="form-control" style="width:200px" id="user_wards" name="id_xaphuong">   
+                    <option value="{{$user->id_xaphuong}}">{{$user->wards->tenxaphuong}}</option>
+                </select>
             </div>
             <div class="form-group">
-                <label for="name">Địa chỉ</label>
-                <input readonly type="text" value="{{$user->diachi.' '.$user->wards->tenxaphuong. ' '.$user->wards->district->tenquanhuyen.' '.$user->wards->district->province->tentinhthanh}}" class="form-control" name="DiaChi" id="diachi" placeholder="Nhập nội dung">
+                <label for="name">Địa chỉ chi tiết</label>
+                <input  type="text" value="{{$user->diachi}}" class="form-control" name="diachi" id="diachi" placeholder="Nhập nội dung">
             </div>
-           
             <div class="form-group">
                 <label for="name">Số điện thoại</label>
-                <input readonly type="text" value="{{$user->sdt}}" class="form-control" name="SDT" id="SDT" placeholder="Nhập nội dung">
+                <input  type="text" value="{{$user->sdt}}" class="form-control" name="sdt" id="SDT" placeholder="Nhập nội dung">
             </div>
             <div class="form-group">
                 <label for="name">Email</label>
@@ -46,12 +65,13 @@
             </div>
             <div class="form-group">
                 <label for="name">Quyền truy cập</label>
-               <select id="user_role" onchange="changerole({{$user->id}})" class="form-control" style="width:300px">
+               <select id="user_role" onchange="changerole('{{$user->id}}')" class="form-control" style="width:300px">
                     <option value="1" >Khách hàng</option>
                     <option value="2" >Ban tổ chức</option>
                     <option selected value="{{$user->quyentruycap}}" >{{$user->roles->tenquyentruycap}}</option>
                </select>
         </div>
+        <button type="submit" id="submit_edit_user" class="btn btn-primary">Thay đổi</button>
         <!-- /.card-body -->
         @csrf
     </form>
@@ -142,7 +162,65 @@
                 })
             })
         }
-        
+        function finddistrict(){
+            var id= '';
+            id = $('#user_province').val();
+            $("#user_district").empty();
+            $("#user_wards").empty();
+            district(id);
+        }
+        function district(province_id){
+            var data = [];
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: '/getdistrict/'+province_id,
+                success: function(response){
+                    data = response.districts;
+                    
+                    data.forEach(key =>{
+                        var x = document.getElementById("user_district");
+                        var option = document.createElement("option");
+                        option.text = key.tenquanhuyen;
+                        option.value = key.id;
+                        x.add(option);
+            });
+                
+                },
+                error: function(){
+                    console.log(23);
+                }
+            })
+            
+        }
+        function findward(){
+            var id= '';
+            id = $('#user_district').val();
+            $("#user_wards").empty();
+            wards(id);
+        }
+        function wards(district_id){
+            var data = [];
+            $.ajax({
+                type: "GET",
+                dataType: "JSON",
+                url: '/getwards/'+district_id,
+                success: function(response){
+                    data = response.wards;
+                    data.forEach(key =>{
+                        var x = document.getElementById("user_wards");
+                        var option = document.createElement("option");
+                        option.text = key.tenxaphuong;
+                        option.value = key.id;
+                        x.add(option);
+            });
+                
+                },
+                error: function(){
+                    console.log(23);
+                }
+            })
+        }
     </script>
 
 @endsection

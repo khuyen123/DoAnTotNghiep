@@ -36,16 +36,6 @@
                                     <option value="">Lễ hội âm nhạc</option>
                                     <option value="">Đấu giá từ thiện</option>
                                     <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
-                                    <option value="">Cắm trại dã ngoại</option>
                                     
                                 </select>
                             </div>

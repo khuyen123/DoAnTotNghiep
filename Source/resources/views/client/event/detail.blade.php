@@ -192,11 +192,20 @@
                                 <h3>{{$event_detail->event->tenSukien.'-'.$event_detail->wards->district->province->tentinhthanh}}</h3>
                                 <div class="rdt-right">
                                     <div class="rating">
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star"></i>
-                                        <i class="icon_star-half_alt"></i>
+                                        @if($socomment == 0)
+                                            @for($i=1;$i<=5;$i++)
+                                            <i class="fa fa-star" ></i>
+                                            @endfor
+                                        @endif
+                                        @for($i=1;$i<=$sosao;$i++)
+                                            <i class="fa fa-star" ></i>
+                                        @endfor
+                                        @if(($socomment!=0))
+                                        @if((round($sosao,0)-floor($sosao))==1&&($socomment>1))
+                                            <i class="fa fa-star-half-full" ></i>
+                                        @endif
+                                        @endif
+                                        
                                     </div>
                                     
                                 </div>
@@ -218,6 +227,10 @@
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Email liên hệ:</td>
                                         <td>{{$event_detail->email_lienhe}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o" style="color:#dfa974">Thời gian đặt vé:</td>
+                                        <td>{{$event_detail->batdau}}</td>
                                     </tr>
                                     <tr>
                                         <td class="r-o" style="color:#dfa974">Thời gian diễn ra:</td>
@@ -387,9 +400,9 @@
                             </div>
                             @endif
                             <table class="seat_picker">
-                                <tr colspan="{{$event_detail->soghemoihang}}">
+                                <tr>
                                     <td align="center">
-                                        @if ($event_detail->id_hinhthucve == 1)<h4 style="margin-left: 130px ; font-weight:bold;color:red">Sân khấu</h4>@endif
+                                        @if ($event_detail->id_hinhthucve == 1)<h4  style="font-weight:bold;color:red">Sân khấu</h4>@endif
                                     </td>
                                 </tr>
                                 <?php 

@@ -38,10 +38,10 @@ class titketController extends Controller
         $truve['sovedaban'] = $eventdetail->sovedaban+$request->soCho;
         if ($new_ticket = $result){
             $this->eventdetailService->update($eventdetail,$truve);
-            // Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
-            //     $email->subject('Thông tin đặt vé');
-            //     $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
-            // });
+            Mail::send('client.titket.titket_mail',compact('new_ticket','image'), function($email) use ($new_ticket) {
+                $email->subject('Thông tin đặt vé');
+                $email->to($new_ticket->email_nguoidat,$new_ticket->ten_nguoidat);
+            });
             $seat = explode(",",$new_ticket->soGhe);
             foreach($seat as $key){
                 DB::table('checkghe')

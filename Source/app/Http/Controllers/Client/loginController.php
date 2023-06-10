@@ -39,6 +39,41 @@ class loginController extends Controller
         }
        
     }
+    public function changepass_index($user_id){
+        if ($user_id!=Auth::user()->id) {
+            return redirect()->back();
+        }
+        if (!Auth::check()) {
+            return redirect()->back();
+        }
+        $page_infor = $this->pageInforService->getAll();
+        $banners = $this->bannerService->getAll();
+        $new_user = $this->userService->find($user_id);
+        $token = $this->userService->rand_string(6);
+        $data['makichhoat'] = $token;
+        $this->userService->update($new_user,$data);
+        Mail::send('client.forgot_password_mail',compact('new_user'), function($email) use ($new_user){
+            $email->subject('Mã Xác nhận lấy lại mật khẩu');
+            $email->to($new_user->email, $new_user->hoten);
+        });
+        Session::flash('success','Xin chào: '.$new_user->hoten.' ! Mã xác nhận đã được gửi qua Email đăng ký của bạn!');
+        return view('client.user.changepass',['page_infor'=>$page_infor,'banners'=>$banners]);
+    }
+    public function changepass_store($user_id,changePassRequest $request){
+        if ($user_id!=Auth::user()->id) {
+            return redirect()->back();
+        }
+        $user = $this->userService->find($user_id);
+        if ($request->newpass_token == $user->makichhoat) {
+                $data['password'] = Hash::make($request->newpass); 
+                $data['makichhoat'] = '';
+                $this->userService->update($user,$data);
+                Session::flash('success','Lấy lại mật khẩu thành công!');
+                return redirect()->to('/client/infor/'.$user_id.'/index')->with('changepass_success','1');
+        } 
+        Session::flash('error','Mã xác nhận không chính xác!');
+        return redirect()->back();
+    }
     public function forgot_password(){
         $page_infor = $this->pageInforService->getAll();
         if (Auth::check()) {

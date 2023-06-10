@@ -171,7 +171,11 @@
             <div  class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                     <form enctype="multipart/form-data" method="POST" action="/client/infor/{{Auth::user()->id}}/changeavt">
-                        
+                    @if (Session::has('changepass_success'))
+                                
+                                <input type ="hidden" value="{{Session::get('changepass_success')}}" id="changepass_success">
+                            
+                        @endif
                     <input type="file" class="form-control" onchange="choosefile(this)" accept="image/*" id="user_avt" name="user_avt">
                     <p style="color:#CB4154">{{ $errors->first('user_avt') }}</p>
                         <img height="100px" width="100px" src="" name="user_avt" id="image" style="margin-top:10px">
@@ -207,7 +211,7 @@
                   <h3 class="mb-0">Tài khoản của tôi</h3>
                 </div>
                 <div class="col-4 text-right">
-                  <button class="btn btn-primary" style="background-color:#DFA974;border:none">Chỉnh sửa</button>
+                  <button class="btn btn-primary" id="edit_profile" style="background-color:#DFA974;border:none">Chỉnh sửa</button>
                 </div>
               </div>
             </div>
@@ -241,7 +245,7 @@
                         <label class="form-control-label" for="input-first-name">Mật khẩu:</label>
                         <div style="display:flex">
                             <input style="width:250px" readonly value="*******" type="password" id="input-first-name" class="form-control form-control-alternative">
-                            <button style="margin-left:40px" type="button" class="btn btn-primary" ><i class="fa fa-key"></i>Thay đổi</button>
+                            <button style="margin-left:40px" type="button" class="btn btn-primary" id="change_pass" ><i class="fa fa-key"></i>Thay đổi</button>
                         </div>
                       </div>
                     </div>
@@ -389,6 +393,7 @@
     <script src="{{asset('client/js/jquery.slicknav.js')}}"></script>
     <script src="{{asset('client/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('client/js/main.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).on('click','#ticket_history',function(){
           var user_id = parseInt($('#user_id').val())
@@ -400,6 +405,18 @@
             $("#detail_district").empty();
             district(id);
         }
+        $(document).on('click','#change_pass',function(){
+          location.href = 'changepass'
+        })
+        $(document).ready(function(){
+          if ($('#changepass_success').val()== 1){
+            Swal.fire(
+              'Thành công!',
+              'Thay đổi mật khẩu thành công',
+              'success'
+            )
+          }
+        });
     </script>
 </body>
 

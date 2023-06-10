@@ -194,7 +194,7 @@ if (Auth::check()) {
                                 <tbody>
                                 <tr>
                                             <td class="r-o">Địa chỉ:</td>
-                                            <td style="height:160px">'.$event_detail->diachi.'</td>
+                                            <td style="height:80px">'.$event_detail->diachi.'</td>
                                         </tr>
                                         <tr>
                                             <td class="r-o">Hình thức vé:</td>';
@@ -213,7 +213,7 @@ if (Auth::check()) {
                                         <tr>
                                             <td class="r-o">Hoạt động:</td>
                                             <td>';
-                                            $event_detail->trangthai == 1?$html_detail.='<p class="badge badge-success" style="font-size:15px">Còn hoạt động</p>' : $html_detail.='<p class="badge badge-danger" style="font-size:15px">Kết thúc</p>';
+                                            $event_detail->trangthai == 1?$html_detail.='<p class="badge badge-success" style="font-size:15px">Đang hoạt động</p>' : $html_detail.='<p class="badge badge-danger" style="font-size:15px">Kết thúc</p>';
                                             $html_detail .='</td>
                                         </tr>
                                 </tbody>
